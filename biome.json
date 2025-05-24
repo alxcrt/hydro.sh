@@ -11,6 +11,8 @@
 			".next",
 			"dist",
 			".turbo",
+			".output",
+			".vinxi",
 			"dev-dist",
 			".zed",
 			".vscode",
