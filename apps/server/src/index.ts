@@ -14,9 +14,21 @@ app.use(logger());
 app.use(
 	"/*",
 	cors({
+		// Set the allowed origin for CORS requests
+		// This controls which domains can access our API
+		// CORS_ORIGIN is loaded from environment variables
 		origin: env.CORS_ORIGIN || "",
+
+		// Define which HTTP methods are allowed for cross-origin requests
 		allowMethods: ["GET", "POST", "OPTIONS"],
+
+		// Specify which headers can be included in cross-origin requests
+		// Content-Type: For specifying data format (JSON, form data, etc.)
+		// Authorization: For authentication tokens
 		allowHeaders: ["Content-Type", "Authorization"],
+
+		// Allow cookies and authorization headers to be sent with requests
+		// This is important for authenticated requests across origins
 		credentials: true,
 	}),
 );
