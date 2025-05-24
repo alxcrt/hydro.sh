@@ -14,14 +14,14 @@
 		"db:migrate": "drizzle-kit migrate"
 	},
 	"dependencies": {
-		"dotenv": "^16.4.7",
-		"zod": "^3.25.16",
-		"@orpc/server": "^1.2.0",
 		"@orpc/client": "^1.2.0",
-		"hono": "^4.7.6",
+		"@orpc/server": "^1.2.0",
+		"better-auth": "^1.2.7",
+		"dotenv": "^16.5.0",
 		"drizzle-orm": "^0.38.4",
+		"hono": "^4.7.6",
 		"pg": "^8.14.1",
-		"better-auth": "^1.2.7"
+		"zod": "^3.25.16"
 	},
 	"devDependencies": {
 		"tsc-alias": "^1.8.16",
