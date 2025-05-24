@@ -1,3 +1,4 @@
+import { env } from "@/utils/env";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../db";
@@ -9,7 +10,7 @@ export const auth = betterAuth({
 
 		schema: schema,
 	}),
-	trustedOrigins: [process.env.CORS_ORIGIN || ""],
+	trustedOrigins: [env.CORS_ORIGIN || ""],
 	emailAndPassword: {
 		enabled: true,
 	},
