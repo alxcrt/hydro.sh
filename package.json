@@ -4,6 +4,7 @@
 	"workspaces": ["apps/*", "packages/*"],
 	"scripts": {
 		"dev": "turbo dev",
+		"start": "turbo start",
 		"build": "turbo build",
 		"typecheck": "turbo typecheck",
 		"dev:native": "turbo -F native dev",
