@@ -10,6 +10,8 @@ import { env } from "./utils/env";
 
 const app = new Hono({});
 
+console.log(env);
+
 app.use(logger());
 app.use(
 	"/*",
