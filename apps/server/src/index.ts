@@ -8,9 +8,7 @@ import { createContext } from "./lib/context";
 import { appRouter } from "./routers/index";
 import { env } from "./utils/env";
 
-const app = new Hono({});
-
-console.log(env);
+const app = new Hono();
 
 app.use(logger());
 app.use(
