@@ -13,7 +13,11 @@
 		"db:studio": "turbo -F server db:studio",
 		"db:generate": "turbo -F server db:generate",
 		"db:migrate": "turbo -F server db:migrate",
-		"prepare": "husky || true"
+		"prepare": "husky || true",
+		"check": "biome check .",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"lint:fix": "biome check --apply-unsafe ."
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
