@@ -7,6 +7,10 @@ export const env = createEnv({
 		DATABASE_URL: z.string(),
 		BETTER_AUTH_SECRET: z.string(),
 	},
-	runtimeEnv: process.env,
+	runtimeEnv: {
+		CORS_ORIGIN: process.env.CORS_ORIGIN,
+		DATABASE_URL: process.env.DATABASE_URL,
+		BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+	},
 	emptyStringAsUndefined: true,
 });
