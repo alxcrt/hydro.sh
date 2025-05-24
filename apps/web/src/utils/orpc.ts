@@ -7,6 +7,7 @@ import { QueryCache, QueryClient } from "@tanstack/react-query";
 import { createContext, use } from "react";
 import { toast } from "sonner";
 import type { appRouter } from "../../../server/src/routers/index";
+import { env } from "./env";
 
 type ORPCReactUtils = RouterUtils<RouterClient<typeof appRouter>>;
 
@@ -26,7 +27,7 @@ export const queryClient = new QueryClient({
 });
 
 export const link = new RPCLink({
-	url: `${import.meta.env.VITE_SERVER_URL}/rpc`,
+	url: `${env.VITE_SERVER_URL}/rpc`,
 	fetch(url, options) {
 		return fetch(url, {
 			...options,
