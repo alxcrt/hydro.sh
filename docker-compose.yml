@@ -7,8 +7,8 @@ services:
       - ./apps/server/.env
     ports:
       - "3001:3001"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
 
   web:
     build:
