@@ -9,6 +9,8 @@ services:
       - "3000:3000"
     # depends_on:
     #   - db
+    networks:
+      - app_network
 
   web:
     build:
@@ -19,6 +21,8 @@ services:
       - "3001:3001"
     depends_on:
       - server
+    networks:
+      - app_network
 
 #   db:
 #     image: postgres:15
@@ -31,6 +35,12 @@ services:
 #       - "5432:5432"
 #     volumes:
 #       - db_data:/var/lib/postgresql/data
+#     networks:
+#       - app_network
 
 # volumes:
 #   db_data:
+
+networks:
+  app_network:
+    driver: bridge
