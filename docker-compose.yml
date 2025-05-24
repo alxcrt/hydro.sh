@@ -9,8 +9,7 @@ services:
       - "3000:3456"
     # depends_on:
     #   - db
-    networks:
-      - app_network
+
 
   web:
     build:
@@ -21,8 +20,7 @@ services:
       - "3001:3457"
     depends_on:
       - server
-    networks:
-      - app_network
+
 
 #   db:
 #     image: postgres:15
