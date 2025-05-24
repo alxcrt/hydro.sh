@@ -30,5 +30,9 @@
 		"turbo": "^2.5.3"
 	},
 	"packageManager": "bun@1.2.14",
-	"trustedDependencies": ["@biomejs/biome"]
+	"trustedDependencies": ["@biomejs/biome"],
+	"engines": {
+		"node": ">=22.14.0",
+		"bun": ">=1.2.13"
+	}
 }
