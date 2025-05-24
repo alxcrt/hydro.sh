@@ -1,21 +1,47 @@
-import * as React from "react";
+import * as InputPrimitives from "@/components/ui/input-primitives.tsx";
 
-import { cn } from "@/lib/utils";
+export type InputProps = React.ComponentPropsWithoutRef<
+	typeof InputPrimitives.Input
+> &
+	Pick<
+		React.ComponentPropsWithoutRef<typeof InputPrimitives.Root>,
+		"$error" | "$size"
+	> & {
+		leadingIcon?: React.ForwardRefExoticComponent<
+			React.SVGProps<SVGSVGElement>
+		>;
+		trailingIcon?: React.ForwardRefExoticComponent<
+			React.SVGProps<SVGSVGElement>
+		>;
+		leadingNode?: React.ReactNode;
+		trailingNode?: React.ReactNode;
+		inlineLeadingNode?: React.ReactNode;
+		inlineTrailingNode?: React.ReactNode;
+	};
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-  return (
-    <input
-      type={type}
-      data-slot="input"
-      className={cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className
-      )}
-      {...props}
-    />
-  );
+export function Input({
+	$size,
+	$error,
+	leadingIcon: LeadingIcon,
+	trailingIcon: TrailingIcon,
+	leadingNode,
+	trailingNode,
+	inlineLeadingNode,
+	inlineTrailingNode,
+	...rest
+}: InputProps) {
+	return (
+		<InputPrimitives.Root $size={$size} $error={$error}>
+			{leadingNode}
+			<InputPrimitives.Wrapper>
+				{inlineLeadingNode}
+				{LeadingIcon && <InputPrimitives.Icon as={LeadingIcon} />}
+				<InputPrimitives.Input type="text" {...rest} />
+				{TrailingIcon && <InputPrimitives.Icon as={TrailingIcon} />}
+				{inlineTrailingNode}
+			</InputPrimitives.Wrapper>
+			{trailingNode}
+		</InputPrimitives.Root>
+	);
 }
-
-export { Input };
+Input.displayName = "Input";

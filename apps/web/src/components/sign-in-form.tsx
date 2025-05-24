@@ -6,7 +6,6 @@ import z from "zod/v4";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 
 export default function SignInForm({
 	onSwitchToSignUp,
@@ -55,8 +54,8 @@ export default function SignInForm({
 	}
 
 	return (
-		<div className="mx-auto w-full mt-10 max-w-md p-6">
-			<h1 className="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+		<div className="mx-auto mt-10 w-full max-w-md p-6">
+			<h1 className="mb-6 text-center font-bold text-3xl">Welcome Back</h1>
 
 			<form
 				onSubmit={(e) => {
@@ -70,7 +69,7 @@ export default function SignInForm({
 					<form.Field name="email">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>Email</Label>
+								<label htmlFor={field.name}>Email</label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -93,7 +92,7 @@ export default function SignInForm({
 					<form.Field name="password">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
+								<label htmlFor={field.name}>Password</label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -127,7 +126,6 @@ export default function SignInForm({
 
 			<div className="mt-4 text-center">
 				<Button
-					variant="link"
 					onClick={onSwitchToSignUp}
 					className="text-indigo-600 hover:text-indigo-800"
 				>
