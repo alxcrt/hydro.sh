@@ -11,9 +11,14 @@ export default defineConfig({
 		preset: "node-server",
 	},
 	// TSR (TanStack Router) configuration
-	// Specifies that the application code is located in the "src" directory
+	// - appDirectory: Specifies that the application code is located in the "src" directory
+	//   TanStack Router will look for routes in src/routes by default
+	// - autoCodeSplitting: When set to true, enables automatic code splitting
+	//   This improves performance by splitting the bundle into smaller chunks
+	//   that are loaded on demand when a user navigates to different routes
 	tsr: {
 		appDirectory: "src",
+		autoCodeSplitting: true,
 	},
 	// Vite bundler configuration
 	// Define the plugins used for building and developing the application
