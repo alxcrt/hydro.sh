@@ -2,20 +2,12 @@ FROM oven/bun:1.2.14 AS base
 
 WORKDIR /app
 
-# Copy root package files
-COPY package.json bun.lockb* turbo.json ./
-
-
-# Copy all workspace package files
-COPY apps/*/package.json ./apps/
-COPY packages/*/package.json ./packages/
+# Copy all files for installation
+COPY . .
 
 # Install dependencies
 # --frozen-lockfile ensures exact versions from lockfile are used and prevents lockfile updates
 RUN bun install --frozen-lockfile
-
-# Copy the rest of the application
-COPY . .
 
 # Build the application using Turbo
 RUN bun run build
@@ -25,13 +17,8 @@ FROM oven/bun:1.2.14 AS production
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json bun.lockb* turbo.json ./
-
-# Copy built application from base stage
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/packages ./packages
-COPY --from=base /app/apps ./apps
+# Copy all files to production stage
+COPY . .
 
 # Use production environment
 ENV NODE_ENV=production
