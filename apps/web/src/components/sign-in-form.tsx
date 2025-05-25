@@ -12,7 +12,9 @@ export default function SignInForm({
 }: {
 	onSwitchToSignUp: () => void;
 }) {
-	const navigate = useNavigate();
+	const navigate = useNavigate({
+		from: "/login",
+	});
 	const { isPending } = authClient.useSession();
 
 	const form = useForm({
