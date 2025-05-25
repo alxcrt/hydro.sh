@@ -97,12 +97,6 @@ export function UserButton({ className }: { className?: string }) {
 				<Divider.Root $type="line-spacing" />
 
 				<DropdownMenu.Group>
-					<DropdownMenu.Item asChild>
-						<Link to="/">
-							<DropdownMenu.ItemIcon as={UserCircle02Icon} />
-							My profile
-						</Link>
-					</DropdownMenu.Item>
 					<DropdownMenu.Item onClick={setOpen}>
 						<DropdownMenu.ItemIcon as={Setting07Icon} />
 						Settings

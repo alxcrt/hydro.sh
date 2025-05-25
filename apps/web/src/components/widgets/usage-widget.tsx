@@ -1,16 +1,16 @@
-import { Link } from "@tanstack/react-router";
+// import { Link } from "@tanstack/react-router";
 
-import { useMe } from "@/hooks/use-me.ts";
+// import { useMe } from "@/hooks/use-me.ts";
 import { cn } from "@/utils/cn.ts";
-import * as LinkButton from "../ui/link-button.tsx";
+// import * as LinkButton from "../ui/link-button.tsx";
 import * as ProgressBar from "../ui/progress-bar.tsx";
 
 type UsageWidgetProps = React.ComponentPropsWithRef<"div">;
 
 export function UsageWidget({ className, ...props }: UsageWidgetProps) {
-	const me = useMe();
+	// const me = useMe();
 
-	const requestLimits = me?.requestLimits;
+	// const requestLimits = me?.requestLimits;
 
 	// const usedRequests = requestLimits?.totalRequests ?? 0;
 	// const totalAllowed = requestLimits?.totalAllowedRequests ?? 0;
@@ -36,21 +36,8 @@ export function UsageWidget({ className, ...props }: UsageWidgetProps) {
 						{percentageUsed}%
 					</span>
 				</div>
-				<ProgressBar.Root value={progressBarValue} max={100} />
-				{(requestLimits?.plan === "free" || percentageUsed >= 80) && (
-					<div className="text-(--text-sub-600) text-paragraph-xs">
-						<LinkButton.Root $style="primary" $size="sm" $underline asChild>
-							<Link to="/" hash="pricing">
-								Upgrade
-							</Link>
-						</LinkButton.Root>{" "}
-						to unlock more screenshots.
-					</div>
-				)}
 
-				<div className="text-(--text-sub-600) text-paragraph-xs">
-					Each extra screenshot costs 69 USD.
-				</div>
+				<ProgressBar.Root value={progressBarValue} max={100} />
 			</div>
 		</div>
 	);

@@ -6,8 +6,10 @@ import {
 	QueryClientProvider,
 } from "@tanstack/react-query";
 import { createRouter as createTanstackRouter } from "@tanstack/react-router";
+import React from "react";
 import { toast } from "sonner";
 import Loader from "./components/loader";
+import { NotFound } from "./components/not-found.tsx";
 import { Button } from "./components/ui/button.tsx";
 import * as AlertToast from "./components/ui/toast-alert.tsx";
 import { ORPCContext } from "./hooks/use-orpc";
@@ -79,14 +81,17 @@ export const createRouter = () => {
 		defaultPreloadStaleTime: 0,
 
 		// Pass our API client and React Query client to all routes
-		context: { orpc, queryClient },
+		context: { orpc, queryClient, session: null },
 
 		// Show loading spinner when route is loading
 		defaultPendingComponent: () => <Loader />,
 
 		// Simple 404 page when route isn't found
-		defaultNotFoundComponent: () => <div>Not Found</div>,
-
+		defaultNotFoundComponent: () => (
+			<React.Suspense fallback={<Loader />}>
+				<NotFound />
+			</React.Suspense>
+		),
 		// Enable view transition API for smooth page transitions
 		defaultViewTransition: true,
 

@@ -20,6 +20,9 @@ import { useORPC } from "@/hooks/use-orpc.ts";
 import { useSettingsStore } from "@/store/settings.ts";
 
 export function AccountSettings() {
+	// Retrieve the QueryClient instance from the root route context
+	// This is needed to invalidate user data queries after updating account information
+	// When user details are updated, we need to refresh the cached data to show the latest information
 	const { queryClient } = useRouteContext({
 		from: "__root__",
 	});

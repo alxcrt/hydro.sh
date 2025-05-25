@@ -1,12 +1,10 @@
 "use client";
 
-import Album02Icon from "virtual:icons/hugeicons/album-02";
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
 import DashboardSquare02Icon from "virtual:icons/hugeicons/dashboard-square-02";
-import DocumentCode01Icon from "virtual:icons/hugeicons/document-code";
 import HeadsetIcon from "virtual:icons/hugeicons/headset";
-import Key01Icon from "virtual:icons/hugeicons/key-01";
 import Setting07Icon from "virtual:icons/hugeicons/setting-07";
+import SodaIcon from "virtual:icons/hugeicons/soda-can-stroke-rounded";
 
 import { Link, useLocation } from "@tanstack/react-router";
 import * as React from "react";
@@ -14,10 +12,11 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 import { useSettingsStore } from "@/store/settings";
 import { cn } from "@/utils/cn";
+// import { WorkspaceSwitch } from "./workspace-switch.tsx";
+import { Logo } from "./logo.tsx";
 import * as Divider from "./ui/divider.tsx";
 import { UserButton } from "./user-button.tsx";
 import { UsageWidget } from "./widgets/usage-widget.tsx";
-import { WorkspaceSwitch } from "./workspace-switch.tsx";
 
 type NavigationLink = {
 	icon: React.ComponentType<{ className?: string }>;
@@ -28,9 +27,7 @@ type NavigationLink = {
 
 export const navigationLinks: NavigationLink[] = [
 	{ icon: DashboardSquare02Icon, label: "Overview", to: "/dashboard" },
-	{ icon: DocumentCode01Icon, label: "Playground", to: "/playground" },
-	{ icon: Album02Icon, label: "Screenshots", to: "/screenshots" },
-	{ icon: Key01Icon, label: "API Keys", to: "/keys" },
+	{ icon: SodaIcon, label: "Devices", to: "/devices" },
 ];
 
 function useCollapsedState({
@@ -98,11 +95,20 @@ export function SidebarHeader({ collapsed }: { collapsed?: boolean }) {
 				"lg:px-2": collapsed,
 			})}
 		>
-			<WorkspaceSwitch
-				className={cn("transition-all-default", {
-					"w-16": collapsed,
-				})}
-			/>
+			<div className="flex w-full items-center gap-3 whitespace-nowrap p-3 text-left outline-none focus:outline-none">
+				<Link to="/" className="flex items-center gap-2">
+					<Logo className="h-10 w-auto text-primary" />
+					<span className="font-semibold" data-hide-collapsed>
+						Hydro.sh
+					</span>
+				</Link>
+			</div>
+
+			{/* <WorkspaceSwitch
+        className={cn("transition-all-default", {
+          "w-16": collapsed,
+        })}
+      /> */}
 		</div>
 	);
 }

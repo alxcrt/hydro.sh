@@ -1,8 +1,20 @@
 import { SettingsModal } from "@/components/modals/settings-modal/settings-modal";
 import Sidebar from "@/components/sidebar";
-import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app")({
+	async beforeLoad({ context: { queryClient, orpc, ...context }, location }) {
+		if (!context.session?.id) {
+			throw redirect({
+				to: "/login",
+				search: {
+					redirect_to: location.href,
+				},
+			});
+		}
+
+		await queryClient.prefetchQuery(orpc.users.me.queryOptions());
+	},
 	component: RouteComponent,
 });
 

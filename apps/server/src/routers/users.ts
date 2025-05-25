@@ -58,7 +58,7 @@ export const usersRouter = {
 		return {
 			fullName: user.name || "John Doe",
 			email: user.email || "user@example.com",
-			imageUrl: "https://example.com/avatar.png",
+			imageUrl: "https://avatar.iran.liara.run/public/19",
 			currentWorkspace: {
 				id: `ws-${Math.random().toString(36).substring(2, 10)}`,
 				name: "Primary Workspace",

@@ -15,6 +15,7 @@ import { Route as HomeImport } from './routes/_home'
 import { Route as AppImport } from './routes/_app'
 import { Route as HomeIndexImport } from './routes/_home/index'
 import { Route as AuthLoginImport } from './routes/_auth/login'
+import { Route as AppDevicesImport } from './routes/_app/devices'
 import { Route as AppDashboardImport } from './routes/_app/dashboard'
 
 // Create/Update Routes
@@ -39,6 +40,12 @@ const AuthLoginRoute = AuthLoginImport.update({
   id: '/_auth/login',
   path: '/login',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AppDevicesRoute = AppDevicesImport.update({
+  id: '/devices',
+  path: '/devices',
+  getParentRoute: () => AppRoute,
 } as any)
 
 const AppDashboardRoute = AppDashboardImport.update({
@@ -72,6 +79,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardImport
       parentRoute: typeof AppImport
     }
+    '/_app/devices': {
+      id: '/_app/devices'
+      path: '/devices'
+      fullPath: '/devices'
+      preLoaderRoute: typeof AppDevicesImport
+      parentRoute: typeof AppImport
+    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -93,10 +107,12 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppDevicesRoute: typeof AppDevicesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppDevicesRoute: AppDevicesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -114,6 +130,7 @@ const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof HomeRouteWithChildren
   '/dashboard': typeof AppDashboardRoute
+  '/devices': typeof AppDevicesRoute
   '/login': typeof AuthLoginRoute
   '/': typeof HomeIndexRoute
 }
@@ -121,6 +138,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '': typeof AppRouteWithChildren
   '/dashboard': typeof AppDashboardRoute
+  '/devices': typeof AppDevicesRoute
   '/login': typeof AuthLoginRoute
   '/': typeof HomeIndexRoute
 }
@@ -130,20 +148,22 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_home': typeof HomeRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/devices': typeof AppDevicesRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_home/': typeof HomeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dashboard' | '/login' | '/'
+  fullPaths: '' | '/dashboard' | '/devices' | '/login' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/dashboard' | '/login' | '/'
+  to: '' | '/dashboard' | '/devices' | '/login' | '/'
   id:
     | '__root__'
     | '/_app'
     | '/_home'
     | '/_app/dashboard'
+    | '/_app/devices'
     | '/_auth/login'
     | '/_home/'
   fileRoutesById: FileRoutesById
@@ -179,7 +199,8 @@ export const routeTree = rootRoute
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
-        "/_app/dashboard"
+        "/_app/dashboard",
+        "/_app/devices"
       ]
     },
     "/_home": {
@@ -190,6 +211,10 @@ export const routeTree = rootRoute
     },
     "/_app/dashboard": {
       "filePath": "_app/dashboard.tsx",
+      "parent": "/_app"
+    },
+    "/_app/devices": {
+      "filePath": "_app/devices.tsx",
       "parent": "/_app"
     },
     "/_auth/login": {
