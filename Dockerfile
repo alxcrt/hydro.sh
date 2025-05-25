@@ -20,11 +20,19 @@ FROM oven/bun:1.2.14 AS production
 
 WORKDIR /app
 
-# Copy all files to production stage
-COPY . .
+# Copy package.json and other config files
+COPY package.json turbo.json bun.lockb ./
+COPY apps/server/package.json ./apps/server/
+COPY apps/web/package.json ./apps/web/
+COPY packages/schemas/package.json ./packages/schemas/
 
-# Install production dependencies
-RUN bun install --frozen-lockfile
+# Copy built artifacts from base stage
+COPY --from=base /app/apps/server/dist ./apps/server/dist
+COPY --from=base /app/apps/web/dist ./apps/web/dist
+COPY --from=base /app/packages/schemas/dist ./packages/schemas/dist
+
+# Install production dependencies only
+RUN bun install --frozen-lockfile --production
 
 # Install Turbo globally in production
 RUN bun install -g turbo
@@ -36,5 +44,5 @@ ENV NODE_ENV=production
 EXPOSE 3000
 EXPOSE 3001
 
-# Run the application
+# Run the application (ensure server has access to built files)
 CMD ["turbo", "start"]
