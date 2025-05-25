@@ -7,7 +7,7 @@
 		"typecheck": "tsc --noEmit",
 		"compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
 		"dev": "bun run --hot src/index.ts",
-		"start": "bun run dist/src/index.js",
+		"start": "bun run db:migrate && bun run dist/src/index.js",
 		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
 		"db:generate": "drizzle-kit generate",
