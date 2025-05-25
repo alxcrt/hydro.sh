@@ -12,7 +12,6 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "next-themes";
-import Header from "../components/header";
 
 import Loader from "@/components/loader";
 import type { orpc } from "@/utils/orpc";
@@ -90,7 +89,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				className="h-full bg-(--bg-white-0) text-(--text-strong-950)"
 				suppressHydrationWarning
 			>
-				<Header />
 				{isFetching ? <Loader /> : children}
 				<Toaster position="top-center" />
 				<TanStackRouterDevtools position="bottom-right" />

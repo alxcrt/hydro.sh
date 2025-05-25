@@ -2,12 +2,9 @@ import "./app.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { createRouter as createTanstackRouter } from "@tanstack/react-router";
 import Loader from "./components/loader";
+import { ORPCContext } from "./hooks/use-orpc";
 import { routeTree } from "./routeTree.gen";
-import {
-	ORPCContext,
-	orpc,
-	queryClient as orpcQueryClient,
-} from "./utils/orpc";
+import { orpc, queryClient as orpcQueryClient } from "./utils/orpc";
 
 const queryClient = orpcQueryClient;
 

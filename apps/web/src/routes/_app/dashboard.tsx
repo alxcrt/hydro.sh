@@ -1,10 +1,10 @@
+import { useORPC } from "@/hooks/use-orpc";
 import { authClient } from "@/lib/auth-client";
-import { useORPC } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-export const Route = createFileRoute("/dashboard")({
+export const Route = createFileRoute("/_app/dashboard")({
 	component: RouteComponent,
 });
 
