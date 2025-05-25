@@ -1,33 +1,17 @@
 version: "3.8"
 services:
-  server:
-    build:
-      context: ./apps/server
-    env_file:
-      - ./apps/server/.env
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hydro
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
-
-  web:
-    build:
-      context: ./apps/web
-    env_file:
-      - ./apps/web/.env
-
-
-#   db:
-#     image: postgres:15
-#     restart: always
-#     environment:
-#       POSTGRES_USER: postgres
-#       POSTGRES_PASSWORD: postgres
-#       POSTGRES_DB: hydro
-#     ports:
-#       - "5432:5432"
-#     volumes:
-#       - db_data:/var/lib/postgresql/data
-#     networks:
-#       - app_network
-
-# volumes:
-#   db_data:
+volumes:
+  db_data:
 
