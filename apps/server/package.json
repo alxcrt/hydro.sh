@@ -1,5 +1,5 @@
 {
-	"name": "server",
+	"name": "@hydro.sh/server",
 	"main": "src/index.ts",
 	"type": "module",
 	"scripts": {
