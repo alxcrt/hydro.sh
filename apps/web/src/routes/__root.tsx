@@ -14,7 +14,6 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { LazyMotion, domAnimation } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
-import Loader from "@/components/loader";
 import { authClient } from "@/lib/auth-client";
 import type { orpc } from "@/utils/orpc";
 import { createServerFn } from "@tanstack/react-start";
@@ -105,6 +104,8 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 		// 1. It calls authStateFn() which extracts cookies from the request
 		//    and verifies the session server-side
 		const session = await authStateFn();
+
+		console.log("session", session);
 
 		// 2. Return the session data to be added to the router context
 		// 3. If a session exists, we structure it to include both session data
