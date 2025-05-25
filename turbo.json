@@ -1,6 +1,7 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
+	"globalEnv": ["NODE_ENV", "CORS_ORIGIN", "VITE_SERVER_URL"],
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
@@ -19,7 +20,16 @@
 		},
 		"start": {
 			"cache": false,
-			"persistent": true
+			"persistent": true,
+			"env": [
+				"DATABASE_URL",
+				"BETTER_AUTH_SECRET",
+				"BETTER_AUTH_URL",
+				"CORS_ORIGIN",
+				"POLAR_ACCESS_TOKEN",
+				"NODE_ENV",
+				"PORT"
+			]
 		},
 		"db:push": {
 			"cache": false,
