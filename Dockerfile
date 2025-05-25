@@ -12,6 +12,9 @@ COPY packages/*/package.json ./packages/
 # Install dependencies
 RUN bun install --frozen-lockfile
 
+# Install TypeScript globally to ensure tsc is available
+RUN bun install -g typescript
+
 # Copy the rest of the application
 COPY . .
 
@@ -38,4 +41,3 @@ EXPOSE 3001
 
 # Run the application using Turbo
 CMD ["bun", "run", "start"]
-
