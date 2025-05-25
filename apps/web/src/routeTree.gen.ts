@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as HomeImport } from './routes/_home'
+import { Route as AuthImport } from './routes/_auth'
 import { Route as AppImport } from './routes/_app'
 import { Route as HomeIndexImport } from './routes/_home/index'
 import { Route as AuthLoginImport } from './routes/_auth/login'
@@ -22,6 +23,11 @@ import { Route as AppDashboardImport } from './routes/_app/dashboard'
 
 const HomeRoute = HomeImport.update({
   id: '/_home',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRoute = AuthImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -37,9 +43,9 @@ const HomeIndexRoute = HomeIndexImport.update({
 } as any)
 
 const AuthLoginRoute = AuthLoginImport.update({
-  id: '/_auth/login',
+  id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AuthRoute,
 } as any)
 
 const AppDevicesRoute = AppDevicesImport.update({
@@ -63,6 +69,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AppImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
     '/_home': {
@@ -91,7 +104,7 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AuthImport
     }
     '/_home/': {
       id: '/_home/'
@@ -117,6 +130,16 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface AuthRouteChildren {
+  AuthLoginRoute: typeof AuthLoginRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginRoute: AuthLoginRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 interface HomeRouteChildren {
   HomeIndexRoute: typeof HomeIndexRoute
 }
@@ -136,7 +159,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '': typeof AppRouteWithChildren
+  '': typeof AuthRouteWithChildren
   '/dashboard': typeof AppDashboardRoute
   '/devices': typeof AppDevicesRoute
   '/login': typeof AuthLoginRoute
@@ -146,6 +169,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteWithChildren
+  '/_auth': typeof AuthRouteWithChildren
   '/_home': typeof HomeRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/devices': typeof AppDevicesRoute
@@ -161,6 +185,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
+    | '/_auth'
     | '/_home'
     | '/_app/dashboard'
     | '/_app/devices'
@@ -171,14 +196,14 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
   HomeRoute: typeof HomeRouteWithChildren
-  AuthLoginRoute: typeof AuthLoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRouteWithChildren,
   HomeRoute: HomeRouteWithChildren,
-  AuthLoginRoute: AuthLoginRoute,
 }
 
 export const routeTree = rootRoute
@@ -192,8 +217,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_app",
-        "/_home",
-        "/_auth/login"
+        "/_auth",
+        "/_home"
       ]
     },
     "/_app": {
@@ -201,6 +226,12 @@ export const routeTree = rootRoute
       "children": [
         "/_app/dashboard",
         "/_app/devices"
+      ]
+    },
+    "/_auth": {
+      "filePath": "_auth.tsx",
+      "children": [
+        "/_auth/login"
       ]
     },
     "/_home": {
@@ -218,7 +249,8 @@ export const routeTree = rootRoute
       "parent": "/_app"
     },
     "/_auth/login": {
-      "filePath": "_auth/login.tsx"
+      "filePath": "_auth/login.tsx",
+      "parent": "/_auth"
     },
     "/_home/": {
       "filePath": "_home/index.tsx",
