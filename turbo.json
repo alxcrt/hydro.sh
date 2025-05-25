@@ -28,7 +28,8 @@
 				"CORS_ORIGIN",
 				"POLAR_ACCESS_TOKEN",
 				"NODE_ENV",
-				"PORT"
+				"PORT",
+				"VITE_SERVER_URL"
 			]
 		},
 		"db:push": {
