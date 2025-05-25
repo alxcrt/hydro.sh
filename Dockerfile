@@ -3,17 +3,16 @@ FROM oven/bun:1.2.14 AS base
 WORKDIR /app
 
 # Copy root package files
-COPY package.json bun.lockb* ./
+COPY package.json bun.lockb* turbo.json ./
+
 
 # Copy all workspace package files
 COPY apps/*/package.json ./apps/
 COPY packages/*/package.json ./packages/
 
 # Install dependencies
+# --frozen-lockfile ensures exact versions from lockfile are used and prevents lockfile updates
 RUN bun install --frozen-lockfile
-
-# Install TypeScript globally to ensure tsc is available
-RUN bun install -g typescript
 
 # Copy the rest of the application
 COPY . .
@@ -26,11 +25,13 @@ FROM oven/bun:1.2.14 AS production
 
 WORKDIR /app
 
+# Copy package files
+COPY package.json bun.lockb* turbo.json ./
+
 # Copy built application from base stage
 COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./package.json
-COPY --from=base /app/apps ./apps
 COPY --from=base /app/packages ./packages
+COPY --from=base /app/apps ./apps
 
 # Use production environment
 ENV NODE_ENV=production
@@ -39,5 +40,5 @@ ENV NODE_ENV=production
 EXPOSE 3000
 EXPOSE 3001
 
-# Run the application using Turbo
+# Run the application
 CMD ["bun", "run", "start"]
