@@ -215,12 +215,12 @@
   --color-black-alpha-10: oklch(0% 0 0deg / 10%);
 
   /* primary colors */
-  --color-primary-darker: var(--color-orange-800);
-  --color-primary-dark: var(--color-orange-700);
-  --color-primary: var(--color-orange-500);
-  --color-primary-light: var(--color-orange-alpha-24);
-  --color-primary-lighter: var(--color-orange-alpha-16);
-  --color-primary-lightest: var(--color-orange-alpha-10);
+  --color-primary-darker: var(--color-blue-800);
+  --color-primary-dark: var(--color-blue-700);
+  --color-primary: var(--color-blue-500);
+  --color-primary-light: var(--color-blue-alpha-24);
+  --color-primary-lighter: var(--color-blue-alpha-16);
+  --color-primary-lightest: var(--color-blue-alpha-10);
 
   /* state-colors */
   --color-state-faded-dark: var(--state-faded-dark);
