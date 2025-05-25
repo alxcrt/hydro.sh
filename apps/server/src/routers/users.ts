@@ -5,6 +5,7 @@ import type { z } from "zod";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { protectedProcedure } from "@/lib/orpc";
+import { UpdateUserSchema } from "@hydro.sh/schemas/users";
 
 export const usersRouter = {
 	me: protectedProcedure.handler(async ({ context }) => {
@@ -92,4 +93,47 @@ export const usersRouter = {
 			},
 		};
 	}),
+
+	update: protectedProcedure
+		.input(UpdateUserSchema)
+		.handler(async ({ context, input }) => {
+			const existingUser = await db.query.user.findFirst({
+				where: (users, { and, eq, ne }) =>
+					and(
+						eq(users.email, input.email),
+						ne(users.id, context.session.user.id),
+					),
+			});
+
+			if (existingUser) {
+				throw new ORPCError("Email already in use by another account");
+			}
+
+			const updateData: Partial<typeof schema.user.$inferInsert> = {
+				name: input.name,
+				email: input.email,
+			};
+
+			if (input.image && typeof input.image === "object") {
+				// const imageUrl = await uploadFile(
+				//   input.image,
+				//   `avatars/${context.session.user.id}_${Date.now()}.png`,
+				//   {
+				//     type: input.image.type,
+				//     acl: "public-read",
+				//   }
+				// );
+				// updateData.imageUrl = imageUrl;
+			}
+
+			const user = await db
+				.update(schema.user)
+				.set(updateData)
+				.where(eq(schema.user.id, context.session.user.id))
+				.returning({
+					id: schema.user.id,
+				});
+
+			return user;
+		}),
 };

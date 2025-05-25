@@ -90,6 +90,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				suppressHydrationWarning
 			>
 				{isFetching ? <Loader /> : children}
+
 				<Toaster position="top-center" />
 				<TanStackRouterDevtools position="bottom-right" />
 				<ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />

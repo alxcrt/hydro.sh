@@ -48,14 +48,9 @@ export function UsageWidget({ className, ...props }: UsageWidgetProps) {
 					</div>
 				)}
 
-				{/* {requestLimits?.plan &&
-          requestLimits.plan !== "free" &&
-          plans[requestLimits.plan]?.extraScreenshotsCost && (
-            <div className="text-(--text-sub-600) text-paragraph-xs">
-              Each extra screenshot costs{" "}
-              {plans[requestLimits.plan].extraScreenshotsCost} USD.
-            </div>
-          )} */}
+				<div className="text-(--text-sub-600) text-paragraph-xs">
+					Each extra screenshot costs 69 USD.
+				</div>
 			</div>
 		</div>
 	);
