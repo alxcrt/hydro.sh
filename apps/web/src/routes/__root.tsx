@@ -8,7 +8,6 @@ import {
 	Outlet,
 	Scripts,
 	createRootRouteWithContext,
-	useRouterState,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { LazyMotion, domAnimation } from "motion/react";
@@ -62,6 +61,7 @@ export const authStateFn = createServerFn({ method: "GET" }).handler(
 		const request = getWebRequest();
 		if (!request)
 			throw new Error("No request found in current execution context");
+		console.log("Request headers:", request.headers);
 		const { data } = await authClient.getSession({
 			fetchOptions: {
 				headers: {
@@ -69,6 +69,7 @@ export const authStateFn = createServerFn({ method: "GET" }).handler(
 				},
 			},
 		});
+		console.log("Auth session data:", data);
 
 		return data;
 	},

@@ -7,11 +7,11 @@ import * as schema from "../db/schema/auth";
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
 		provider: "pg",
-
 		schema: schema,
 	}),
 	trustedOrigins: [env.CORS_ORIGIN || ""],
 	emailAndPassword: {
 		enabled: true,
+		autoSignIn: true,
 	},
 });
