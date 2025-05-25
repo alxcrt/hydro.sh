@@ -6,6 +6,13 @@ export const env = createEnv({
 		CORS_ORIGIN: z.string().url().optional(),
 		DATABASE_URL: z.string(),
 		BETTER_AUTH_SECRET: z.string(),
+		// DOMAIN is only required in production environment
+		// Used for cross-subdomain cookies
+		// in auth.ts
+		DOMAIN:
+			process.env.NODE_ENV === "production"
+				? z.string()
+				: z.string().optional(),
 	},
 	runtimeEnv: process.env,
 	emptyStringAsUndefined: true,
