@@ -16,6 +16,8 @@
 	"dependencies": {
 		"@orpc/client": "^1.2.0",
 		"@orpc/server": "^1.2.0",
+		"@hydro.sh/schemas": "workspace:*",
+		"@t3-oss/env-core": "^0.13.4",
 		"better-auth": "^1.2.7",
 		"dotenv": "^16.5.0",
 		"drizzle-orm": "^0.38.4",
