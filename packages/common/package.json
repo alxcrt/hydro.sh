@@ -1,0 +1,21 @@
+{
+	"name": "@hydro.sh/common",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./color": "./src/color.ts",
+		"./sip": "./src/sip.ts",
+		"./consts": "./src/consts.ts"
+	},
+	"module": "src/index.ts",
+	"dependencies": {
+		"zod": "3.25.28"
+	},
+	"devDependencies": {
+		"@types/bun": "1.2.14"
+	},
+	"peerDependencies": {
+		"typescript": "5.8.3"
+	}
+}

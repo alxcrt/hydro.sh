@@ -7,7 +7,9 @@
 		"./dashboard": "./src/dashboard.ts",
 		"./plan": "./src/plan.ts",
 		"./users": "./src/users.ts",
-		"./workspaces": "./src/workspaces.ts"
+		"./workspaces": "./src/workspaces.ts",
+		"./devices": "./src/devices.ts",
+		"./water": "./src/water.ts"
 	},
 	"module": "src/index.ts",
 	"dependencies": {

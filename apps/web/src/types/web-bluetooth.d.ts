@@ -1,0 +1,1 @@
+import "@types/web-bluetooth";

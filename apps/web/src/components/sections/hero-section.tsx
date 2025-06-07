@@ -77,8 +77,10 @@ export function HeroSection({
 								{isLoading
 									? "Connecting..."
 									: isError
-										? "Server Offline"
-										: "Server Online"}
+										? healthCheck
+											? "Connected"
+											: "Disconnected"
+										: "Connected"}
 							</div>
 						</div>
 					</div>

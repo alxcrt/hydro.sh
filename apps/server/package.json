@@ -14,15 +14,16 @@
 		"db:migrate": "drizzle-kit migrate"
 	},
 	"dependencies": {
+		"@hydro.sh/schemas": "workspace:*",
 		"@orpc/client": "^1.2.0",
 		"@orpc/server": "^1.2.0",
-		"@hydro.sh/schemas": "workspace:*",
 		"@t3-oss/env-core": "^0.13.4",
 		"better-auth": "^1.2.7",
 		"dotenv": "^16.5.0",
 		"drizzle-orm": "^0.38.4",
 		"hono": "^4.7.6",
 		"pg": "^8.14.1",
+		"resend": "^4.5.1",
 		"zod": "^3.25.16"
 	},
 	"devDependencies": {

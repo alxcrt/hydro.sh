@@ -12,6 +12,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { LazyMotion, domAnimation } from "motion/react";
 import { ThemeProvider } from "next-themes";
+import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
 
 import { authClient } from "@/lib/auth-client";
 import type { orpc } from "@/utils/orpc";
@@ -61,7 +62,6 @@ export const authStateFn = createServerFn({ method: "GET" }).handler(
 		const request = getWebRequest();
 		if (!request)
 			throw new Error("No request found in current execution context");
-		console.log("Request headers:", request.headers);
 		const { data } = await authClient.getSession({
 			fetchOptions: {
 				headers: {
@@ -69,7 +69,6 @@ export const authStateFn = createServerFn({ method: "GET" }).handler(
 				},
 			},
 		});
-		console.log("Auth session data:", data);
 
 		return data;
 	},
@@ -106,8 +105,6 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 		//    and verifies the session server-side
 		const session = await authStateFn();
 
-		console.log("session", session);
-
 		// 2. Return the session data to be added to the router context
 		// 3. If a session exists, we structure it to include both session data
 		//    and user data from the auth response
@@ -133,9 +130,11 @@ function RootComponent() {
 			defaultTheme="light"
 		>
 			<RootDocument>
-				<LazyMotion features={domAnimation}>
-					<Outlet />
-				</LazyMotion>{" "}
+				<NuqsAdapter>
+					<LazyMotion features={domAnimation}>
+						<Outlet />
+					</LazyMotion>
+				</NuqsAdapter>
 			</RootDocument>
 		</ThemeProvider>
 	);

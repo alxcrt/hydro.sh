@@ -1,0 +1,23 @@
+// public static final String BATTERY = "00002a19-0000-1000-8000-00805f9b34fb";
+// public static final String BOOTLOADER = "00060001-f8ce-11e4-abf4-0002a5d5c51b";
+// public static final String CONFIG = "31FB5B6C-0166-4C97-BA1D-BF0A82FBBCB6";
+// public static final String DATA_POINT = "016e11b1-6c8a-4074-9e5a-076053f93784";
+// public static final String DEBUG = "e3578b0d-caa7-46d6-b7c2-7331c08de044";
+// public static final String FIRMWARE_VERSION = "00002a26-0000-1000-8000-00805f9b34fb";
+// public static final String H2O_TOTAL = "6ac24e8b-056c-4077-8221-8f816ade71e6";
+// public static final String LED_CONTROL = "a1d9a5bf-f5d8-49f3-a440-e6bf27440cb0";
+// public static final String NORDIC_CUSTOM_COLOR = "B810E826-CF05-4B46-A725-07BC0FA2E5D9";
+// public static final String NORDIC_LED_CONTROL = "B810E826-CF05-4B46-A725-07BC0FA2E5D9";
+// public static final String SET_POINT = "b44b03f0-b850-4090-86eb-72863fb3618d";
+
+export const BATTERY = "00002a19-0000-1000-8000-00805f9b34fb";
+export const BOOTLOADER = "00060001-f8ce-11e4-abf4-0002a5d5c51b";
+export const CONFIG = "31FB5B6C-0166-4C97-BA1D-BF0A82FBBCB6";
+export const DATA_POINT = "016e11b1-6c8a-4074-9e5a-076053f93784";
+export const DEBUG = "e3578b0d-caa7-46d6-b7c2-7331c08de044";
+export const FIRMWARE_VERSION = "00002a26-0000-1000-8000-00805f9b34fb";
+export const H2O_TOTAL = "6ac24e8b-056c-4077-8221-8f816ade71e6";
+export const LED_CONTROL = "a1d9a5bf-f5d8-49f3-a440-e6bf27440cb0";
+export const NORDIC_CUSTOM_COLOR = "B810E826-CF05-4B46-A725-07BC0FA2E5D9";
+export const NORDIC_LED_CONTROL = "B810E826-CF05-4B46-A725-07BC0FA2E5D9";
+export const SET_POINT = "b44b03f0-b850-4090-86eb-72863fb3618d";

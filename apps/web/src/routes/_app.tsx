@@ -1,3 +1,4 @@
+import { AddDeviceModal } from "@/components/modals/add-device-modal";
 import { SettingsModal } from "@/components/modals/settings-modal/settings-modal";
 import Sidebar from "@/components/sidebar";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
@@ -30,6 +31,7 @@ function RouteComponent() {
 			</div>
 
 			<SettingsModal />
+			<AddDeviceModal />
 		</>
 	);
 }

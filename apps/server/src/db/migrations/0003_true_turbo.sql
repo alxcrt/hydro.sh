@@ -1,0 +1,1 @@
+ALTER TABLE "water_intake" ALTER COLUMN "amount" SET DATA TYPE text;
