@@ -9,7 +9,7 @@ import * as React from "react";
 import { useActionsParams } from "@/hooks/use-actions-params.ts";
 import { useMe } from "@/hooks/use-me.ts";
 import { useORPC } from "@/hooks/use-orpc.ts";
-import { useBLEScanner } from "@/hooks/useBTDevices.ts";
+import { useBluetooth } from "@/hooks/useBluetooth.ts";
 import { useEffect } from "react";
 import { useAppForm } from "../forms/form.tsx";
 import * as Alert from "../ui/alert.tsx";
@@ -24,7 +24,7 @@ export function AddDeviceModal() {
 	const queryClient = useQueryClient();
 	const me = useMe();
 	// const userPlan = me?.requestLimits?.plan ?? "free";
-	const { devices, isLoading, isScanning, startScan } = useBLEScanner();
+	const { connect, isConnecting, device, isConnected } = useBluetooth();
 
 	const orpc = useORPC();
 	const { mutateAsync } = useMutation(orpc.devices.create.mutationOptions());
@@ -106,12 +106,12 @@ export function AddDeviceModal() {
 	};
 
 	useEffect(() => {
-		if (devices?.length) {
-			form.setFieldValue("name", devices[0]?.name || "My Device");
-			form.setFieldValue("id", devices[0]?.id || "My Device");
-			form.setFieldValue("bluetoothName", devices[0]?.name || "My Device");
+		if (device) {
+			form.setFieldValue("name", device.name || "My Device");
+			form.setFieldValue("id", device.id || "My Device");
+			form.setFieldValue("bluetoothName", device.name || "My Device");
 		}
-	}, [devices]);
+	}, [device]);
 
 	return (
 		<Modal.Root
@@ -166,18 +166,18 @@ export function AddDeviceModal() {
 									{/* <Skeleton className="h-full w-full rounded-10" /> */}
 
 									{/* Start Scanning */}
-									{devices?.length ? null : (
+									{device ? null : (
 										<Button
 											$type="neutral"
 											className="w-full"
-											disabled={isScanning}
-											onClick={startScan}
+											disabled={isConnecting}
+											onClick={connect}
 										>
-											{isScanning ? "Scanning..." : "Start Scanning"}
+											{isConnecting ? "Connecting..." : "Start Scanning"}
 										</Button>
 									)}
 
-									{devices?.length ? (
+									{device ? (
 										<form.AppField
 											name="name"
 											children={(field) => (
