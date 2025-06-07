@@ -29,7 +29,8 @@
 				"NODE_ENV",
 				"PORT",
 				"VITE_SERVER_URL",
-				"DOMAIN"
+				"DOMAIN",
+				"RESEND_API_KEY"
 			]
 		},
 		"db:push": {
