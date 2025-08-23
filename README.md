@@ -1,4 +1,19 @@
-# hydro.sh
+# hydro.sh 💧
+
+A clean, fast web app for smart water bottle tracking - without the bloat.
+
+![Hydro.sh Dashboard](./dashboard.png)
+
+## Features
+
+✅ **Bluetooth Sync** - Connect directly to smart water bottles (HidrateSpark supported)  
+✅ **Browser-Based** - No app downloads, works on any device  
+✅ **Multi-Bottle Support** - Track multiple bottles seamlessly  
+✅ **Free LED Control** - Change your bottle's LED colors without premium  
+✅ **Manual Logging** - Track intake even without a smart bottle  
+✅ **Privacy First** - Your data stays local, not locked in corporate servers  
+✅ **No Social Bloat** - Just hydration tracking, no leaderboards or friend requests
+
 
 This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, TanStack Start, Hono, ORPC, and more.
 
