@@ -34,12 +34,7 @@ export default function SignUpForm({
 				},
 				{
 					onSuccess: () => {
-						toast.success(
-							"Account created! Please check your email to verify your account.",
-							{
-								duration: 6000,
-							},
-						);
+						toast.success("Account created! You can now sign in.");
 						onSwitchToSignIn();
 					},
 					onError: (error) => {
