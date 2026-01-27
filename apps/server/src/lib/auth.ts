@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+// import { Resend } from "resend";
 
 import { env } from "@/utils/env";
 import { betterAuth } from "better-auth";
@@ -6,7 +6,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
-const resend = new Resend(env.RESEND_API_KEY);
+// const resend = new Resend(env.RESEND_API_KEY);
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
@@ -23,27 +23,27 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		autoSignIn: true,
-		requireEmailVerification: true,
+		// requireEmailVerification: true,
 	},
-	emailVerification: {
-		sendVerificationEmail: async ({ user, url, token }) => {
-			const { data, error } = await resend.emails.send({
-				from: "Hydro <onboarding@resend.dev>",
-				to: user.email,
-				subject: "Verify your email",
-				html: `<p>Click <a href="${url}">here</a> to verify your email</p>`,
-			});
+	// emailVerification: {
+	// 	sendVerificationEmail: async ({ user, url, token }) => {
+	// 		const { data, error } = await resend.emails.send({
+	// 			from: "Hydro <onboarding@resend.dev>",
+	// 			to: user.email,
+	// 			subject: "Verify your email",
+	// 			html: `<p>Click <a href="${url}">here</a> to verify your email</p>`,
+	// 		});
 
-			if (error) {
-				console.error(error);
-			}
+	// 		if (error) {
+	// 			console.error(error);
+	// 		}
 
-			// return data;
-		},
-		sendOnSignUp: true,
-		autoSignInAfterVerification: true,
-		expiresIn: 3600, // 1 hour
-	},
+	// 		// return data;
+	// 	},
+	// 	sendOnSignUp: true,
+	// 	autoSignInAfterVerification: true,
+	// 	expiresIn: 3600, // 1 hour
+	// },
 	// The advanced configuration allows for fine-tuning of auth cookie behavior
 	advanced: {
 		// Sets a prefix for all auth cookies to prevent naming conflicts
