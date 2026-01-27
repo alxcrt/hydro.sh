@@ -111,7 +111,7 @@ export function AddDeviceModal() {
 			form.setFieldValue("id", device.id || "My Device");
 			form.setFieldValue("bluetoothName", device.name || "My Device");
 		}
-	}, [device]);
+	}, [device, form.setFieldValue]);
 
 	return (
 		<Modal.Root

@@ -11,17 +11,17 @@ export function useScroll(): ScrollPosition {
 		scrollY: 0,
 	});
 
-	const handleScroll = () => {
+	const handleScroll = React.useCallback(() => {
 		setScrollPosition({
 			scrollX: window.scrollX,
 			scrollY: window.scrollY,
 		});
-	};
+	}, []);
 
 	React.useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+	}, [handleScroll]);
 
 	return scrollPosition;
 }

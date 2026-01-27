@@ -1,6 +1,5 @@
 import { ORPCError } from "@orpc/server";
 import { eq } from "drizzle-orm";
-import { v4 as uuidv4 } from "uuid";
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
@@ -41,7 +40,7 @@ export const devicesRouter = {
 				const device = await db
 					.insert(schema.device)
 					.values({
-						id: uuidv4(),
+						id: crypto.randomUUID(),
 						name: input.name,
 						bluetoothName: input.bluetoothName,
 						deviceIdentifier: input.deviceIdentifier,

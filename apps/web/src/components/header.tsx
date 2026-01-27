@@ -21,10 +21,6 @@ const navItems = [
 		label: "Features",
 		href: "/#features",
 	},
-	{
-		label: "Pricing",
-		href: "/#pricing",
-	},
 ];
 
 const mobileNavItems = [

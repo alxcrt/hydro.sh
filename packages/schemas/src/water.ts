@@ -11,5 +11,7 @@ export const ListWaterIntakesSchema = z
 	.object({
 		limit: z.number().optional(),
 		offset: z.number().optional(),
+		startDate: z.date().optional(),
+		endDate: z.date().optional(),
 	})
 	.optional();

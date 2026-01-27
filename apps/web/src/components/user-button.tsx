@@ -2,19 +2,14 @@
 
 import ArrowDown01Icon from "virtual:icons/hugeicons/arrow-down-01";
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
-import CustomerSupportIcon from "virtual:icons/hugeicons/customer-support";
 import Logout04Icon from "virtual:icons/hugeicons/logout-04";
 import Moon02Icon from "virtual:icons/hugeicons/moon-02";
-// import SecurityCheckIcon from "virtual:icons/hugeicons/security-check";
-import Setting07Icon from "virtual:icons/hugeicons/setting-07";
-import UserCircle02Icon from "virtual:icons/hugeicons/user-circle-02";
 
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useTheme } from "next-themes";
 
 import { useMe } from "@/hooks/use-me.ts";
 import { authClient } from "@/lib/auth-client";
-import { useSettingsStore } from "@/store/settings";
 import { cn } from "@/utils/cn";
 import * as Avatar from "./ui/avatar.tsx";
 import * as Divider from "./ui/divider.tsx";
@@ -26,7 +21,6 @@ export function UserButton({ className }: { className?: string }) {
 	const me = useMe();
 	const { theme, setTheme } = useTheme();
 	const navigate = useNavigate();
-	const { setOpen } = useSettingsStore();
 
 	return (
 		<DropdownMenu.Root>
@@ -97,15 +91,6 @@ export function UserButton({ className }: { className?: string }) {
 				<Divider.Root $type="line-spacing" />
 
 				<DropdownMenu.Group>
-					<DropdownMenu.Item onClick={setOpen}>
-						<DropdownMenu.ItemIcon as={Setting07Icon} />
-						Settings
-					</DropdownMenu.Item>
-				</DropdownMenu.Group>
-
-				<Divider.Root $type="line-spacing" />
-
-				<DropdownMenu.Group>
 					<DropdownMenu.Item
 						onClick={() => {
 							authClient.signOut({
@@ -125,15 +110,7 @@ export function UserButton({ className }: { className?: string }) {
 				</DropdownMenu.Group>
 
 				<div className="p-2 text-(--text-soft-400) text-paragraph-sm">
-					<span>v1.0.0 · </span>
-					{/* <Link
-            to="/legal/$"
-            params={{
-              _splat: "terms",
-            }}
-          >
-            Terms & Conditions
-          </Link> */}
+					<span>v1.0.0</span>
 				</div>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
@@ -144,7 +121,6 @@ export function UserButtonMobile({ className }: { className?: string }) {
 	const { theme, setTheme } = useTheme();
 	const me = useMe();
 	const navigate = useNavigate();
-	const { setOpen } = useSettingsStore();
 
 	return (
 		<DropdownMenu.Root modal={false}>
@@ -175,7 +151,6 @@ export function UserButtonMobile({ className }: { className?: string }) {
 				<div
 					className={cn(
 						"flex size-6 items-center justify-center rounded-6 border border-(--stroke-soft-200) bg-(--bg-white-0) text-(--text-sub-600) shadow-xs",
-						// open
 						"group-data-[state=open]:bg-(--bg-strong-950) group-data-[state=open]:text-(--text-white-0) group-data-[state=open]:shadow-none",
 					)}
 				>
@@ -195,42 +170,6 @@ export function UserButtonMobile({ className }: { className?: string }) {
 					<span className="flex-1" />
 					<Switch.Root checked={theme === "dark"} />
 				</DropdownMenu.Item>
-
-				<Divider.Root $type="line-spacing" />
-
-				<DropdownMenu.Group>
-					<DropdownMenu.Item asChild>
-						<Link to="/">
-							<DropdownMenu.ItemIcon as={UserCircle02Icon} />
-							My profile
-						</Link>
-					</DropdownMenu.Item>
-					<DropdownMenu.Item onClick={setOpen}>
-						<DropdownMenu.ItemIcon as={Setting07Icon} />
-						Settings
-					</DropdownMenu.Item>
-					<DropdownMenu.Item asChild>
-						{/* <Link
-              to="/legal/$"
-              params={{
-                _splat: "policy",
-              }}
-            >
-              <DropdownMenu.ItemIcon as={SecurityCheckIcon} />
-              Privacy policy
-            </Link> */}
-					</DropdownMenu.Item>
-					<DropdownMenu.Item asChild>
-						<a
-							href="mailto:support@expensetrackr.app"
-							rel="noopener noreferrer"
-							target="_blank"
-						>
-							<DropdownMenu.ItemIcon as={CustomerSupportIcon} />
-							Support
-						</a>
-					</DropdownMenu.Item>
-				</DropdownMenu.Group>
 
 				<Divider.Root $type="line-spacing" />
 

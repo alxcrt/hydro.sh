@@ -2,21 +2,15 @@
 
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
 import DashboardSquare02Icon from "virtual:icons/hugeicons/dashboard-square-02";
-import HeadsetIcon from "virtual:icons/hugeicons/headset";
-import Setting07Icon from "virtual:icons/hugeicons/setting-07";
-import SodaIcon from "virtual:icons/hugeicons/soda-can-stroke-rounded";
 
 import { Link, useLocation } from "@tanstack/react-router";
 import * as React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
-import { useSettingsStore } from "@/store/settings";
 import { cn } from "@/utils/cn";
-// import { WorkspaceSwitch } from "./workspace-switch.tsx";
 import { Logo } from "./logo.tsx";
 import * as Divider from "./ui/divider.tsx";
 import { UserButton } from "./user-button.tsx";
-import { UsageWidget } from "./widgets/usage-widget.tsx";
 
 type NavigationLink = {
 	icon: React.ComponentType<{ className?: string }>;
@@ -26,8 +20,7 @@ type NavigationLink = {
 };
 
 export const navigationLinks: NavigationLink[] = [
-	{ icon: DashboardSquare02Icon, label: "Overview", to: "/dashboard" },
-	{ icon: SodaIcon, label: "Devices", to: "/devices" },
+	{ icon: DashboardSquare02Icon, label: "Dashboard", to: "/dashboard" },
 ];
 
 function useCollapsedState({
@@ -103,12 +96,6 @@ export function SidebarHeader({ collapsed }: { collapsed?: boolean }) {
 					</span>
 				</Link>
 			</div>
-
-			{/* <WorkspaceSwitch
-        className={cn("transition-all-default", {
-          "w-16": collapsed,
-        })}
-      /> */}
 		</div>
 	);
 }
@@ -180,112 +167,6 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
 	);
 }
 
-function SettingsAndSupport({ collapsed }: { collapsed: boolean }) {
-	const { setOpen } = useSettingsStore();
-	const pathname = useLocation().pathname;
-
-	const links = [
-		{
-			href: "mailto:support@screenshothis.com",
-			icon: HeadsetIcon,
-			label: "Support",
-		},
-	];
-
-	return (
-		<div className="space-y-2">
-			<div
-				className={cn(
-					"p-1 text-(--text-soft-400) text-subheading-xs uppercase",
-					{
-						"-mx-2.5 w-14 px-0 text-center": collapsed,
-					},
-				)}
-			>
-				Others
-			</div>
-			<div className="space-y-1">
-				<button
-					type="button"
-					onClick={setOpen}
-					className={cn(
-						"group relative flex items-center gap-2 whitespace-nowrap rounded-lg py-2 text-left text-(--text-sub-600) hover:bg-(--bg-weak-50)",
-						"transition duration-200 ease-out",
-						{
-							"w-9 px-2": collapsed,
-							"w-full px-3": !collapsed,
-						},
-					)}
-				>
-					<Setting07Icon
-						className={cn(
-							"size-5 shrink-0 text-(--text-sub-600) transition duration-200 ease-out",
-							"group-aria-[current=page]:text-primary",
-						)}
-					/>
-
-					<div
-						className="flex w-[180px] shrink-0 items-center gap-2"
-						data-hide-collapsed
-					>
-						<div className="flex-1 text-label-sm">Settings</div>
-					</div>
-				</button>
-
-				{links.map(({ icon: Icon, label, href }) => {
-					const isActivePage = pathname.startsWith(href);
-
-					return (
-						<Link
-							key={href}
-							to={href}
-							aria-current={isActivePage ? "page" : undefined}
-							className={cn(
-								"group relative flex items-center gap-2 whitespace-nowrap rounded-lg py-2 text-(--text-sub-600) hover:bg-(--bg-weak-50)",
-								"transition duration-200 ease-out",
-								"aria-[current=page]:bg-(--bg-weak-50)",
-								"aria-disabled:pointer-events-none aria-disabled:opacity-50",
-								{
-									"w-9 px-2": collapsed,
-									"w-full px-3": !collapsed,
-								},
-							)}
-						>
-							<div
-								className={cn(
-									"-translate-y-1/2 absolute top-1/2 h-5 w-1 origin-left rounded-r-full bg-primary transition duration-200 ease-out",
-									{
-										"-left-[22px]": collapsed,
-										"-left-5": !collapsed,
-										"scale-100": isActivePage,
-										"scale-0": !isActivePage,
-									},
-								)}
-							/>
-							<Icon
-								className={cn(
-									"size-5 shrink-0 text-(--text-sub-600) transition duration-200 ease-out",
-									"group-aria-[current=page]:text-primary",
-								)}
-							/>
-
-							<div
-								className="flex w-[180px] shrink-0 items-center gap-2"
-								data-hide-collapsed
-							>
-								<div className="flex-1 text-label-sm">{label}</div>
-								{isActivePage && (
-									<ArrowRight01Icon className="size-5 text-(--text-sub-600)" />
-								)}
-							</div>
-						</Link>
-					);
-				})}
-			</div>
-		</div>
-	);
-}
-
 function UserProfile({ collapsed }: { collapsed: boolean }) {
 	return (
 		<div
@@ -350,9 +231,6 @@ export default function Sidebar({
 						})}
 					>
 						<NavigationMenu collapsed={collapsed} />
-						<SettingsAndSupport collapsed={collapsed} />
-
-						{!collapsed ? <UsageWidget className="mt-auto" /> : null}
 					</div>
 
 					<SidebarDivider collapsed={collapsed} />

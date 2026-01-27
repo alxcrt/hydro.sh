@@ -45,10 +45,6 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 export function useBottle({ onHandleSipData, onHandleDebug }: UseBottleProps) {
 	const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
 	const [firmwareVersion, setFirmwareVersion] = useState<string | null>(null);
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	// const [sipData, setSipData] = useState<any | null>(null);
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	// const [debugData, setDebugData] = useState<any | null>(null);
 
 	const {
 		device,

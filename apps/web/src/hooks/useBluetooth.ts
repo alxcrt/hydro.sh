@@ -84,7 +84,12 @@ export const useBluetooth = (
 				acceptAllDevices: true,
 
 				// Filters are not allowed when acceptAllDevices is true
-				// filters: [{ services: config.services, namePrefix: "h2o" }],
+				// filters: [
+				//   {
+				//     // services: config.services,
+				//     namePrefix: "h2o",
+				//   },
+				// ],
 				optionalServices: finalConfig.services || [],
 			});
 

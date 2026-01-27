@@ -1,6 +1,5 @@
 import { ORPCError } from "@orpc/server";
-import { eq } from "drizzle-orm";
-import { v4 as uuidv4 } from "uuid";
+import { and, eq, gte, lte } from "drizzle-orm";
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
@@ -17,8 +16,19 @@ export const waterRouter = {
 			const limit = input?.limit ?? 5;
 			const offset = input?.offset ?? 0;
 
+			const conditions = [
+				eq(schema.waterIntake.userId, context.session.user.id),
+			];
+
+			if (input?.startDate) {
+				conditions.push(gte(schema.waterIntake.timestamp, input.startDate));
+			}
+			if (input?.endDate) {
+				conditions.push(lte(schema.waterIntake.timestamp, input.endDate));
+			}
+
 			const waterIntakes = await db.query.waterIntake.findMany({
-				where: eq(schema.waterIntake.userId, context.session.user.id),
+				where: and(...conditions),
 				orderBy: (waterIntake, { desc }) => [desc(waterIntake.timestamp)],
 				limit,
 				offset,
@@ -38,7 +48,7 @@ export const waterRouter = {
 				const waterIntake = await db
 					.insert(schema.waterIntake)
 					.values({
-						id: uuidv4(),
+						id: crypto.randomUUID(),
 						amount: input.amount.toString(),
 						timestamp: input.timestamp || new Date(),
 						bottleBrand: input.bottleBrand,
