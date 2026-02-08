@@ -5,6 +5,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { auth } from "./lib/auth";
 import { createContext } from "./lib/context";
+import { stripe } from "./lib/stripe";
 import { appRouter } from "./routers/index";
 import { env } from "./utils/env";
 
@@ -34,6 +35,36 @@ app.use(
 );
 
 app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
+
+app.post("/api/stripe/webhook", async (c) => {
+	const body = await c.req.text();
+	const signature = c.req.header("stripe-signature");
+
+	if (!signature) {
+		return c.json({ error: "Missing stripe-signature header" }, 400);
+	}
+
+	try {
+		const event = await stripe.webhooks.constructEventAsync(
+			body,
+			signature,
+			env.STRIPE_WEBHOOK_SECRET,
+		);
+
+		if (event.type === "checkout.session.completed") {
+			const session = event.data.object;
+			console.log("Donation received:", {
+				amount: session.amount_total,
+				message: session.metadata?.message,
+			});
+		}
+
+		return c.json({ received: true }, 200);
+	} catch (err) {
+		console.error("Webhook signature verification failed:", err);
+		return c.json({ error: "Webhook signature verification failed" }, 400);
+	}
+});
 
 const handler = new RPCHandler(appRouter);
 app.use("/rpc/*", async (c, next) => {

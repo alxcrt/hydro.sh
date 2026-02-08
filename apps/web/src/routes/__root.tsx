@@ -90,6 +90,27 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 		],
 		links: [
 			{
+				rel: "icon",
+				href: "/favicon.ico",
+				sizes: "32x32",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				href: "/favicon-32x32.png",
+				sizes: "32x32",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				href: "/favicon-16x16.png",
+				sizes: "16x16",
+			},
+			{
+				rel: "apple-touch-icon",
+				href: "/apple-touch-icon.png",
+			},
+			{
 				rel: "stylesheet",
 				href: tailwindCss,
 			},

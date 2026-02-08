@@ -36,12 +36,7 @@ export function UserButton({ className }: { className?: string }) {
 						$color="blue"
 						$size="40"
 					>
-						{me.imageUrl ? (
-							<Avatar.Image
-								alt={me.fullName ?? ""}
-								src={me.imageUrl ?? undefined}
-							/>
-						) : null}
+						{me.fullName?.charAt(0) ?? ""}
 					</Avatar.Root>
 				) : (
 					<Skeleton className="size-10 rounded-full" />
@@ -82,7 +77,10 @@ export function UserButton({ className }: { className?: string }) {
 						setTheme(theme === "dark" ? "light" : "dark");
 					}}
 				>
-					<DropdownMenu.ItemIcon as={Moon02Icon} />
+					<DropdownMenu.ItemIcon
+						className="text-(--text-strong-950)"
+						as={Moon02Icon}
+					/>
 					Dark Mode
 					<span className="flex-1" />
 					<Switch.Root checked={theme === "dark"} />
@@ -131,14 +129,7 @@ export function UserButtonMobile({ className }: { className?: string }) {
 				)}
 			>
 				<Avatar.Root $color="blue" $size="48">
-					{me?.imageUrl ? (
-						<Avatar.Image
-							alt={me?.fullName ?? ""}
-							src={me?.imageUrl ?? undefined}
-						/>
-					) : (
-						me?.fullName?.slice(0, 2)
-					)}
+					{me?.fullName?.charAt(0) ?? ""}
 				</Avatar.Root>
 				<div className="flex-1 space-y-1">
 					<div className="flex items-center gap-0.5 text-label-md">
@@ -165,7 +156,10 @@ export function UserButtonMobile({ className }: { className?: string }) {
 						setTheme(theme === "dark" ? "light" : "dark");
 					}}
 				>
-					<DropdownMenu.ItemIcon as={Moon02Icon} />
+					<DropdownMenu.ItemIcon
+						className="text-(--text-strong-950)"
+						as={Moon02Icon}
+					/>
 					Dark Mode
 					<span className="flex-1" />
 					<Switch.Root checked={theme === "dark"} />

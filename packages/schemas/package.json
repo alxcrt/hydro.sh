@@ -9,7 +9,8 @@
 		"./users": "./src/users.ts",
 		"./workspaces": "./src/workspaces.ts",
 		"./devices": "./src/devices.ts",
-		"./water": "./src/water.ts"
+		"./water": "./src/water.ts",
+		"./donation": "./src/donation.ts"
 	},
 	"module": "src/index.ts",
 	"dependencies": {

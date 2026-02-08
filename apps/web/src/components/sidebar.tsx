@@ -2,6 +2,7 @@
 
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
 import DashboardSquare02Icon from "virtual:icons/hugeicons/dashboard-square-02";
+import FavouriteIcon from "virtual:icons/hugeicons/favourite";
 
 import { Link, useLocation } from "@tanstack/react-router";
 import * as React from "react";
@@ -9,6 +10,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 import { cn } from "@/utils/cn";
 import { Logo } from "./logo.tsx";
+import { DonateModal } from "./modals/donate-modal.tsx";
 import * as Divider from "./ui/divider.tsx";
 import { UserButton } from "./user-button.tsx";
 
@@ -195,6 +197,33 @@ function SidebarDivider({ collapsed }: { collapsed: boolean }) {
 	);
 }
 
+function DonateLink({ collapsed }: { collapsed: boolean }) {
+	const [donateOpen, setDonateOpen] = React.useState(false);
+
+	return (
+		<>
+			<DonateModal open={donateOpen} onOpenChange={setDonateOpen} />
+			<button
+				type="button"
+				onClick={() => setDonateOpen(true)}
+				className={cn(
+					"group flex items-center gap-2 whitespace-nowrap rounded-8 py-2 text-(--text-soft-400) hover:bg-pink-50 hover:text-pink-600",
+					"transition duration-200 ease-out",
+					{
+						"w-9 justify-center px-2": collapsed,
+						"w-full px-3": !collapsed,
+					},
+				)}
+			>
+				<FavouriteIcon className="size-5 shrink-0 text-pink-400 transition duration-200 ease-out group-hover:text-pink-500" />
+				<span className="text-label-sm" data-hide-collapsed>
+					Support Us
+				</span>
+			</button>
+		</>
+	);
+}
+
 export default function Sidebar({
 	defaultCollapsed = false,
 }: {
@@ -231,6 +260,10 @@ export default function Sidebar({
 						})}
 					>
 						<NavigationMenu collapsed={collapsed} />
+
+						<div className="mt-auto">
+							<DonateLink collapsed={collapsed} />
+						</div>
 					</div>
 
 					<SidebarDivider collapsed={collapsed} />

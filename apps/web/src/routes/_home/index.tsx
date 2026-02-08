@@ -1,7 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
+import * as React from "react";
 
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
+import { DonateButton } from "@/components/donate-button";
+import { DonateModal } from "@/components/modals/donate-modal";
 import { Button } from "@/components/ui/button";
 import { useORPC } from "@/hooks/use-orpc";
 import { cn } from "@/utils/cn";
@@ -76,9 +79,11 @@ const features = [
 
 function RouteComponent() {
 	const { isLoading, isError } = useQuery(useORPC().healthCheck.queryOptions());
+	const [donateOpen, setDonateOpen] = React.useState(false);
 
 	return (
 		<div className="flex min-h-screen">
+			<DonateModal open={donateOpen} onOpenChange={setDonateOpen} />
 			{/* Left side - Hero Content */}
 			<div className="relative hidden flex-col justify-between overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-500 p-12 lg:flex lg:w-1/2">
 				{/* Background decoration */}
@@ -155,6 +160,13 @@ function RouteComponent() {
 				</div>
 
 				{/* Footer */}
+				<div className="relative z-10 space-y-4">
+					<DonateButton
+						variant="default"
+						onClick={() => setDonateOpen(true)}
+						className="border-white/20 from-white/10 to-white/5 text-white hover:border-white/30 hover:from-white/20 hover:to-white/10 hover:shadow-white/10"
+					/>
+				</div>
 				<div className="relative z-10 flex items-center gap-3 text-blue-200 text-paragraph-sm">
 					<div
 						className={cn(
@@ -312,6 +324,14 @@ function RouteComponent() {
 					<p className="mt-6 text-center text-neutral-400 text-paragraph-xs">
 						No credit card required. Free forever for personal use.
 					</p>
+
+					{/* Donate CTA */}
+					<div className="mt-4 flex justify-center">
+						<DonateButton
+							variant="default"
+							onClick={() => setDonateOpen(true)}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

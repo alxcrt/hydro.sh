@@ -1,5 +1,6 @@
 import { protectedProcedure, publicProcedure } from "../lib/orpc";
 import { devicesRouter } from "./devices";
+import { stripeRouter } from "./stripe";
 import { usersRouter } from "./users";
 import { waterRouter } from "./water";
 
@@ -19,6 +20,7 @@ export const appRouter = {
 		return "SAMSON";
 	}),
 	waterIntake: waterRouter,
+	stripe: stripeRouter,
 };
 
 export type AppRouter = typeof appRouter;

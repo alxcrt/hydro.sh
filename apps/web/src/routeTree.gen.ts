@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as DonateSuccessImport } from './routes/donate-success'
+import { Route as DonateCancelImport } from './routes/donate-cancel'
 import { Route as HomeImport } from './routes/_home'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AppImport } from './routes/_app'
@@ -20,6 +22,18 @@ import { Route as AppDevicesImport } from './routes/_app/devices'
 import { Route as AppDashboardImport } from './routes/_app/dashboard'
 
 // Create/Update Routes
+
+const DonateSuccessRoute = DonateSuccessImport.update({
+  id: '/donate-success',
+  path: '/donate-success',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DonateCancelRoute = DonateCancelImport.update({
+  id: '/donate-cancel',
+  path: '/donate-cancel',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const HomeRoute = HomeImport.update({
   id: '/_home',
@@ -83,6 +97,20 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof HomeImport
+      parentRoute: typeof rootRoute
+    }
+    '/donate-cancel': {
+      id: '/donate-cancel'
+      path: '/donate-cancel'
+      fullPath: '/donate-cancel'
+      preLoaderRoute: typeof DonateCancelImport
+      parentRoute: typeof rootRoute
+    }
+    '/donate-success': {
+      id: '/donate-success'
+      path: '/donate-success'
+      fullPath: '/donate-success'
+      preLoaderRoute: typeof DonateSuccessImport
       parentRoute: typeof rootRoute
     }
     '/_app/dashboard': {
@@ -152,6 +180,8 @@ const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
 
 export interface FileRoutesByFullPath {
   '': typeof HomeRouteWithChildren
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
   '/dashboard': typeof AppDashboardRoute
   '/devices': typeof AppDevicesRoute
   '/login': typeof AuthLoginRoute
@@ -160,6 +190,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '': typeof AuthRouteWithChildren
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
   '/dashboard': typeof AppDashboardRoute
   '/devices': typeof AppDevicesRoute
   '/login': typeof AuthLoginRoute
@@ -171,6 +203,8 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_home': typeof HomeRouteWithChildren
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/devices': typeof AppDevicesRoute
   '/_auth/login': typeof AuthLoginRoute
@@ -179,14 +213,30 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dashboard' | '/devices' | '/login' | '/'
+  fullPaths:
+    | ''
+    | '/donate-cancel'
+    | '/donate-success'
+    | '/dashboard'
+    | '/devices'
+    | '/login'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/dashboard' | '/devices' | '/login' | '/'
+  to:
+    | ''
+    | '/donate-cancel'
+    | '/donate-success'
+    | '/dashboard'
+    | '/devices'
+    | '/login'
+    | '/'
   id:
     | '__root__'
     | '/_app'
     | '/_auth'
     | '/_home'
+    | '/donate-cancel'
+    | '/donate-success'
     | '/_app/dashboard'
     | '/_app/devices'
     | '/_auth/login'
@@ -198,12 +248,16 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
   HomeRoute: typeof HomeRouteWithChildren
+  DonateCancelRoute: typeof DonateCancelRoute
+  DonateSuccessRoute: typeof DonateSuccessRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
   HomeRoute: HomeRouteWithChildren,
+  DonateCancelRoute: DonateCancelRoute,
+  DonateSuccessRoute: DonateSuccessRoute,
 }
 
 export const routeTree = rootRoute
@@ -218,7 +272,9 @@ export const routeTree = rootRoute
       "children": [
         "/_app",
         "/_auth",
-        "/_home"
+        "/_home",
+        "/donate-cancel",
+        "/donate-success"
       ]
     },
     "/_app": {
@@ -239,6 +295,12 @@ export const routeTree = rootRoute
       "children": [
         "/_home/"
       ]
+    },
+    "/donate-cancel": {
+      "filePath": "donate-cancel.tsx"
+    },
+    "/donate-success": {
+      "filePath": "donate-success.tsx"
     },
     "/_app/dashboard": {
       "filePath": "_app/dashboard.tsx",
