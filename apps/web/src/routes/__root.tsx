@@ -162,6 +162,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
 					rel="stylesheet"
 				/>
+				<script
+					defer
+					data-domain="hydro.alexcretu.com"
+					src="https://plausible.alexcretu.com/js/script.js"
+				/>
 			</head>
 			<body
 				className="h-full bg-(--bg-white-0) text-(--text-strong-950)"
