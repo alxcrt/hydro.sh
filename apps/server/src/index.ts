@@ -5,6 +5,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { auth } from "./lib/auth";
 import { createContext } from "./lib/context";
+import { generateOGImage } from "./lib/og";
 import { stripe } from "./lib/stripe";
 import { appRouter } from "./routers/index";
 import { env } from "./utils/env";
@@ -77,6 +78,23 @@ app.use("/rpc/*", async (c, next) => {
 		return c.newResponse(response.body, response);
 	}
 	await next();
+});
+
+let cachedOGImage: Uint8Array | null = null;
+
+app.get("/api/og", async (c) => {
+	try {
+		if (!cachedOGImage) {
+			cachedOGImage = await generateOGImage();
+		}
+		return c.body(cachedOGImage, 200, {
+			"Content-Type": "image/png",
+			"Cache-Control": "public, max-age=86400, s-maxage=86400",
+		});
+	} catch (err) {
+		console.error("OG image generation failed:", err);
+		return c.json({ error: String(err) }, 500);
+	}
 });
 
 app.get("/", (c) => {

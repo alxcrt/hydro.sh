@@ -87,6 +87,45 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 			{
 				title: "Hydro.sh",
 			},
+			{
+				name: "description",
+				content:
+					"Track your hydration effortlessly. Connect your smart water bottle and automatically track every sip.",
+			},
+			{
+				property: "og:type",
+				content: "website",
+			},
+			{
+				property: "og:title",
+				content: "Hydro.sh",
+			},
+			{
+				property: "og:description",
+				content:
+					"Track your hydration effortlessly. Connect your smart water bottle and automatically track every sip.",
+			},
+			{
+				property: "og:image",
+				content: `${import.meta.env.VITE_SERVER_URL}/api/og`,
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image",
+			},
+			{
+				name: "twitter:title",
+				content: "Hydro.sh",
+			},
+			{
+				name: "twitter:description",
+				content:
+					"Track your hydration effortlessly. Connect your smart water bottle and automatically track every sip.",
+			},
+			{
+				name: "twitter:image",
+				content: `${import.meta.env.VITE_SERVER_URL}/api/og`,
+			},
 		],
 		links: [
 			{
