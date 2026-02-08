@@ -78,8 +78,8 @@ export function DonateModal({
 			<Modal.Content className="max-w-[440px]">
 				<Modal.Header
 					icon={FavouriteIcon}
-					title="Support Hydro.sh"
-					description="Hydro.sh is built with love and runs on community support. Your donation helps cover hosting costs and keeps development going."
+					title="Support me"
+					description="I build Hydro.sh solo in my free time. Your support helps cover hosting costs and keeps me motivated to ship new features."
 				/>
 
 				<Modal.Body className="space-y-5">

@@ -2,10 +2,14 @@ import { useBottle } from "@/hooks/useBottle";
 import { cn } from "@/utils/cn";
 import { orpc } from "@/utils/orpc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Icons } from "./icons";
+import { DonateModal } from "./modals/donate-modal";
+import { SupportToast } from "./toasts/support-toast";
 import { Button } from "./ui/button";
 import * as Modal from "./ui/modal";
+import { toast } from "./ui/toast";
+import * as AlertToast from "./ui/toast-alert";
 
 export default function Bottle() {
 	const queryClient = useQueryClient();
@@ -13,6 +17,33 @@ export default function Bottle() {
 	const { mutateAsync: createWaterIntake } = useMutation(
 		orpc.waterIntake.create.mutationOptions(),
 	);
+
+	const [isDrinking, setIsDrinking] = useState(false);
+	const [ledColor1, setLedColor1] = useState("#3b82f6");
+	const [ledColor2, setLedColor2] = useState("#06b6d4");
+	const [showConnectHint, setShowConnectHint] = useState(false);
+	const [showDonateModal, setShowDonateModal] = useState(false);
+	const [isBluetoothSupported, setIsBluetoothSupported] = useState(true);
+
+	useEffect(() => {
+		setIsBluetoothSupported(
+			typeof navigator !== "undefined" && "bluetooth" in navigator,
+		);
+	}, []);
+
+	const showSupportPrompt = useCallback(() => {
+		if (!localStorage.getItem("hydro:donate-prompted")) {
+			localStorage.setItem("hydro:donate-prompted", "1");
+			setTimeout(() => {
+				toast.custom(
+					(t) => (
+						<SupportToast t={t} onSupport={() => setShowDonateModal(true)} />
+					),
+					{ duration: 15000 },
+				);
+			}, 4000);
+		}
+	}, []);
 
 	const onHandleSipData = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -27,14 +58,20 @@ export default function Bottle() {
 			await queryClient.invalidateQueries({
 				queryKey: orpc.waterIntake.list.queryOptions().queryKey,
 			});
-		},
-		[createWaterIntake, queryClient],
-	);
 
-	const [isDrinking, setIsDrinking] = useState(false);
-	const [ledColor1, setLedColor1] = useState("#3b82f6");
-	const [ledColor2, setLedColor2] = useState("#06b6d4");
-	const [showConnectHint, setShowConnectHint] = useState(false);
+			toast.custom((t) => (
+				<AlertToast.Root
+					t={t}
+					$status="success"
+					$variant="stroke"
+					message="Sip synced from your bottle!"
+				/>
+			));
+
+			showSupportPrompt();
+		},
+		[createWaterIntake, queryClient, showSupportPrompt],
+	);
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const onHandleDebug = useCallback((data: any) => {
@@ -63,6 +100,21 @@ export default function Bottle() {
 		setShowConnectHint(false);
 		connect();
 	}, [connect]);
+
+	const handleApplyColors = useCallback(() => {
+		setLedColor(ledColor1, ledColor2);
+
+		toast.custom((t) => (
+			<AlertToast.Root
+				t={t}
+				$status="success"
+				$variant="stroke"
+				message="LED colors applied!"
+			/>
+		));
+
+		showSupportPrompt();
+	}, [setLedColor, ledColor1, ledColor2, showSupportPrompt]);
 
 	return (
 		<div
@@ -230,7 +282,7 @@ export default function Bottle() {
 						$type={isConnected ? "neutral" : "primary"}
 						$size="sm"
 						onClick={isConnected ? disconnect : handleConnect}
-						disabled={isConnecting}
+						disabled={isConnecting || !isBluetoothSupported}
 						className="shrink-0"
 					>
 						{isConnecting ? (
@@ -267,6 +319,49 @@ export default function Bottle() {
 					</Button>
 				</div>
 
+				{/* Bluetooth unsupported banner */}
+				{!isBluetoothSupported && (
+					<div className="relative mt-3 overflow-hidden rounded-12 border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-3.5">
+						{/* Subtle decorative water drop */}
+						<div className="-right-2 -bottom-2 pointer-events-none absolute text-blue-100/60">
+							<svg
+								aria-hidden="true"
+								className="h-16 w-12"
+								viewBox="0 0 24 36"
+								fill="currentColor"
+							>
+								<path d="M12 0C12 0 0 14 0 24C0 30.627 5.373 36 12 36C18.627 36 24 30.627 24 24C24 14 12 0 12 0Z" />
+							</svg>
+						</div>
+
+						<div className="relative flex items-start gap-3">
+							<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-10 bg-blue-100">
+								<Icons.bluetooth className="h-4 w-4 text-blue-400" />
+							</div>
+							<div className="min-w-0">
+								<p className="font-medium text-(--text-strong-950) text-label-xs">
+									Browser doesn't support Bluetooth
+								</p>
+								<p className="mt-1 text-(--text-sub-600) text-paragraph-xs leading-relaxed">
+									Open in{" "}
+									<span className="font-medium text-(--text-strong-950)">
+										Chrome
+									</span>
+									,{" "}
+									<span className="font-medium text-(--text-strong-950)">
+										Edge
+									</span>
+									, or{" "}
+									<span className="font-medium text-(--text-strong-950)">
+										Opera
+									</span>{" "}
+									to connect your bottle.
+								</p>
+							</div>
+						</div>
+					</div>
+				)}
+
 				{/* LED Color Controls - Only show when connected */}
 				{isConnected && (
 					<div className="relative mt-4 flex items-center gap-3 border-(--stroke-soft-200) border-t pt-4">
@@ -302,7 +397,7 @@ export default function Bottle() {
 						<Button
 							$size="xs"
 							$style="stroke"
-							onClick={() => setLedColor(ledColor1, ledColor2)}
+							onClick={handleApplyColors}
 							className="ml-auto"
 						>
 							Apply Colors
@@ -310,6 +405,8 @@ export default function Bottle() {
 					</div>
 				)}
 			</div>
+
+			<DonateModal open={showDonateModal} onOpenChange={setShowDonateModal} />
 
 			{/* Connection Help Modal */}
 			<Modal.Root open={showConnectHint} onOpenChange={setShowConnectHint}>

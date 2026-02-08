@@ -1,6 +1,5 @@
 "use client";
 
-import Alert01SolidIcon from "virtual:icons/hugeicons/alert-01-solid";
 import SodaIcon from "virtual:icons/hugeicons/soda-can-stroke-rounded";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,19 +9,31 @@ import { useActionsParams } from "@/hooks/use-actions-params.ts";
 import { useMe } from "@/hooks/use-me.ts";
 import { useORPC } from "@/hooks/use-orpc.ts";
 import { useBluetooth } from "@/hooks/useBluetooth.ts";
+import { cn } from "@/utils/cn.ts";
 import { useEffect } from "react";
 import { useAppForm } from "../forms/form.tsx";
-import * as Alert from "../ui/alert.tsx";
 import { Button } from "../ui/button.tsx";
 import * as Modal from "../ui/modal.tsx";
 import * as AlertToast from "../ui/toast-alert.tsx";
 import { toast } from "../ui/toast.tsx";
 
+function useBluetoothSupport() {
+	const [isSupported, setIsSupported] = React.useState(true);
+
+	React.useEffect(() => {
+		setIsSupported(
+			typeof navigator !== "undefined" && "bluetooth" in navigator,
+		);
+	}, []);
+
+	return isSupported;
+}
+
 export function AddDeviceModal() {
 	const { setParams, ...params } = useActionsParams();
-	const [key, setKey] = React.useState<string | null>(null);
 	const queryClient = useQueryClient();
 	const me = useMe();
+	const isBluetoothSupported = useBluetoothSupport();
 	// const userPlan = me?.requestLimits?.plan ?? "free";
 	const { connect, isConnecting, device, isConnected } = useBluetooth();
 
@@ -36,20 +47,6 @@ export function AddDeviceModal() {
 			id: "",
 		},
 		async onSubmit({ value }) {
-			// if (!userPlan) {
-			//   toast.custom((t) => (
-			//     <AlertToast.Root
-			//       t={t}
-			//       $status="error"
-			//       $variant="filled"
-			//       message="You need to have a valid plan to create an API key"
-			//     />
-			//   ));
-			//   return;
-			// }
-
-			console.log(value);
-
 			try {
 				await mutateAsync({
 					name: value.name,
@@ -58,10 +55,6 @@ export function AddDeviceModal() {
 				});
 
 				handleClose();
-
-				// Store the result for later use
-				// You can uncomment and adapt the setKey code if needed
-				// setKey(result.id);
 			} catch (err) {
 				console.error("Error creating device:", err);
 				toast.custom((t) => (
@@ -75,33 +68,15 @@ export function AddDeviceModal() {
 				return;
 			}
 
-			// if (error) {
-			//   toast.custom((t) => (
-			//     <AlertToast.Root
-			//       t={t}
-			//       $status="error"
-			//       $variant="filled"
-			//       message={error.message ?? ""}
-			//     />
-			//   ));
-			//   return;
-			// }
-
-			// setKey(data.key);
-			// await queryClient.invalidateQueries({ queryKey: ["devices", "list"] });
 			await queryClient.invalidateQueries({
 				queryKey: orpc.devices.list.queryOptions().queryKey,
 			});
 		},
-		// validators: {
-		//   onSubmit: CreateApiKeySchema,
-		// },
 	});
 
 	const handleClose = async () => {
 		await setParams({ action: null, resource: null });
 
-		setKey(null);
 		form.reset();
 	};
 
@@ -127,114 +102,138 @@ export function AddDeviceModal() {
 					/>
 
 					<Modal.Body>
-						{key ? (
-							<div className="grid gap-4">
-								{/* <CodeBlock
-                  lang="bash"
-                  isCopyable
-                  textToCopy={key}
-                  children={key}
-                  className="rounded-lg"
-                  title="API Key"
-                /> */}
+						<form
+							id="create-api-key-form"
+							className="grid gap-6"
+							onSubmit={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								void form.handleSubmit();
+							}}
+						>
+							<div className="grid gap-3">
+								{device ? null : isBluetoothSupported ? (
+									<Button
+										$type="neutral"
+										className="w-full"
+										disabled={isConnecting}
+										onClick={connect}
+									>
+										{isConnecting ? "Connecting..." : "Start Scanning"}
+									</Button>
+								) : (
+									<div className="relative overflow-hidden rounded-12 border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-5">
+										{/* Decorative background drop */}
+										<div className="-right-3 -bottom-3 pointer-events-none absolute text-blue-100/50">
+											<svg
+												aria-hidden="true"
+												className="h-24 w-18"
+												viewBox="0 0 24 36"
+												fill="currentColor"
+											>
+												<path d="M12 0C12 0 0 14 0 24C0 30.627 5.373 36 12 36C18.627 36 24 30.627 24 24C24 14 12 0 12 0Z" />
+											</svg>
+										</div>
 
-								<Alert.Root $variant="light" $status="information" $size="xs">
-									<Alert.Icon as={Alert01SolidIcon} />
-									<p>
-										Your access token has been generated.{" "}
-										<strong>
-											Please copy it now and store it in a safe location
-										</strong>
-										. For security reasons, you will not be able to view this
-										token again after leaving this page.
-									</p>
-								</Alert.Root>
+										<div className="relative space-y-4">
+											<div className="flex items-start gap-3">
+												<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-10 bg-gradient-to-br from-blue-100 to-cyan-100">
+													<svg
+														aria-hidden="true"
+														className="h-4.5 w-4.5 text-blue-500"
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke="currentColor"
+														strokeWidth={2}
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															d="M6.343 17.657A8 8 0 1117.657 6.343M12 9v4m0 4h.01"
+														/>
+													</svg>
+												</div>
+												<div>
+													<p className="font-semibold text-(--text-strong-950) text-label-sm">
+														Bluetooth not available
+													</p>
+													<p className="mt-1 text-(--text-sub-600) text-paragraph-xs leading-relaxed">
+														Your browser doesn't support Web Bluetooth, which is
+														needed to pair smart bottles.
+													</p>
+												</div>
+											</div>
+
+											{/* Supported browsers */}
+											<div className="flex items-center gap-2 rounded-10 bg-white/70 px-3 py-2.5 ring-1 ring-blue-100/80">
+												<span className="shrink-0 text-(--text-soft-400) text-paragraph-xs">
+													Supported:
+												</span>
+												<div className="flex items-center gap-3">
+													{[
+														{ name: "Chrome", color: "text-blue-600" },
+														{ name: "Edge", color: "text-cyan-600" },
+														{ name: "Opera", color: "text-teal-600" },
+													].map((browser) => (
+														<span
+															key={browser.name}
+															className={cn(
+																"inline-flex items-center gap-1 font-medium text-label-xs",
+																browser.color,
+															)}
+														>
+															<span className="h-1.5 w-1.5 rounded-full bg-current opacity-60" />
+															{browser.name}
+														</span>
+													))}
+												</div>
+											</div>
+										</div>
+									</div>
+								)}
+
+								{device ? (
+									<form.AppField
+										name="name"
+										children={(field) => (
+											<field.TextField
+												autoComplete="off"
+												placeholder="Enter a name for your device"
+												id="name"
+												label="Name"
+												name="name"
+												hint="A friendly name to identify this device"
+											/>
+										)}
+									/>
+								) : null}
 							</div>
-						) : (
-							<form
-								id="create-api-key-form"
-								className="grid gap-6"
-								onSubmit={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									void form.handleSubmit();
-								}}
-							>
-								<div className="grid gap-3">
-									{/* Hidden input to include plan in form data for validation and submission */}
-									{/* <input type="hidden" id="plan" name="plan" value={userPlan} /> */}
-									{/* <Skeleton className="h-full w-full rounded-10" /> */}
-
-									{/* Start Scanning */}
-									{device ? null : (
-										<Button
-											$type="neutral"
-											className="w-full"
-											disabled={isConnecting}
-											onClick={connect}
-										>
-											{isConnecting ? "Connecting..." : "Start Scanning"}
-										</Button>
-									)}
-
-									{device ? (
-										<form.AppField
-											name="name"
-											children={(field) => (
-												<field.TextField
-													autoComplete="off"
-													placeholder="Enter a name for your device"
-													id="name"
-													label="Name"
-													name="name"
-													hint="A friendly name to identify this device"
-												/>
-											)}
-										/>
-									) : null}
-								</div>
-							</form>
-						)}
+						</form>
 					</Modal.Body>
 
 					<Modal.Footer>
-						{!key && (
-							<Modal.Close asChild>
-								<Button
-									$size="sm"
-									$style="stroke"
-									$type="neutral"
-									className="w-full"
-									disabled={form.state.isSubmitting}
-									onClick={handleClose}
-								>
-									Cancel
-								</Button>
-							</Modal.Close>
-						)}
-
-						{key ? (
-							<Modal.Close asChild>
-								<Button
-									$size="sm"
-									className="w-full"
-									$type="neutral"
-									onClick={handleClose}
-								>
-									Yes, I saved it
-								</Button>
-							</Modal.Close>
-						) : (
-							<form.SubmitButton
+						<Modal.Close asChild>
+							<Button
 								$size="sm"
+								$style="stroke"
+								$type="neutral"
 								className="w-full"
 								disabled={form.state.isSubmitting}
-								form="create-api-key-form"
-								type="submit"
+								onClick={handleClose}
 							>
-								{form.state.isSubmitting ? "Creating..." : "Create"}
-							</form.SubmitButton>
-						)}
+								Cancel
+							</Button>
+						</Modal.Close>
+
+						<form.SubmitButton
+							$size="sm"
+							className="w-full"
+							disabled={form.state.isSubmitting || !isBluetoothSupported}
+							form="create-api-key-form"
+							type="submit"
+						>
+							{form.state.isSubmitting ? "Creating..." : "Create"}
+						</form.SubmitButton>
 					</Modal.Footer>
 				</Modal.Content>
 			</form.AppForm>

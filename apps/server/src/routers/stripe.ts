@@ -15,7 +15,7 @@ export const stripeRouter = {
 							price_data: {
 								currency: "usd",
 								product_data: {
-									name: "Support Hydro.sh",
+									name: "Support the developer of Hydro.sh",
 								},
 								unit_amount: input.amount,
 							},

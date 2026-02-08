@@ -46,7 +46,7 @@ export function DonateButton({
 			{...rest}
 		>
 			<FavouriteIcon className="size-4 text-pink-500 transition-transform duration-300 group-hover:scale-110" />
-			Support Hydro.sh
+			Support me
 		</button>
 	);
 }

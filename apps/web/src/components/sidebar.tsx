@@ -217,7 +217,7 @@ function DonateLink({ collapsed }: { collapsed: boolean }) {
 			>
 				<FavouriteIcon className="size-5 shrink-0 text-pink-400 transition duration-200 ease-out group-hover:text-pink-500" />
 				<span className="text-label-sm" data-hide-collapsed>
-					Support Us
+					Support me
 				</span>
 			</button>
 		</>
