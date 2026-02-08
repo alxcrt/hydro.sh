@@ -2,7 +2,7 @@
 
 A clean, fast web app for smart water bottle tracking - without the bloat.
 
-![Hydro.sh Dashboard](./dashboard.png)
+![Banner](./hydro.sh.png)
 
 ## Features
 
