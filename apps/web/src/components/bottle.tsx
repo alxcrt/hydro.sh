@@ -56,7 +56,7 @@ export default function Bottle() {
 			});
 
 			await queryClient.invalidateQueries({
-				queryKey: orpc.waterIntake.list.queryOptions().queryKey,
+				queryKey: orpc.waterIntake.key(),
 			});
 
 			toast.custom((t) => (

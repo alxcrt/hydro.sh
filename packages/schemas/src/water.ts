@@ -15,3 +15,12 @@ export const ListWaterIntakesSchema = z
 		endDate: z.date().optional(),
 	})
 	.optional();
+
+export const WaterIntakeSummarySchema = z
+	.object({
+		startDate: z.date(),
+		endDate: z.date(),
+	})
+	.refine(({ startDate, endDate }) => startDate <= endDate, {
+		message: "Start date must not be after end date",
+	});

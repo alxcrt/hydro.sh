@@ -201,21 +201,19 @@ function RouteComponent() {
 		}),
 		refetchInterval: 30 * 1000,
 	});
+	const waterIntakeSummary = useQuery({
+		...orpc.waterIntake.summary.queryOptions({
+			input: { startDate: todayStart, endDate: todayEnd },
+		}),
+		refetchInterval: 30 * 1000,
+	});
 
 	const { mutateAsync: createWaterIntake, isPending } = useMutation(
 		orpc.waterIntake.create.mutationOptions(),
 	);
 
-	const totalIntake = useMemo(() => {
-		return (
-			Math.round(
-				(waterIntakes.data?.reduce(
-					(acc, curr) => acc + Number(curr.amount),
-					0,
-				) ?? 0) * 10,
-			) / 10
-		);
-	}, [waterIntakes.data]);
+	const totalIntake =
+		Math.round((waterIntakeSummary.data?.total ?? 0) * 10) / 10;
 
 	const goalAmount = 2500;
 
@@ -229,17 +227,10 @@ function RouteComponent() {
 			});
 
 			await queryClient.invalidateQueries({
-				queryKey: orpc.waterIntake.list.queryOptions({
-					input: waterIntakeListInput,
-				}).queryKey,
+				queryKey: orpc.waterIntake.key(),
 			});
 		},
-		[
-			createWaterIntake,
-			queryClient,
-			orpc.waterIntake.list,
-			waterIntakeListInput,
-		],
+		[createWaterIntake, queryClient, orpc.waterIntake],
 	);
 
 	const quickAddAmounts = [100, 250, 350, 500];
