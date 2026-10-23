@@ -1,5 +1,5 @@
 import { ORPCError } from "@orpc/server";
-import { and, eq, gte, lte } from "drizzle-orm";
+import { and, eq, gte, lte, sql } from "drizzle-orm";
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
@@ -7,9 +7,30 @@ import { protectedProcedure } from "@/lib/orpc";
 import {
 	CreateWaterIntakeSchema,
 	ListWaterIntakesSchema,
+	WaterIntakeSummarySchema,
 } from "@hydro.sh/schemas/water";
 
 export const waterRouter = {
+	summary: protectedProcedure
+		.input(WaterIntakeSummarySchema)
+		.handler(async ({ context, input }) => {
+			const [summary] = await db
+				.select({
+					total: sql<string>`coalesce(sum(${schema.waterIntake.amount}::numeric), 0)`,
+					entries: sql<number>`count(*)::int`,
+				})
+				.from(schema.waterIntake)
+				.where(
+					and(
+						eq(schema.waterIntake.userId, context.session.user.id),
+						gte(schema.waterIntake.timestamp, input.startDate),
+						lte(schema.waterIntake.timestamp, input.endDate),
+					),
+				);
+
+			return { total: Number(summary.total), entries: summary.entries };
+		}),
+
 	list: protectedProcedure
 		.input(ListWaterIntakesSchema)
 		.handler(async ({ context, input }) => {
