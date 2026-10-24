@@ -6,7 +6,7 @@
 		"start": "node .output/server/index.mjs",
 		"build": "vite build",
 		"serve": "vite preview",
-		"dev": "vinxi dev",
+		"dev": "vite dev",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {

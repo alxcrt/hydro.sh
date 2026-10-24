@@ -109,7 +109,8 @@ const tests = Bun.spawn(
 	},
 );
 assert.equal(await tests.exited, 0);
-assert.equal((await fetch(origin)).status, 200);
+const page = await fetch(origin);
+assert.equal(page.status, 200, await page.text());
 console.log(
 	"Production fixture passed: auth/session, total beyond pagination, device CRUD, origin rejection, isolated access and five DB regressions.",
 );
