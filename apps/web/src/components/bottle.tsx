@@ -135,7 +135,6 @@ export default function Bottle() {
 						: "h-0 opacity-0",
 				)}
 				style={{
-					// @ts-expect-error
 					"--tw-animate-shimmer": "shimmer 2s linear infinite",
 				}}
 			>
