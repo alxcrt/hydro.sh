@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { cn } from "@/utils/cn.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 import { IconEmptyCompany, IconEmptyUser } from "./avatar-empty-icons.tsx";
 
 export const AVATAR_ROOT_NAME = "AvatarRoot";
@@ -19,7 +19,7 @@ export const avatarVariants = tv({
 	slots: {
 		root: [
 			"relative flex shrink-0 items-center justify-center rounded-full",
-			"select-none text-center uppercase",
+			"text-center uppercase select-none",
 		],
 		image: "size-full rounded-full object-cover",
 		indicator:
@@ -28,31 +28,31 @@ export const avatarVariants = tv({
 	variants: {
 		$size: {
 			"80": {
-				root: "size-20 text-h5",
+				root: "text-h5 size-20",
 			},
 			"72": {
-				root: "size-[72px] text-h5",
+				root: "text-h5 size-[72px]",
 			},
 			"64": {
-				root: "size-16 text-h5",
+				root: "text-h5 size-16",
 			},
 			"56": {
-				root: "size-14 text-label-lg",
+				root: "text-label-lg size-14",
 			},
 			"48": {
-				root: "size-12 text-label-lg",
+				root: "text-label-lg size-12",
 			},
 			"40": {
-				root: "size-10 text-label-md",
+				root: "text-label-md size-10",
 			},
 			"32": {
-				root: "size-8 text-label-sm",
+				root: "text-label-sm size-8",
 			},
 			"24": {
-				root: "size-6 text-label-xs",
+				root: "text-label-xs size-6",
 			},
 			"20": {
-				root: "size-5 text-label-xs",
+				root: "text-label-xs size-5",
 			},
 		},
 		$color: {
@@ -236,7 +236,7 @@ function AvatarIndicator({
 AvatarIndicator.displayName = AVATAR_INDICATOR_NAME;
 
 export const avatarStatusVariants = tv({
-	base: "box-content size-3 rounded-full border-(--bg-white-0) border-4",
+	base: "box-content size-3 rounded-full border-4 border-(--bg-white-0)",
 	variants: {
 		status: {
 			online: "bg-state-success-base",
@@ -279,7 +279,7 @@ function AvatarBrandLogo({
 	return (
 		<Component
 			className={cn(
-				"box-content size-6 rounded-full border-(--bg-white-0) border-2",
+				"box-content size-6 rounded-full border-2 border-(--bg-white-0)",
 				className,
 			)}
 			{...rest}
@@ -295,7 +295,7 @@ function AvatarNotification({
 	return (
 		<div
 			className={cn(
-				"box-content size-3 rounded-full border-(--bg-white-0) border-2 bg-state-error-base",
+				"bg-state-error-base box-content size-3 rounded-full border-2 border-(--bg-white-0)",
 				className,
 			)}
 			{...rest}

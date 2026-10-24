@@ -26,7 +26,7 @@ export function UserButton({ className }: { className?: string }) {
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger
 				className={cn(
-					"flex w-full items-center gap-3 whitespace-nowrap rounded-10 p-3 text-left outline-none hover:bg-(--bg-weak-50) focus:outline-none",
+					"rounded-10 flex w-full items-center gap-3 p-3 text-left whitespace-nowrap outline-none hover:bg-(--bg-weak-50) focus:outline-none",
 					className,
 				)}
 			>
@@ -48,7 +48,7 @@ export function UserButton({ className }: { className?: string }) {
 				>
 					<div className="flex-1 space-y-1">
 						{me ? (
-							<div className="fade-in flex animate-in items-center gap-0.5 text-label-sm duration-300">
+							<div className="fade-in animate-in text-label-sm flex items-center gap-0.5 duration-300">
 								{me.fullName}
 							</div>
 						) : (
@@ -56,7 +56,7 @@ export function UserButton({ className }: { className?: string }) {
 						)}
 
 						{me ? (
-							<div className="fade-in animate-in truncate text-(--text-sub-600) text-paragraph-xs duration-300">
+							<div className="fade-in animate-in text-paragraph-xs truncate text-(--text-sub-600) duration-300">
 								{me.email}
 							</div>
 						) : (
@@ -64,7 +64,7 @@ export function UserButton({ className }: { className?: string }) {
 						)}
 					</div>
 
-					<div className="flex size-6 items-center justify-center rounded-6">
+					<div className="rounded-6 flex size-6 items-center justify-center">
 						<ArrowRight01Icon className="size-5 text-(--text-sub-600)" />
 					</div>
 				</div>
@@ -107,7 +107,7 @@ export function UserButton({ className }: { className?: string }) {
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 
-				<div className="p-2 text-(--text-soft-400) text-paragraph-sm">
+				<div className="text-paragraph-sm p-2 text-(--text-soft-400)">
 					<span>v1.0.0</span>
 				</div>
 			</DropdownMenu.Content>
@@ -124,7 +124,7 @@ export function UserButtonMobile({ className }: { className?: string }) {
 		<DropdownMenu.Root modal={false}>
 			<DropdownMenu.Trigger
 				className={cn(
-					"group flex w-full items-center gap-3 whitespace-nowrap rounded-10 p-3 text-left outline-none hover:bg-(--bg-weak-50) focus:outline-none",
+					"group rounded-10 flex w-full items-center gap-3 p-3 text-left whitespace-nowrap outline-none hover:bg-(--bg-weak-50) focus:outline-none",
 					className,
 				)}
 			>
@@ -132,20 +132,20 @@ export function UserButtonMobile({ className }: { className?: string }) {
 					{me?.fullName?.charAt(0) ?? ""}
 				</Avatar.Root>
 				<div className="flex-1 space-y-1">
-					<div className="flex items-center gap-0.5 text-label-md">
+					<div className="text-label-md flex items-center gap-0.5">
 						{me?.fullName}
 					</div>
-					<div className="truncate text-(--text-sub-600) text-paragraph-sm">
+					<div className="text-paragraph-sm truncate text-(--text-sub-600)">
 						{me?.email}
 					</div>
 				</div>
 				<div
 					className={cn(
-						"flex size-6 items-center justify-center rounded-6 border border-(--stroke-soft-200) bg-(--bg-white-0) text-(--text-sub-600) shadow-xs",
+						"rounded-6 flex size-6 items-center justify-center border border-(--stroke-soft-200) bg-(--bg-white-0) text-(--text-sub-600) shadow-xs",
 						"group-data-[state=open]:bg-(--bg-strong-950) group-data-[state=open]:text-(--text-white-0) group-data-[state=open]:shadow-none",
 					)}
 				>
-					<ArrowDown01Icon className="group-data-[state=open]:-rotate-180 size-5" />
+					<ArrowDown01Icon className="size-5 group-data-[state=open]:-rotate-180" />
 				</div>
 			</DropdownMenu.Trigger>
 

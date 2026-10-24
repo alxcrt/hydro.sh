@@ -4,18 +4,17 @@ import SodaIcon from "virtual:icons/hugeicons/soda-can-stroke-rounded";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
-
+import { useEffect } from "react";
 import { useActionsParams } from "@/hooks/use-actions-params.ts";
 import { useMe } from "@/hooks/use-me.ts";
 import { useORPC } from "@/hooks/use-orpc.ts";
 import { useBluetooth } from "@/hooks/useBluetooth.ts";
 import { cn } from "@/utils/cn.ts";
-import { useEffect } from "react";
 import { useAppForm } from "../forms/form.tsx";
 import { Button } from "../ui/button.tsx";
 import * as Modal from "../ui/modal.tsx";
-import * as AlertToast from "../ui/toast-alert.tsx";
 import { toast } from "../ui/toast.tsx";
+import * as AlertToast from "../ui/toast-alert.tsx";
 
 function useBluetoothSupport() {
 	const [isSupported, setIsSupported] = React.useState(true);
@@ -32,10 +31,10 @@ function useBluetoothSupport() {
 export function AddDeviceModal() {
 	const { setParams, ...params } = useActionsParams();
 	const queryClient = useQueryClient();
-	const me = useMe();
+	useMe();
 	const isBluetoothSupported = useBluetoothSupport();
 	// const userPlan = me?.requestLimits?.plan ?? "free";
-	const { connect, isConnecting, device, isConnected } = useBluetooth();
+	const { connect, isConnecting, device } = useBluetooth();
 
 	const orpc = useORPC();
 	const { mutateAsync } = useMutation(orpc.devices.create.mutationOptions());
@@ -122,9 +121,9 @@ export function AddDeviceModal() {
 										{isConnecting ? "Connecting..." : "Start Scanning"}
 									</Button>
 								) : (
-									<div className="relative overflow-hidden rounded-12 border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-5">
+									<div className="rounded-12 relative overflow-hidden border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-5">
 										{/* Decorative background drop */}
-										<div className="-right-3 -bottom-3 pointer-events-none absolute text-blue-100/50">
+										<div className="pointer-events-none absolute -right-3 -bottom-3 text-blue-100/50">
 											<svg
 												aria-hidden="true"
 												className="h-24 w-18"
@@ -137,7 +136,7 @@ export function AddDeviceModal() {
 
 										<div className="relative space-y-4">
 											<div className="flex items-start gap-3">
-												<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-10 bg-gradient-to-br from-blue-100 to-cyan-100">
+												<div className="rounded-10 flex h-9 w-9 shrink-0 items-center justify-center bg-gradient-to-br from-blue-100 to-cyan-100">
 													<svg
 														aria-hidden="true"
 														className="h-4.5 w-4.5 text-blue-500"
@@ -154,10 +153,10 @@ export function AddDeviceModal() {
 													</svg>
 												</div>
 												<div>
-													<p className="font-semibold text-(--text-strong-950) text-label-sm">
+													<p className="text-label-sm font-semibold text-(--text-strong-950)">
 														Bluetooth not available
 													</p>
-													<p className="mt-1 text-(--text-sub-600) text-paragraph-xs leading-relaxed">
+													<p className="text-paragraph-xs mt-1 leading-relaxed text-(--text-sub-600)">
 														Your browser doesn't support Web Bluetooth, which is
 														needed to pair smart bottles.
 													</p>
@@ -165,8 +164,8 @@ export function AddDeviceModal() {
 											</div>
 
 											{/* Supported browsers */}
-											<div className="flex items-center gap-2 rounded-10 bg-white/70 px-3 py-2.5 ring-1 ring-blue-100/80">
-												<span className="shrink-0 text-(--text-soft-400) text-paragraph-xs">
+											<div className="rounded-10 flex items-center gap-2 bg-white/70 px-3 py-2.5 ring-1 ring-blue-100/80">
+												<span className="text-paragraph-xs shrink-0 text-(--text-soft-400)">
 													Supported:
 												</span>
 												<div className="flex items-center gap-3">
@@ -178,7 +177,7 @@ export function AddDeviceModal() {
 														<span
 															key={browser.name}
 															className={cn(
-																"inline-flex items-center gap-1 font-medium text-label-xs",
+																"text-label-xs inline-flex items-center gap-1 font-medium",
 																browser.color,
 															)}
 														>

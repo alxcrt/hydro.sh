@@ -1,12 +1,13 @@
-import { Icons } from "@/components/icons.tsx";
 import {
 	type ColumnDef,
 	flexRender,
-	getCoreRowModel,
-	useReactTable,
+	type StockFeatures,
+	stockFeatures,
+	useTable,
 } from "@tanstack/react-table";
 import { format, formatDistanceToNow } from "date-fns";
 import * as React from "react";
+import { Icons } from "@/components/icons.tsx";
 
 import { cn } from "@/utils/cn.ts";
 import * as Table from "../ui/table.tsx";
@@ -25,7 +26,7 @@ type WaterIntakeHistoryTableProps = {
 	data: Array<WaterIntakeHistoryType>;
 	total: number;
 };
-const columns: ColumnDef<WaterIntakeHistoryType>[] = [
+const columns: ColumnDef<StockFeatures, WaterIntakeHistoryType>[] = [
 	{
 		header: "Amount",
 		accessorKey: "amount",
@@ -40,7 +41,7 @@ const columns: ColumnDef<WaterIntakeHistoryType>[] = [
 					)}
 					<div className="flex flex-col justify-center sm:flex-row sm:items-center sm:gap-2">
 						<span className="font-medium">{row.original.amount}ml</span>
-						<span className="text-neutral-500 text-paragraph-xs">
+						<span className="text-paragraph-xs text-neutral-500">
 							({row.original.bottleBrand})
 						</span>
 					</div>
@@ -59,7 +60,7 @@ const columns: ColumnDef<WaterIntakeHistoryType>[] = [
 			const timeAgo = formatDistanceToNow(date, { addSuffix: true });
 
 			return (
-				<div className="text-neutral-500 text-paragraph-sm">
+				<div className="text-paragraph-sm text-neutral-500">
 					<span className="font-mono">{formattedTime}</span>
 					<span className="opacity-60"> • </span>
 					<span>{timeAgo}</span>
@@ -73,17 +74,17 @@ export function WaterIntakeHistoryTable({
 	data,
 	total,
 }: WaterIntakeHistoryTableProps) {
-	const table = useReactTable({
+	const table = useTable({
 		data,
 		columns,
-		getCoreRowModel: getCoreRowModel(),
+		features: stockFeatures,
 		rowCount: total,
 	});
 
 	return (
 		<Table.Root className="-mx-4 w-auto px-4 lg:mx-0 lg:w-full lg:px-0">
-			<div className="px-4 py-2 ">
-				<h3 className="font-semibold text-paragraph-lg">
+			<div className="px-4 py-2">
+				<h3 className="text-paragraph-lg font-semibold">
 					📝 Today's Log (Last 5)
 				</h3>
 			</div>

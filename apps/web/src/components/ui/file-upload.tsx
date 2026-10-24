@@ -16,7 +16,7 @@ function FileUpload({
 	return (
 		<Component
 			className={cn(
-				"flex w-full cursor-pointer flex-col items-center gap-5 rounded-xl border border-(--stroke-sub-300) border-dashed bg-(--bg-white-0) p-8 text-center",
+				"flex w-full cursor-pointer flex-col items-center gap-5 rounded-xl border border-dashed border-(--stroke-sub-300) bg-(--bg-white-0) p-8 text-center",
 				"transition duration-200 ease-out",
 				// hover
 				"hover:bg-(--bg-weak-50)",
@@ -40,8 +40,8 @@ function FileUploadButton({
 	return (
 		<Component
 			className={cn(
-				"inline-flex h-8 items-center justify-center gap-2.5 whitespace-nowrap rounded-lg bg-(--bg-white-0) px-2.5 text-(--text-sub-600) text-label-sm",
-				"pointer-events-none ring-(--stroke-soft-200) ring-1 ring-inset",
+				"text-label-sm inline-flex h-8 items-center justify-center gap-2.5 rounded-lg bg-(--bg-white-0) px-2.5 whitespace-nowrap text-(--text-sub-600)",
+				"pointer-events-none ring-1 ring-(--stroke-soft-200) ring-inset",
 				className,
 			)}
 			{...rest}
@@ -66,7 +66,7 @@ function FileUploadIcon<T extends React.ElementType>({
 }
 
 export {
+	FileUpload as Root,
 	FileUploadButton as Button,
 	FileUploadIcon as Icon,
-	FileUpload as Root,
 };

@@ -19,7 +19,7 @@ function TableHead({ className, ...rest }: React.ComponentPropsWithRef<"th">) {
 	return (
 		<th
 			className={cn(
-				"bg-(--bg-weak-50) px-3 py-2 text-left font-medium text-(--text-sub-600) text-paragraph-sm first:rounded-l-8 last:rounded-r-8",
+				"text-paragraph-sm first:rounded-l-8 last:rounded-r-8 bg-(--bg-weak-50) px-3 py-2 text-left font-medium text-(--text-sub-600)",
 				className,
 			)}
 			{...rest}
@@ -79,7 +79,7 @@ function TableCell({ className, ...rest }: React.ComponentPropsWithRef<"td">) {
 	return (
 		<td
 			className={cn(
-				"h-16 px-3 transition duration-200 ease-out first:rounded-l-12 last:rounded-r-12 group-hover/row:bg-(--bg-weak-50)",
+				"first:rounded-l-12 last:rounded-r-12 h-16 px-3 transition duration-200 ease-out group-hover/row:bg-(--bg-weak-50)",
 				className,
 			)}
 			{...rest}
@@ -94,7 +94,7 @@ function TableCaption({
 }: React.ComponentPropsWithRef<"caption">) {
 	return (
 		<caption
-			className={cn("mt-4 text-(--text-sub-600) text-paragraph-sm", className)}
+			className={cn("text-paragraph-sm mt-4 text-(--text-sub-600)", className)}
 			{...rest}
 		/>
 	);
@@ -102,12 +102,12 @@ function TableCaption({
 TableCaption.displayName = "TableCaption";
 
 export {
+	Table as Root,
 	TableBody as Body,
 	TableCaption as Caption,
 	TableCell as Cell,
 	TableHead as Head,
 	TableHeader as Header,
-	Table as Root,
 	TableRow as Row,
 	TableRowDivider as RowDivider,
 };

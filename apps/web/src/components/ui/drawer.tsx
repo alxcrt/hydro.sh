@@ -25,7 +25,7 @@ function DrawerOverlay({
 		<DialogPrimitive.Overlay
 			className={cn(
 				// base
-				"fixed inset-0 z-50 grid grid-cols-1 place-items-end overflow-hidden bg-overlay backdrop-blur-[10px]",
+				"bg-overlay fixed inset-0 z-50 grid grid-cols-1 place-items-end overflow-hidden backdrop-blur-[10px]",
 				// animation
 				"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=open]:animate-in",
 				className,
@@ -48,7 +48,7 @@ function DrawerContent({
 					className={cn(
 						// base
 						"size-full max-w-[400px] overflow-y-auto",
-						"border-(--stroke-soft-200) border-l bg-(--bg-white-0)",
+						"border-l border-(--stroke-soft-200) bg-(--bg-white-0)",
 						// animation
 						"data-[state=open]:animate-in data-[state=open]:duration-200 data-[state=open]:ease-out",
 						"data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=closed]:ease-in",
@@ -102,7 +102,7 @@ function DrawerTitle({
 }: React.CustomComponentPropsWithRef<typeof DialogPrimitive.Title>) {
 	return (
 		<DialogPrimitive.Title
-			className={cn("flex-1 text-(--text-strong-950) text-label-lg", className)}
+			className={cn("text-label-lg flex-1 text-(--text-strong-950)", className)}
 			{...rest}
 		/>
 	);
@@ -115,7 +115,7 @@ function DrawerDescription({
 }: React.CustomComponentPropsWithRef<typeof DialogPrimitive.Description>) {
 	return (
 		<DialogPrimitive.Description
-			className={cn("text-(--text-sub-600) text-label-sm", className)}
+			className={cn("text-label-sm text-(--text-sub-600)", className)}
 			{...rest}
 		/>
 	);

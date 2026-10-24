@@ -39,7 +39,7 @@ function Switch({ className, disabled, ...rest }: SwitchProps) {
 					],
 					// disabled
 					disabled && [
-						"bg-(--bg-white-0) p-[3px] ring-(--stroke-soft-200) ring-1 ring-inset",
+						"bg-(--bg-white-0) p-[3px] ring-1 ring-(--stroke-soft-200) ring-inset",
 					],
 				)}
 			>
@@ -52,10 +52,10 @@ function Switch({ className, disabled, ...rest }: SwitchProps) {
 						"data-[state=checked]:translate-x-3",
 						!disabled && [
 							// before
-							"before:-translate-x-1/2 before:absolute before:inset-y-0 before:left-1/2 before:w-3 before:rounded-full before:bg-white",
+							"before:absolute before:inset-y-0 before:left-1/2 before:w-3 before:-translate-x-1/2 before:rounded-full before:bg-white",
 							"before:[mask:var(--mask)]",
 							// after
-							"after:-translate-x-1/2 after:absolute after:inset-y-0 after:left-1/2 after:w-3 after:rounded-full after:shadow-switch-thumb",
+							"after:shadow-switch-thumb after:absolute after:inset-y-0 after:left-1/2 after:w-3 after:-translate-x-1/2 after:rounded-full",
 							// pressed
 							"group-active/switch:scale-[.833]",
 						],

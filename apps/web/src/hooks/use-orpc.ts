@@ -1,9 +1,7 @@
-import type { appRouter } from "@hydro.sh/server/src/routers";
-import type { RouterUtils } from "@orpc/react-query";
-import type { RouterClient } from "@orpc/server";
 import * as React from "react";
+import type { orpc } from "../utils/orpc";
 
-type ORPCReactUtils = RouterUtils<RouterClient<typeof appRouter>>;
+type ORPCReactUtils = typeof orpc;
 
 export const ORPCContext = React.createContext<ORPCReactUtils | undefined>(
 	undefined,

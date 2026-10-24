@@ -1,10 +1,8 @@
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
-
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-
 import { useORPC } from "@/hooks/use-orpc.ts";
 import { cn } from "@/utils/cn.ts";
-import { useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button.tsx";
 
 // Animated water droplet SVG
@@ -36,15 +34,15 @@ export function HeroSection({
 			className={cn("relative px-2 lg:px-0", className)}
 			{...props}
 		>
-			<div className="container relative max-w-6xl overflow-hidden border-x bg-(--bg-white-0) px-4 pt-28 pb-20 lg:px-8 lg:pt-36 lg:pb-28">
+			<div className="relative container max-w-6xl overflow-hidden border-x bg-(--bg-white-0) px-4 pt-28 pb-20 lg:px-8 lg:pt-36 lg:pb-28">
 				{/* Background gradient decoration */}
 				<div
 					aria-hidden="true"
-					className="-top-40 -right-40 absolute h-[500px] w-[500px] rounded-full bg-gradient-to-br from-blue-100 via-cyan-50 to-transparent opacity-60 blur-3xl"
+					className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-blue-100 via-cyan-50 to-transparent opacity-60 blur-3xl"
 				/>
 				<div
 					aria-hidden="true"
-					className="-bottom-20 -left-20 absolute h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-blue-50 via-transparent to-transparent opacity-50 blur-3xl"
+					className="absolute -bottom-20 -left-20 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-blue-50 via-transparent to-transparent opacity-50 blur-3xl"
 				/>
 
 				{/* Floating droplets decoration */}
@@ -72,7 +70,7 @@ export function HeroSection({
 				<div className="relative">
 					<div className="mx-auto max-w-2xl text-center lg:pt-8">
 						{/* Badge */}
-						<div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 text-label-sm">
+						<div className="text-label-sm mb-8 inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700">
 							<span className="relative flex h-2 w-2">
 								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
 								<span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
@@ -81,7 +79,7 @@ export function HeroSection({
 						</div>
 
 						{/* Headline */}
-						<h1 className="text-pretty font-semibold text-(--text-strong-950) text-4xl tracking-tight lg:text-5xl xl:text-6xl">
+						<h1 className="text-4xl font-semibold tracking-tight text-pretty text-(--text-strong-950) lg:text-5xl xl:text-6xl">
 							Track Your Hydration,{" "}
 							<span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
 								Effortlessly
@@ -89,7 +87,7 @@ export function HeroSection({
 						</h1>
 
 						{/* Subheadline */}
-						<p className="mx-auto mt-6 max-w-xl text-pretty text-(--text-sub-600) text-lg leading-relaxed lg:text-xl">
+						<p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-pretty text-(--text-sub-600) lg:text-xl">
 							Connect your smart water bottle and automatically track every sip.
 							Set daily goals, view your progress, and build healthier hydration
 							habits.
@@ -100,7 +98,7 @@ export function HeroSection({
 							<Button
 								trailingIcon={ArrowRight01Icon}
 								trailingIconClassName="transition-transform duration-300 group-hover:translate-x-1"
-								className="gap-2 shadow-blue-500/20 shadow-lg"
+								className="gap-2 shadow-lg shadow-blue-500/20"
 								$size="md"
 								asChild
 							>
@@ -114,7 +112,7 @@ export function HeroSection({
 
 						{/* Server status indicator */}
 						<div className="mt-10 flex items-center justify-center gap-3">
-							<div className="flex items-center gap-2 rounded-full border border-(--stroke-soft-200) bg-(--bg-weak-50) px-4 py-2 text-(--text-sub-600) text-paragraph-sm">
+							<div className="text-paragraph-sm flex items-center gap-2 rounded-full border border-(--stroke-soft-200) bg-(--bg-weak-50) px-4 py-2 text-(--text-sub-600)">
 								<div
 									className={cn(
 										"size-2 rounded-full transition-colors",
@@ -136,7 +134,7 @@ export function HeroSection({
 				</div>
 
 				{/* Bottom decorative line */}
-				<div className="-translate-x-1/2 absolute bottom-0 left-1/2 h-px w-24 bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
+				<div className="absolute bottom-0 left-1/2 h-px w-24 -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
 			</div>
 
 			{/* Keyframes for floating animation */}

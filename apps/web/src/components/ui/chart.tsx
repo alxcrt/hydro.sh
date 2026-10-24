@@ -52,7 +52,7 @@ const ChartContainer = React.forwardRef<
 				data-chart={chartId}
 				ref={ref}
 				className={cn(
-					"flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+					"[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-sector]:outline-none [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-none",
 					className,
 				)}
 				{...props}
@@ -105,7 +105,10 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 
 const ChartTooltipContent = React.forwardRef<
 	HTMLDivElement,
-	React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+	RechartsPrimitive.TooltipContentProps<
+		RechartsPrimitive.TooltipValueType,
+		string | number
+	> &
 		React.ComponentProps<"div"> & {
 			hideLabel?: boolean;
 			hideIndicator?: boolean;
@@ -180,7 +183,7 @@ const ChartTooltipContent = React.forwardRef<
 			<div
 				ref={ref}
 				className={cn(
-					"grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+					"border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
 					className,
 				)}
 			>
@@ -193,9 +196,13 @@ const ChartTooltipContent = React.forwardRef<
 
 						return (
 							<div
-								key={item.dataKey}
+								key={
+									typeof item.dataKey === "function"
+										? (item.name ?? index)
+										: (item.dataKey ?? item.name ?? index)
+								}
 								className={cn(
-									"flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+									"[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
 									indicator === "dot" && "items-center",
 								)}
 							>
@@ -240,7 +247,7 @@ const ChartTooltipContent = React.forwardRef<
 												</span>
 											</div>
 											{item.value && (
-												<span className="font-medium font-mono text-foreground tabular-nums">
+												<span className="text-foreground font-mono font-medium tabular-nums">
 													{item.value.toLocaleString()}
 												</span>
 											)}
@@ -262,7 +269,10 @@ const ChartLegend = RechartsPrimitive.Legend;
 const ChartLegendContent = React.forwardRef<
 	HTMLDivElement,
 	React.ComponentProps<"div"> &
-		Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+		Pick<
+			RechartsPrimitive.DefaultLegendContentProps,
+			"payload" | "verticalAlign"
+		> & {
 			hideIcon?: boolean;
 			nameKey?: string;
 		}
@@ -294,7 +304,7 @@ const ChartLegendContent = React.forwardRef<
 						<div
 							key={item.value}
 							className={cn(
-								"flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground",
+								"[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
 							)}
 						>
 							{itemConfig?.icon && !hideIcon ? (
@@ -358,9 +368,9 @@ function getPayloadConfigFromPayload(
 
 export {
 	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
 	ChartLegend,
 	ChartLegendContent,
 	ChartStyle,
+	ChartTooltip,
+	ChartTooltipContent,
 };

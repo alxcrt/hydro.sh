@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button.tsx";
 
@@ -13,9 +13,9 @@ function DonateCancelPage() {
 				{/* Decorative background */}
 				<div
 					aria-hidden="true"
-					className="-z-10 absolute inset-0 overflow-hidden"
+					className="absolute inset-0 -z-10 overflow-hidden"
 				>
-					<div className="-top-20 -left-20 absolute h-64 w-64 rounded-full bg-gradient-to-br from-blue-50 via-transparent to-transparent opacity-40 blur-3xl" />
+					<div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-gradient-to-br from-blue-50 via-transparent to-transparent opacity-40 blur-3xl" />
 				</div>
 
 				{/* Icon */}
@@ -32,11 +32,11 @@ function DonateCancelPage() {
 					</div>
 				</div>
 
-				<h1 className="mb-3 font-semibold text-(--text-strong-950) text-2xl">
+				<h1 className="mb-3 text-2xl font-semibold text-(--text-strong-950)">
 					No worries!
 				</h1>
 
-				<p className="mx-auto mb-8 max-w-sm text-(--text-sub-600) text-paragraph-sm leading-relaxed">
+				<p className="text-paragraph-sm mx-auto mb-8 max-w-sm leading-relaxed text-(--text-sub-600)">
 					Hydro.sh is free and always will be. Using the app and staying
 					hydrated is the best support you can give.
 				</p>

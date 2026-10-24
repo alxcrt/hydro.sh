@@ -1,4 +1,4 @@
-import { type VariantProps, tv } from "@/utils/tv";
+import { tv, type VariantProps } from "@/utils/tv";
 
 export const progressBarVariants = tv({
 	slots: {
@@ -53,7 +53,6 @@ function ProgressBarRoot({
 				aria-valuemax={max}
 				aria-valuemin={0}
 				role="progressbar"
-				tabIndex={0}
 			/>
 		</div>
 	);

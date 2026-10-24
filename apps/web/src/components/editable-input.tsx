@@ -61,12 +61,13 @@ export function EditableInput({
 	};
 
 	return (
+		// biome-ignore lint/a11y/useSemanticElements: Editing renders an input; a button would nest interactive controls.
 		<div
 			className={cn(
-				"group relative flex h-10 w-full items-center gap-2.5 rounded-10 bg-(--bg-white-0) px-3",
+				"group rounded-10 relative flex h-10 w-full items-center gap-2.5 bg-(--bg-white-0) px-3",
 				"transition duration-200 ease-out",
 				"hover:[&:not(&:has(input:focus))]:bg-(--bg-weak-50) hover:[&:not(&:has(input:focus))]:text-(--text-strong-950)",
-				"has-[input:focus]:ring-1 has-[input:focus]:ring-primary has-[input:focus]:ring-inset",
+				"has-[input:focus]:ring-primary has-[input:focus]:ring-1 has-[input:focus]:ring-inset",
 				{
 					"cursor-pointer": !editing,
 				},
@@ -75,7 +76,6 @@ export function EditableInput({
 				if (editing) return e.preventDefault();
 				handleStartEditing();
 			}}
-			// biome-ignore lint/a11y/useSemanticElements: we want to use a button for the click handler
 			role="button"
 			tabIndex={editing ? -1 : 0}
 			onKeyDown={(e) => {
@@ -88,7 +88,7 @@ export function EditableInput({
 		>
 			<div className="flex w-full items-baseline">
 				{prefix && (
-					<span className="select-none text-(--text-strong-950) text-paragraph-sm">
+					<span className="text-paragraph-sm text-(--text-strong-950) select-none">
 						{prefix}
 					</span>
 				)}
@@ -99,8 +99,8 @@ export function EditableInput({
 					onChange={handleInputChange}
 					readOnly={!editing}
 					className={cn(
-						"h-10 w-full flex-1 bg-none bg-transparent caret-primary",
-						"text-(--text-strong-950) text-paragraph-sm",
+						"caret-primary h-10 w-full flex-1 bg-transparent bg-none",
+						"text-paragraph-sm text-(--text-strong-950)",
 						"transition duration-200 ease-out",
 						"placeholder:text-(--text-soft-400)",
 						"focus:outline-none",
@@ -119,7 +119,7 @@ export function EditableInput({
 				<div className="flex shrink-0 items-center gap-2.5">
 					<button
 						type="button"
-						className="text-(--text-sub-600) text-label-sm"
+						className="text-label-sm text-(--text-sub-600)"
 						onClick={handleCancel}
 					>
 						Cancel

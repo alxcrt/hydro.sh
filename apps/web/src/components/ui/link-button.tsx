@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const LINK_BUTTON_ROOT_NAME = "LinkButtonRoot";
 const LINK_BUTTON_ICON_NAME = "LinkButtonIcon";
@@ -57,11 +57,11 @@ export const linkButtonVariants = tv({
 		},
 		$size: {
 			sm: {
-				root: "h-4 gap-1 text-label-xs",
+				root: "text-label-xs h-4 gap-1",
 				icon: "size-4",
 			},
 			md: {
-				root: "h-5 gap-1 text-label-sm",
+				root: "text-label-sm h-5 gap-1",
 				icon: "size-5",
 			},
 		},

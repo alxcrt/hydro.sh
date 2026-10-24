@@ -87,7 +87,7 @@ app.get("/api/og", async (c) => {
 		if (!cachedOGImage) {
 			cachedOGImage = await generateOGImage();
 		}
-		return c.body(cachedOGImage, 200, {
+		return c.body(new Uint8Array(cachedOGImage), 200, {
 			"Content-Type": "image/png",
 			"Cache-Control": "public, max-age=86400, s-maxage=86400",
 		});

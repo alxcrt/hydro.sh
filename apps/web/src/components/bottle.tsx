@@ -1,8 +1,8 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useCallback, useEffect, useState } from "react";
 import { useBottle } from "@/hooks/useBottle";
 import { cn } from "@/utils/cn";
 import { orpc } from "@/utils/orpc";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
 import { Icons } from "./icons";
 import { DonateModal } from "./modals/donate-modal";
 import { SupportToast } from "./toasts/support-toast";
@@ -119,11 +119,11 @@ export default function Bottle() {
 	return (
 		<div
 			className={cn(
-				"group relative overflow-hidden rounded-16 border bg-(--bg-white-0) transition-all duration-300",
+				"group rounded-16 relative overflow-hidden border bg-(--bg-white-0) transition-all duration-300",
 				isConnected
 					? "border-(--color-blue-200)"
 					: "border-(--stroke-soft-200)",
-				isDrinking && "border-(--color-blue-400) shadow-blue-200/50 shadow-lg",
+				isDrinking && "border-(--color-blue-400) shadow-lg shadow-blue-200/50",
 			)}
 		>
 			{/* Tilt/Drinking Indicator - Full width banner at top */}
@@ -135,7 +135,6 @@ export default function Bottle() {
 						: "h-0 opacity-0",
 				)}
 				style={{
-					// @ts-ignore
 					"--tw-animate-shimmer": "shimmer 2s linear infinite",
 				}}
 			>
@@ -147,7 +146,7 @@ export default function Bottle() {
 						<span className="h-2 w-2 animate-bounce rounded-full bg-white/80 [animation-delay:300ms]" />
 					</div>
 
-					<span className="font-semibold text-label-md text-white tracking-wide">
+					<span className="text-label-md font-semibold tracking-wide text-white">
 						Bottle Tilted — Recording Intake
 					</span>
 
@@ -166,7 +165,7 @@ export default function Bottle() {
 					<div className="relative">
 						<div
 							className={cn(
-								"flex h-12 w-12 items-center justify-center rounded-12 transition-all duration-300",
+								"rounded-12 flex h-12 w-12 items-center justify-center transition-all duration-300",
 								isConnected
 									? isDrinking
 										? "bg-gradient-to-br from-blue-400 to-cyan-400"
@@ -203,7 +202,7 @@ export default function Bottle() {
 						{/* Connection status dot */}
 						<div
 							className={cn(
-								"-right-0.5 -bottom-0.5 absolute h-3.5 w-3.5 rounded-full border-2 border-white transition-colors duration-300",
+								"absolute -right-0.5 -bottom-0.5 h-3.5 w-3.5 rounded-full border-2 border-white transition-colors duration-300",
 								isDrinking
 									? "animate-pulse bg-(--color-blue-500)"
 									: isConnected
@@ -216,12 +215,12 @@ export default function Bottle() {
 					{/* Device info */}
 					<div className="min-w-0 flex-1">
 						<div className="flex items-center gap-2">
-							<span className="truncate font-semibold text-(--text-strong-950) text-label-sm">
+							<span className="text-label-sm truncate font-semibold text-(--text-strong-950)">
 								{device?.name || "No device connected"}
 							</span>
 						</div>
 
-						<div className="mt-1 flex items-center gap-2 text-(--text-sub-600) text-paragraph-xs">
+						<div className="text-paragraph-xs mt-1 flex items-center gap-2 text-(--text-sub-600)">
 							{isConnected ? (
 								<>
 									{isDrinking ? (
@@ -321,9 +320,9 @@ export default function Bottle() {
 
 				{/* Bluetooth unsupported banner */}
 				{!isBluetoothSupported && (
-					<div className="relative mt-3 overflow-hidden rounded-12 border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-3.5">
+					<div className="rounded-12 relative mt-3 overflow-hidden border border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60 p-3.5">
 						{/* Subtle decorative water drop */}
-						<div className="-right-2 -bottom-2 pointer-events-none absolute text-blue-100/60">
+						<div className="pointer-events-none absolute -right-2 -bottom-2 text-blue-100/60">
 							<svg
 								aria-hidden="true"
 								className="h-16 w-12"
@@ -335,14 +334,14 @@ export default function Bottle() {
 						</div>
 
 						<div className="relative flex items-start gap-3">
-							<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-10 bg-blue-100">
+							<div className="rounded-10 flex h-8 w-8 shrink-0 items-center justify-center bg-blue-100">
 								<Icons.bluetooth className="h-4 w-4 text-blue-400" />
 							</div>
 							<div className="min-w-0">
-								<p className="font-medium text-(--text-strong-950) text-label-xs">
+								<p className="text-label-xs font-medium text-(--text-strong-950)">
 									Browser doesn't support Bluetooth
 								</p>
-								<p className="mt-1 text-(--text-sub-600) text-paragraph-xs leading-relaxed">
+								<p className="text-paragraph-xs mt-1 leading-relaxed text-(--text-sub-600)">
 									Open in{" "}
 									<span className="font-medium text-(--text-strong-950)">
 										Chrome
@@ -364,8 +363,8 @@ export default function Bottle() {
 
 				{/* LED Color Controls - Only show when connected */}
 				{isConnected && (
-					<div className="relative mt-4 flex items-center gap-3 border-(--stroke-soft-200) border-t pt-4">
-						<span className="text-(--text-sub-600) text-paragraph-xs">
+					<div className="relative mt-4 flex items-center gap-3 border-t border-(--stroke-soft-200) pt-4">
+						<span className="text-paragraph-xs text-(--text-sub-600)">
 							LED Colors
 						</span>
 						<div className="flex items-center gap-2">
@@ -377,7 +376,7 @@ export default function Bottle() {
 									onChange={(e) => setLedColor1(e.target.value)}
 								/>
 								<div
-									className="h-7 w-7 rounded-8 shadow-sm ring-2 ring-white transition-transform group-hover/color:scale-110"
+									className="rounded-8 h-7 w-7 shadow-sm ring-2 ring-white transition-transform group-hover/color:scale-110"
 									style={{ backgroundColor: ledColor1 }}
 								/>
 							</label>
@@ -389,7 +388,7 @@ export default function Bottle() {
 									onChange={(e) => setLedColor2(e.target.value)}
 								/>
 								<div
-									className="h-7 w-7 rounded-8 shadow-sm ring-2 ring-white transition-transform group-hover/color:scale-110"
+									className="rounded-8 h-7 w-7 shadow-sm ring-2 ring-white transition-transform group-hover/color:scale-110"
 									style={{ backgroundColor: ledColor2 }}
 								/>
 							</label>
@@ -416,31 +415,31 @@ export default function Bottle() {
 						description="Follow these steps to pair your smart water bottle"
 					/>
 					<Modal.Body className="space-y-4">
-						<div className="flex items-start gap-4 rounded-12 border border-(--stroke-soft-200) bg-(--bg-weak-50) p-4">
-							<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-(--color-blue-500) font-semibold text-label-sm text-white">
+						<div className="rounded-12 flex items-start gap-4 border border-(--stroke-soft-200) bg-(--bg-weak-50) p-4">
+							<div className="text-label-sm flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-(--color-blue-500) font-semibold text-white">
 								1
 							</div>
 							<div>
-								<p className="font-medium text-(--text-strong-950) text-label-sm">
+								<p className="text-label-sm font-medium text-(--text-strong-950)">
 									Wake up your bottle
 								</p>
-								<p className="mt-0.5 text-(--text-sub-600) text-paragraph-xs">
+								<p className="text-paragraph-xs mt-0.5 text-(--text-sub-600)">
 									Give it a gentle shake to activate the Bluetooth sensor
 								</p>
 							</div>
 						</div>
 
-						<div className="flex items-start gap-4 rounded-12 border border-(--stroke-soft-200) bg-(--bg-weak-50) p-4">
-							<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-(--color-blue-500) font-semibold text-label-sm text-white">
+						<div className="rounded-12 flex items-start gap-4 border border-(--stroke-soft-200) bg-(--bg-weak-50) p-4">
+							<div className="text-label-sm flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-(--color-blue-500) font-semibold text-white">
 								2
 							</div>
 							<div>
-								<p className="font-medium text-(--text-strong-950) text-label-sm">
+								<p className="text-label-sm font-medium text-(--text-strong-950)">
 									Select from device list
 								</p>
-								<p className="mt-0.5 text-(--text-sub-600) text-paragraph-xs">
+								<p className="text-paragraph-xs mt-0.5 text-(--text-sub-600)">
 									Look for a device starting with{" "}
-									<code className="rounded bg-(--bg-soft-200) px-1 py-0.5 font-mono text-paragraph-xs">
+									<code className="text-paragraph-xs rounded bg-(--bg-soft-200) px-1 py-0.5 font-mono">
 										h2o
 									</code>{" "}
 									(e.g., h2oC915E)
@@ -448,7 +447,7 @@ export default function Bottle() {
 							</div>
 						</div>
 
-						<p className="text-center text-(--text-soft-400) text-paragraph-xs">
+						<p className="text-paragraph-xs text-center text-(--text-soft-400)">
 							Don't see your bottle? Try shaking it again.
 						</p>
 					</Modal.Body>

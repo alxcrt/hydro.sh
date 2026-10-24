@@ -1,6 +1,4 @@
-import { Outlet, redirect } from "@tanstack/react-router";
-
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth")({
 	async beforeLoad({ context }) {
@@ -28,18 +26,18 @@ function RouteComponent() {
 				<div className="relative z-10">
 					<div className="flex items-center gap-3">
 						<img src="/logo.png" alt="Hydro" className="h-10 w-10" />
-						<span className="font-bold text-2xl text-white">hydro.sh</span>
+						<span className="text-2xl font-bold text-white">hydro.sh</span>
 					</div>
 				</div>
 
 				{/* Main content */}
 				<div className="relative z-10 space-y-6">
-					<h1 className="font-bold text-4xl text-white leading-tight">
+					<h1 className="text-4xl leading-tight font-bold text-white">
 						Track your hydration,
 						<br />
 						stay healthy.
 					</h1>
-					<p className="max-w-md text-blue-100 text-lg">
+					<p className="max-w-md text-lg text-blue-100">
 						Connect your smart water bottle and effortlessly monitor your daily
 						water intake. Set goals, track progress, and build better hydration
 						habits.
@@ -108,7 +106,7 @@ function RouteComponent() {
 				</div>
 
 				{/* Footer */}
-				<div className="relative z-10 text-blue-200 text-sm">
+				<div className="relative z-10 text-sm text-blue-200">
 					Stay hydrated, stay healthy.
 				</div>
 			</div>
@@ -119,7 +117,7 @@ function RouteComponent() {
 					{/* Mobile logo */}
 					<div className="mb-8 flex items-center justify-center gap-3 lg:hidden">
 						<img src="/logo.png" alt="Hydro" className="h-10 w-10" />
-						<span className="font-bold text-2xl text-gray-900">hydro.sh</span>
+						<span className="text-2xl font-bold text-gray-900">hydro.sh</span>
 					</div>
 					<Outlet />
 				</div>

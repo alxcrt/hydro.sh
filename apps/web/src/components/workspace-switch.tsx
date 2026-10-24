@@ -20,10 +20,10 @@ type WorkspaceItem = {
 export function WorkspaceItem({ workspace, isCurrent }: WorkspaceItem) {
 	return (
 		<button
-			className="group/item flex w-full cursor-pointer items-center gap-3 rounded-10 p-2 text-left outline-none transition-default hover:bg-(--bg-weak-50) focus:outline-none"
+			className="group/item rounded-10 transition-default flex w-full cursor-pointer items-center gap-3 p-2 text-left outline-none hover:bg-(--bg-weak-50) focus:outline-none"
 			type="button"
 		>
-			<div className="flex size-10 items-center justify-center rounded-full shadow-xs ring-(--stroke-soft-200) ring-1 ring-inset">
+			<div className="flex size-10 items-center justify-center rounded-full shadow-xs ring-1 ring-(--stroke-soft-200) ring-inset">
 				<Avatar.Root $size="40" placeholderType="workspace" />
 			</div>
 			<div className="flex-1 space-y-1">
@@ -44,7 +44,7 @@ export function WorkspaceSwitch({ className }: { className?: string }) {
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger
 				className={cn(
-					"flex w-full items-center gap-3 whitespace-nowrap p-3 text-left outline-none focus:outline-none",
+					"flex w-full items-center gap-3 p-3 text-left whitespace-nowrap outline-none focus:outline-none",
 					className,
 				)}
 			>
@@ -63,7 +63,7 @@ export function WorkspaceSwitch({ className }: { className?: string }) {
 					data-hide-collapsed
 				>
 					<div className="flex-1 space-y-1">
-						<div className="truncate text-label-sm">
+						<div className="text-label-sm truncate">
 							{me?.currentWorkspace ? (
 								<span className="fade-in animate-in duration-300">
 									{me.currentWorkspace.name}
@@ -73,7 +73,7 @@ export function WorkspaceSwitch({ className }: { className?: string }) {
 							)}
 						</div>
 					</div>
-					<div className="flex size-6 items-center justify-center rounded-6 border border-(--stroke-soft-200) bg-(--bg-white-0) shadow-xs">
+					<div className="rounded-6 flex size-6 items-center justify-center border border-(--stroke-soft-200) bg-(--bg-white-0) shadow-xs">
 						<UnfoldMoreIcon className="size-4 text-(--text-sub-600)" />
 					</div>
 				</div>

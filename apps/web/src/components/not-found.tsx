@@ -10,11 +10,11 @@ export function NotFound() {
 		<section className="relative">
 			<div className="container flex min-h-dvh flex-col items-center justify-center border-x bg-(--bg-white-0) py-32 lg:px-12">
 				<div className="mx-auto text-center">
-					<h1 className="font-bold text-h2 tracking-tight lg:text-h1">
+					<h1 className="text-h2 lg:text-h1 font-bold tracking-tight">
 						404: Page Not Found
 					</h1>
 
-					<p className="mt-4 text-pretty text-(--text-sub-600) lg:text-paragraph-lg">
+					<p className="lg:text-paragraph-lg mt-4 text-pretty text-(--text-sub-600)">
 						Sorry, the page you are looking for could not be found.
 					</p>
 

@@ -50,7 +50,7 @@ export function Header() {
 		>
 			<div
 				className={cn(
-					"container mx-px flex max-w-6xl items-center justify-between border border-t-0 ring-inset transition-all duration-300 lg:mx-0 lg:px-8",
+					"container mx-px flex max-w-6xl items-center justify-between border border-t-0 transition-all duration-300 ring-inset lg:mx-0 lg:px-8",
 					scrollY > 64
 						? "h-16 bg-(--bg-white-0) lg:border-0 lg:bg-transparent"
 						: "h-16 border-x bg-(--bg-white-0) lg:h-20",
@@ -58,7 +58,7 @@ export function Header() {
 			>
 				<div className="flex flex-row items-center justify-between">
 					<Link to="/" className="flex items-center gap-2">
-						<Logo className="h-8 w-auto text-primary" />
+						<Logo className="text-primary h-8 w-auto" />
 						<span className="font-semibold">Hydro.sh</span>
 					</Link>
 				</div>

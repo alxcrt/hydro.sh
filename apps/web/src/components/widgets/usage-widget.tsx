@@ -32,7 +32,7 @@ export function UsageWidget({ className, ...props }: UsageWidgetProps) {
 					<span className="text-label-sm">
 						Usage ({usedRequests}/{totalAllowed})
 					</span>
-					<span className="text-(--text-sub-600) text-paragraph-xs">
+					<span className="text-paragraph-xs text-(--text-sub-600)">
 						{percentageUsed}%
 					</span>
 				</div>

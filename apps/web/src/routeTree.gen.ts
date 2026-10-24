@@ -8,143 +8,193 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as HomeRouteImport } from './routes/_home'
+import { Route as DonateCancelRouteImport } from './routes/donate-cancel'
+import { Route as DonateSuccessRouteImport } from './routes/donate-success'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppDevicesRouteImport } from './routes/_app/devices'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as HomeIndexRouteImport } from './routes/_home/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as DonateSuccessImport } from './routes/donate-success'
-import { Route as DonateCancelImport } from './routes/donate-cancel'
-import { Route as HomeImport } from './routes/_home'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as AppImport } from './routes/_app'
-import { Route as HomeIndexImport } from './routes/_home/index'
-import { Route as AuthLoginImport } from './routes/_auth/login'
-import { Route as AppDevicesImport } from './routes/_app/devices'
-import { Route as AppDashboardImport } from './routes/_app/dashboard'
-
-// Create/Update Routes
-
-const DonateSuccessRoute = DonateSuccessImport.update({
-  id: '/donate-success',
-  path: '/donate-success',
-  getParentRoute: () => rootRoute,
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const DonateCancelRoute = DonateCancelImport.update({
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/_home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateCancelRoute = DonateCancelRouteImport.update({
   id: '/donate-cancel',
   path: '/donate-cancel',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const HomeRoute = HomeImport.update({
-  id: '/_home',
-  getParentRoute: () => rootRoute,
+const DonateSuccessRoute = DonateSuccessRouteImport.update({
+  id: '/donate-success',
+  path: '/donate-success',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthRoute = AuthImport.update({
-  id: '/_auth',
-  getParentRoute: () => rootRoute,
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
 } as any)
-
-const AppRoute = AppImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRoute,
+const AppDevicesRoute = AppDevicesRouteImport.update({
+  id: '/devices',
+  path: '/devices',
+  getParentRoute: () => AppRoute,
 } as any)
-
-const HomeIndexRoute = HomeIndexImport.update({
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const HomeIndexRoute = HomeIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => HomeRoute,
 } as any)
 
-const AuthLoginRoute = AuthLoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AppDevicesRoute = AppDevicesImport.update({
-  id: '/devices',
-  path: '/devices',
-  getParentRoute: () => AppRoute,
-} as any)
-
-const AppDashboardRoute = AppDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
-} as any)
-
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof HomeIndexRoute
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/devices': typeof AppDevicesRoute
+  '/login': typeof AuthLoginRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof HomeIndexRoute
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/devices': typeof AppDevicesRoute
+  '/login': typeof AuthLoginRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_app': typeof AppRouteWithChildren
+  '/_auth': typeof AuthRouteWithChildren
+  '/_home': typeof HomeRouteWithChildren
+  '/donate-cancel': typeof DonateCancelRoute
+  '/donate-success': typeof DonateSuccessRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/devices': typeof AppDevicesRoute
+  '/_auth/login': typeof AuthLoginRoute
+  '/_home/': typeof HomeIndexRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/donate-cancel'
+    | '/donate-success'
+    | '/dashboard'
+    | '/devices'
+    | '/login'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/donate-cancel'
+    | '/donate-success'
+    | '/dashboard'
+    | '/devices'
+    | '/login'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_auth'
+    | '/_home'
+    | '/donate-cancel'
+    | '/donate-success'
+    | '/_app/dashboard'
+    | '/_app/devices'
+    | '/_auth/login'
+    | '/_home/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
+  HomeRoute: typeof HomeRouteWithChildren
+  DonateCancelRoute: typeof DonateCancelRoute
+  DonateSuccessRoute: typeof DonateSuccessRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/_app': {
       id: '/_app'
       path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AppImport
-      parentRoute: typeof rootRoute
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_home': {
       id: '/_home'
       path: ''
-      fullPath: ''
-      preLoaderRoute: typeof HomeImport
-      parentRoute: typeof rootRoute
+      fullPath: '/'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/donate-cancel': {
       id: '/donate-cancel'
       path: '/donate-cancel'
       fullPath: '/donate-cancel'
-      preLoaderRoute: typeof DonateCancelImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DonateCancelRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/donate-success': {
       id: '/donate-success'
       path: '/donate-success'
       fullPath: '/donate-success'
-      preLoaderRoute: typeof DonateSuccessImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DonateSuccessRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardImport
-      parentRoute: typeof AppImport
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/devices': {
       id: '/_app/devices'
       path: '/devices'
       fullPath: '/devices'
-      preLoaderRoute: typeof AppDevicesImport
-      parentRoute: typeof AppImport
+      preLoaderRoute: typeof AppDevicesRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginImport
-      parentRoute: typeof AuthImport
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_home/': {
       id: '/_home/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof HomeIndexImport
-      parentRoute: typeof HomeImport
+      preLoaderRoute: typeof HomeIndexRouteImport
+      parentRoute: typeof HomeRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
@@ -178,80 +228,6 @@ const HomeRouteChildren: HomeRouteChildren = {
 
 const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '': typeof HomeRouteWithChildren
-  '/donate-cancel': typeof DonateCancelRoute
-  '/donate-success': typeof DonateSuccessRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/devices': typeof AppDevicesRoute
-  '/login': typeof AuthLoginRoute
-  '/': typeof HomeIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '': typeof AuthRouteWithChildren
-  '/donate-cancel': typeof DonateCancelRoute
-  '/donate-success': typeof DonateSuccessRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/devices': typeof AppDevicesRoute
-  '/login': typeof AuthLoginRoute
-  '/': typeof HomeIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_app': typeof AppRouteWithChildren
-  '/_auth': typeof AuthRouteWithChildren
-  '/_home': typeof HomeRouteWithChildren
-  '/donate-cancel': typeof DonateCancelRoute
-  '/donate-success': typeof DonateSuccessRoute
-  '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/devices': typeof AppDevicesRoute
-  '/_auth/login': typeof AuthLoginRoute
-  '/_home/': typeof HomeIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/donate-cancel'
-    | '/donate-success'
-    | '/dashboard'
-    | '/devices'
-    | '/login'
-    | '/'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | ''
-    | '/donate-cancel'
-    | '/donate-success'
-    | '/dashboard'
-    | '/devices'
-    | '/login'
-    | '/'
-  id:
-    | '__root__'
-    | '/_app'
-    | '/_auth'
-    | '/_home'
-    | '/donate-cancel'
-    | '/donate-success'
-    | '/_app/dashboard'
-    | '/_app/devices'
-    | '/_auth/login'
-    | '/_home/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren
-  AuthRoute: typeof AuthRouteWithChildren
-  HomeRoute: typeof HomeRouteWithChildren
-  DonateCancelRoute: typeof DonateCancelRoute
-  DonateSuccessRoute: typeof DonateSuccessRoute
-}
-
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
@@ -259,65 +235,15 @@ const rootRouteChildren: RootRouteChildren = {
   DonateCancelRoute: DonateCancelRoute,
   DonateSuccessRoute: DonateSuccessRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_app",
-        "/_auth",
-        "/_home",
-        "/donate-cancel",
-        "/donate-success"
-      ]
-    },
-    "/_app": {
-      "filePath": "_app.tsx",
-      "children": [
-        "/_app/dashboard",
-        "/_app/devices"
-      ]
-    },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/login"
-      ]
-    },
-    "/_home": {
-      "filePath": "_home.tsx",
-      "children": [
-        "/_home/"
-      ]
-    },
-    "/donate-cancel": {
-      "filePath": "donate-cancel.tsx"
-    },
-    "/donate-success": {
-      "filePath": "donate-success.tsx"
-    },
-    "/_app/dashboard": {
-      "filePath": "_app/dashboard.tsx",
-      "parent": "/_app"
-    },
-    "/_app/devices": {
-      "filePath": "_app/devices.tsx",
-      "parent": "/_app"
-    },
-    "/_auth/login": {
-      "filePath": "_auth/login.tsx",
-      "parent": "/_auth"
-    },
-    "/_home/": {
-      "filePath": "_home/index.tsx",
-      "parent": "/_home"
-    }
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
-ROUTE_MANIFEST_END */

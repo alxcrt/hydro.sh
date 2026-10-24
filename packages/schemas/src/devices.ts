@@ -1,23 +1,37 @@
 import { z } from "zod";
 
 export const CreateDeviceSchema = z.object({
-	name: z.string({ required_error: "Device name is required" }).min(1, {
-		message: "Device name is required",
-	}),
+	name: z
+		.string({
+			error: (issue) =>
+				issue.input === undefined ? "Device name is required" : undefined,
+		})
+		.min(1, {
+			message: "Device name is required",
+		}),
 	bluetoothName: z
-		.string({ required_error: "Bluetooth name is required" })
+		.string({
+			error: (issue) =>
+				issue.input === undefined ? "Bluetooth name is required" : undefined,
+		})
 		.min(1, {
 			message: "Bluetooth name is required",
 		}),
 	deviceIdentifier: z
-		.string({ required_error: "Device identifier is required" })
+		.string({
+			error: (issue) =>
+				issue.input === undefined ? "Device identifier is required" : undefined,
+		})
 		.min(1, {
 			message: "Device identifier is required",
 		}),
 });
 
 export const UpdateDeviceSchema = z.object({
-	id: z.string({ required_error: "Device ID is required" }),
+	id: z.string({
+		error: (issue) =>
+			issue.input === undefined ? "Device ID is required" : undefined,
+	}),
 	name: z.string().min(1).optional(),
 	bluetoothName: z.string().min(1).optional(),
 });
