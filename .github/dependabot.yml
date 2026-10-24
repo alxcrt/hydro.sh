@@ -28,7 +28,7 @@
             "time": "04:00",
             "timezone": "Europe/Bucharest",
           },
-        "cooldown": { "default-days": 3, "semver-major-days": 7 },
+        "cooldown": { "default-days": 3 },
         "open-pull-requests-limit": 5,
         "groups":
           {
