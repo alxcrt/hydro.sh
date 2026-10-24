@@ -44,6 +44,8 @@
 		"bun": ">=1.2.13"
 	},
 	"overrides": {
-		"esbuild": "^0.28.2"
+		"esbuild": "^0.28.2",
+		"fflate": "^0.8.3",
+		"postcss-selector-parser": "^7.1.7"
 	}
 }
