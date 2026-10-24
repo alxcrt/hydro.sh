@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
+import type { RouterClient } from "@orpc/server";
+import type { AppRouter } from "../apps/server/src/routers";
 
 // This script may write only to the disposable deployment fixture.
 const database = new URL(process.env.DATABASE_URL || "");
@@ -35,7 +37,7 @@ assert.equal(
 	((await session.json()) as { user: { id: string } }).user.id,
 	signup.user.id,
 );
-const client: any = createORPCClient(
+const client: RouterClient<AppRouter> = createORPCClient(
 	new RPCLink({
 		url: `${api}/rpc`,
 		fetch: (url, options) =>
@@ -51,7 +53,7 @@ const client: any = createORPCClient(
 );
 const now = Date.now();
 for (let i = 0; i < 7; i++)
-	await client.water.create({
+	await client.waterIntake.create({
 		amount: 100 + i * 10,
 		timestamp: new Date(now - i * 60_000),
 		bottleBrand: "Fixture",
@@ -61,8 +63,11 @@ const range = {
 	startDate: new Date(now - 24 * 60 * 60_000),
 	endDate: new Date(now + 60_000),
 };
-assert.equal((await client.water.list({ ...range, limit: 5 })).length, 5);
-assert.deepEqual(await client.water.summary(range), { total: 910, entries: 7 });
+assert.equal((await client.waterIntake.list({ ...range, limit: 5 })).length, 5);
+assert.deepEqual(await client.waterIntake.summary(range), {
+	total: 910,
+	entries: 7,
+});
 const device = await client.devices.create({
 	name: "Fixture Bottle",
 	bluetoothName: "Fixture",
@@ -80,8 +85,10 @@ assert.ok(
 		(item: { id: string }) => item.id === device.id,
 	),
 );
-const anonymous: any = createORPCClient(new RPCLink({ url: `${api}/rpc` }));
-await assert.rejects(() => anonymous.water.summary(range));
+const anonymous: RouterClient<AppRouter> = createORPCClient(
+	new RPCLink({ url: `${api}/rpc` }),
+);
+await assert.rejects(() => anonymous.waterIntake.summary(range));
 const denied = await fetch(`${api}/api/auth/sign-in/email`, {
 	method: "POST",
 	headers: {
