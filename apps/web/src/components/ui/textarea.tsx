@@ -26,13 +26,13 @@ function Textarea({
 			className={cn(
 				[
 					// base
-					"block w-full resize-none text-(--text-strong-950) text-paragraph-sm outline-none",
+					"text-paragraph-sm block w-full resize-none text-(--text-strong-950) outline-none",
 					!$simple && [
 						"pointer-events-auto h-full min-h-[82px] bg-transparent pt-2.5 pr-2.5 pl-3",
 					],
 					$simple && [
-						"min-h-28 rounded-12 bg-(--bg-white-0) px-3 py-2.5 shadow-xs",
-						"ring-(--stroke-soft-200) ring-1 ring-inset",
+						"rounded-12 min-h-28 bg-(--bg-white-0) px-3 py-2.5 shadow-xs",
+						"ring-1 ring-(--stroke-soft-200) ring-inset",
 						"transition duration-200 ease-out",
 						// hover
 						"hover:[&:not(:focus)]:bg-(--bg-weak-50)",
@@ -52,7 +52,7 @@ function Textarea({
 					],
 					!disabled && [
 						// placeholder
-						"placeholder:select-none placeholder:text-(--text-soft-400) placeholder:transition placeholder:duration-200 placeholder:ease-out",
+						"placeholder:text-(--text-soft-400) placeholder:transition placeholder:duration-200 placeholder:ease-out placeholder:select-none",
 						// hover placeholder
 						"group-hover/textarea:placeholder:text-(--text-sub-600)",
 						// focus
@@ -127,8 +127,8 @@ function TextareaRoot({
 			className={cn(
 				[
 					// base
-					"group/textarea relative flex w-full flex-col rounded-12 bg-(--bg-white-0) pb-2.5 shadow-xs",
-					"ring-(--stroke-soft-200) ring-1 ring-inset",
+					"group/textarea rounded-12 relative flex w-full flex-col bg-(--bg-white-0) pb-2.5 shadow-xs",
+					"ring-1 ring-(--stroke-soft-200) ring-inset",
 					"transition duration-200 ease-out",
 					// hover
 					"hover:[&:not(:focus-within)]:bg-(--bg-weak-50)",
@@ -180,7 +180,7 @@ function CharCounter({
 	return (
 		<span
 			className={cn(
-				"text-(--text-soft-400) text-subheading-2xs",
+				"text-subheading-2xs text-(--text-soft-400)",
 				// disabled
 				"group-has-[[disabled]]/textarea:text-(--text-disabled-300)",
 				{

@@ -14,6 +14,7 @@ import * as Divider from "@/components/ui/divider.tsx";
 import * as Select from "@/components/ui/select.tsx";
 import { cn } from "@/utils/cn.ts";
 import { AccountSettings } from "./settings/account.tsx";
+
 // import { WorkspaceSettings } from "./settings/workspace.tsx";
 
 type PersonalSettingKeys = "account" | "privacy-security" | "integrations";
@@ -80,7 +81,7 @@ export function SettingsContent() {
 			orientation="vertical"
 			className="flex w-full flex-col lg:flex-row"
 		>
-			<TabPrimitives.List className="hidden w-64 shrink-0 flex-col gap-4 border-(--stroke-soft-200) border-r p-4 lg:flex">
+			<TabPrimitives.List className="hidden w-64 shrink-0 flex-col gap-4 border-r border-(--stroke-soft-200) p-4 lg:flex">
 				{settingPageItems.map(({ group, items }, i, arr) => (
 					<React.Fragment key={group}>
 						<div className="flex flex-col gap-2">
@@ -94,7 +95,7 @@ export function SettingsContent() {
 										value={key}
 										disabled={v.disabled}
 										className={cn(
-											"group flex h-9 w-full items-center gap-2 rounded-10 bg-(--bg-white-0) px-2 text-left text-(--text-sub-600) text-label-sm",
+											"group rounded-10 text-label-sm flex h-9 w-full items-center gap-2 bg-(--bg-white-0) px-2 text-left text-(--text-sub-600)",
 											"transition duration-200 ease-out",
 											"hover:bg-(--bg-weak-50)",
 											"focus:outline-none",
@@ -140,7 +141,7 @@ export function SettingsContent() {
 					<Select.Content>
 						{settingPageItems.map(({ group, items }) => (
 							<Select.Group key={group}>
-								<Select.GroupLabel className="mt-2 mb-1 px-2 py-1 text-(--text-soft-400) text-subheading-xs">
+								<Select.GroupLabel className="text-subheading-xs mt-2 mb-1 px-2 py-1 text-(--text-soft-400)">
 									{group}
 								</Select.GroupLabel>
 								{Object.entries(items).map(([key, v]) => {
@@ -177,10 +178,10 @@ export function SettingsContent() {
 					>
 						<div className="flex w-full flex-col gap-3.5 px-5 py-4 sm:flex-row sm:items-center">
 							<div className="flex-1">
-								<DialogPrimitives.Title className="text-(--text-strong-950) text-label-md">
+								<DialogPrimitives.Title className="text-label-md text-(--text-strong-950)">
 									Coming Soon
 								</DialogPrimitives.Title>
-								<DialogPrimitives.Description className="mt-1 text-(--text-sub-600) text-paragraph-sm">
+								<DialogPrimitives.Description className="text-paragraph-sm mt-1 text-(--text-sub-600)">
 									This feature is currently under development.
 								</DialogPrimitives.Description>
 							</div>

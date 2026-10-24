@@ -5,7 +5,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children";
-import { type VariantProps, tv } from "@/utils/tv";
+import { tv, type VariantProps } from "@/utils/tv";
 
 const BUTTON_GROUP_ROOT_NAME = "ButtonGroupRoot";
 const BUTTON_GROUP_ITEM_NAME = "ButtonGroupItem";
@@ -13,11 +13,11 @@ const BUTTON_GROUP_ICON_NAME = "ButtonGroupIcon";
 
 export const buttonGroupVariants = tv({
 	slots: {
-		root: "-space-x-[1.5px] flex",
+		root: "flex -space-x-[1.5px]",
 		item: [
 			// base
-			"group relative flex items-center justify-center whitespace-nowrap bg-bg-white-0 text-center text-text-sub-600 outline-none",
-			"border border-stroke-soft-200",
+			"group bg-bg-white-0 text-text-sub-600 relative flex items-center justify-center text-center whitespace-nowrap outline-none",
+			"border-stroke-soft-200 border",
 			"transition duration-200 ease-out",
 			// hover
 			"hover:bg-bg-weak-50",
@@ -27,7 +27,7 @@ export const buttonGroupVariants = tv({
 			"data-[state=on]:bg-bg-weak-50",
 			"data-[state=on]:text-text-strong-950",
 			// disabled
-			"disabled:pointer-events-none disabled:bg-bg-weak-50",
+			"disabled:bg-bg-weak-50 disabled:pointer-events-none",
 			"disabled:text-text-disabled-300",
 		],
 		icon: "shrink-0",
@@ -37,7 +37,7 @@ export const buttonGroupVariants = tv({
 			small: {
 				item: [
 					// base
-					"h-9 gap-4 px-4 text-label-sm",
+					"text-label-sm h-9 gap-4 px-4",
 					// radius
 					"first:rounded-l-lg last:rounded-r-lg",
 				],
@@ -49,7 +49,7 @@ export const buttonGroupVariants = tv({
 			xsmall: {
 				item: [
 					// base
-					"h-8 gap-3.5 px-3.5 text-label-sm",
+					"text-label-sm h-8 gap-3.5 px-3.5",
 					// radius
 					"first:rounded-l-lg last:rounded-r-lg",
 				],
@@ -61,7 +61,7 @@ export const buttonGroupVariants = tv({
 			xxsmall: {
 				item: [
 					// base
-					"h-6 gap-3 px-3 text-label-xs",
+					"text-label-xs h-6 gap-3 px-3",
 					// radius
 					"first:rounded-l-md last:rounded-r-md",
 				],
@@ -153,7 +153,7 @@ function ButtonGroupIcon<T extends React.ElementType>({
 ButtonGroupIcon.displayName = BUTTON_GROUP_ICON_NAME;
 
 export {
-	ButtonGroupRoot as Root,
-	ButtonGroupItem as Item,
 	ButtonGroupIcon as Icon,
+	ButtonGroupItem as Item,
+	ButtonGroupRoot as Root,
 };

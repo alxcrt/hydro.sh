@@ -18,7 +18,7 @@ function ModalOverlay({
 		<DialogPrimitive.Overlay
 			className={cn(
 				// base
-				"fixed inset-0 z-50 flex flex-col items-center justify-center overflow-y-auto bg-overlay p-4 backdrop-blur-[10px]",
+				"bg-overlay fixed inset-0 z-50 flex flex-col items-center justify-center overflow-y-auto p-4 backdrop-blur-[10px]",
 				// animation
 				"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=open]:animate-in",
 				className,
@@ -89,7 +89,7 @@ function ModalHeader({
 	return (
 		<div
 			className={cn(
-				"relative flex items-start gap-3.5 py-4 pr-14 pl-5 before:absolute before:inset-x-0 before:bottom-0 before:border-(--stroke-soft-200) before:border-b",
+				"relative flex items-start gap-3.5 py-4 pr-14 pl-5 before:absolute before:inset-x-0 before:bottom-0 before:border-b before:border-(--stroke-soft-200)",
 				className,
 			)}
 			{...rest}
@@ -97,7 +97,7 @@ function ModalHeader({
 			{children || (
 				<>
 					{Icon && (
-						<div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-(--bg-white-0) ring-(--stroke-soft-200) ring-1 ring-inset">
+						<div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-(--bg-white-0) ring-1 ring-(--stroke-soft-200) ring-inset">
 							<Icon className="size-5 text-(--text-sub-600)" />
 						</div>
 					)}
@@ -121,7 +121,7 @@ function ModalTitle({
 }: React.CustomComponentPropsWithRef<typeof DialogPrimitive.Title>) {
 	return (
 		<DialogPrimitive.Title
-			className={cn("text-(--text-strong-950) text-label-sm", className)}
+			className={cn("text-label-sm text-(--text-strong-950)", className)}
 			{...rest}
 		/>
 	);
@@ -133,7 +133,7 @@ function ModalDescription({
 }: React.CustomComponentPropsWithRef<typeof DialogPrimitive.Description>) {
 	return (
 		<DialogPrimitive.Description
-			className={cn("text-(--text-sub-600) text-paragraph-xs", className)}
+			className={cn("text-paragraph-xs text-(--text-sub-600)", className)}
 			{...rest}
 		/>
 	);
@@ -153,7 +153,7 @@ function ModalFooter({
 	return (
 		<div
 			className={cn(
-				"flex items-center justify-between gap-3 border-(--stroke-soft-200) border-t px-5 py-4",
+				"flex items-center justify-between gap-3 border-t border-(--stroke-soft-200) px-5 py-4",
 				className,
 			)}
 			{...rest}

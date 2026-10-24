@@ -1,11 +1,10 @@
+import { UpdateUserSchema } from "@hydro.sh/schemas/users";
 import { ORPCError } from "@orpc/server";
 import { eq } from "drizzle-orm";
 import type { z } from "zod";
-
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { protectedProcedure } from "@/lib/orpc";
-import { UpdateUserSchema } from "@hydro.sh/schemas/users";
 
 export const usersRouter = {
 	me: protectedProcedure.handler(async ({ context }) => {

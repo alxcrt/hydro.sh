@@ -1,8 +1,8 @@
 // import { Resend } from "resend";
 
-import { env } from "@/utils/env";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { env } from "@/utils/env";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 

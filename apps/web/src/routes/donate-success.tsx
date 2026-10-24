@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button.tsx";
 
@@ -29,10 +29,10 @@ function DonateSuccessPage() {
 				{/* Decorative background */}
 				<div
 					aria-hidden="true"
-					className="-z-10 absolute inset-0 overflow-hidden"
+					className="absolute inset-0 -z-10 overflow-hidden"
 				>
-					<div className="-top-20 -left-20 absolute h-64 w-64 rounded-full bg-gradient-to-br from-blue-100 via-cyan-50 to-transparent opacity-60 blur-3xl" />
-					<div className="-bottom-20 -right-20 absolute h-64 w-64 rounded-full bg-gradient-to-tl from-pink-100 via-transparent to-transparent opacity-40 blur-3xl" />
+					<div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-gradient-to-br from-blue-100 via-cyan-50 to-transparent opacity-60 blur-3xl" />
+					<div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-gradient-to-tl from-pink-100 via-transparent to-transparent opacity-40 blur-3xl" />
 				</div>
 
 				{/* Animated water drop */}
@@ -46,15 +46,15 @@ function DonateSuccessPage() {
 					</div>
 				</div>
 
-				<h1 className="mb-3 font-semibold text-(--text-strong-950) text-2xl">
+				<h1 className="mb-3 text-2xl font-semibold text-(--text-strong-950)">
 					You're amazing!
 				</h1>
 
-				<p className="mx-auto mb-2 max-w-sm text-(--text-sub-600) text-lg leading-relaxed">
+				<p className="mx-auto mb-2 max-w-sm text-lg leading-relaxed text-(--text-sub-600)">
 					Thank you for your generous support.
 				</p>
 
-				<p className="mx-auto mb-8 max-w-sm text-(--text-soft-400) text-paragraph-sm leading-relaxed">
+				<p className="text-paragraph-sm mx-auto mb-8 max-w-sm leading-relaxed text-(--text-soft-400)">
 					Your donation directly helps keep Hydro.sh running and free for
 					everyone. We truly appreciate it.
 				</p>

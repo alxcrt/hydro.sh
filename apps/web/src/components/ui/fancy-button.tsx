@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const FANCY_BUTTON_ROOT_NAME = "FancyButtonRoot";
 const FANCY_BUTTON_ICON_NAME = "FancyButtonIcon";
@@ -12,31 +12,31 @@ export const fancyButtonVariants = tv({
 	slots: {
 		root: [
 			// base
-			"group relative inline-flex items-center justify-center whitespace-nowrap text-label-sm outline-none",
+			"group text-label-sm relative inline-flex items-center justify-center whitespace-nowrap outline-none",
 			"transition duration-200 ease-out",
 			// focus
 			"focus:outline-none",
 			// disabled
 			"disabled:pointer-events-none disabled:text-(--text-disabled-300)",
-			"disabled:bg-(--bg-weak-50) disabled:bg-none disabled:shadow-none disabled:after:hidden disabled:before:hidden",
+			"disabled:bg-(--bg-weak-50) disabled:bg-none disabled:shadow-none disabled:before:hidden disabled:after:hidden",
 		],
 		icon: "relative z-10 size-5 shrink-0",
 	},
 	variants: {
 		variant: {
 			neutral: {
-				root: "bg-(--bg-strong-950) text-(--text-white-0) shadow-fancy-buttons-neutral",
+				root: "shadow-fancy-buttons-neutral bg-(--bg-strong-950) text-(--text-white-0)",
 			},
 			primary: {
-				root: "bg-primary text-white shadow-fancy-buttons-primary",
+				root: "bg-primary shadow-fancy-buttons-primary text-white",
 			},
 			destructive: {
-				root: "bg-state-error-base text-white shadow-fancy-buttons-error",
+				root: "bg-state-error-base shadow-fancy-buttons-error text-white",
 			},
 			basic: {
 				root: [
 					// base
-					"bg-(--bg-white-0) text-(--text-sub-600) shadow-fancy-buttons-stroke",
+					"shadow-fancy-buttons-stroke bg-(--bg-white-0) text-(--text-sub-600)",
 					// hover
 					"hover:bg-(--bg-weak-50) hover:text-(--text-strong-950) hover:shadow-none",
 				],
@@ -44,7 +44,7 @@ export const fancyButtonVariants = tv({
 		},
 		size: {
 			medium: {
-				root: "h-10 gap-3 rounded-10 px-3.5",
+				root: "rounded-10 h-10 gap-3 px-3.5",
 				icon: "-mx-1",
 			},
 			small: {
@@ -67,9 +67,9 @@ export const fancyButtonVariants = tv({
 					"before:bg-gradient-to-b before:p-px",
 					"before:from-white/[.12] before:to-transparent",
 					// before mask
-					"before:[mask-clip:content-box,border-box] before:[mask-composite:exclude] before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)]",
+					"before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:[mask-clip:content-box,border-box]",
 					// after
-					"after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:from-static-white after:to-transparent",
+					"after:from-static-white after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:to-transparent",
 					"after:pointer-events-none after:opacity-[.16] after:transition after:duration-200 after:ease-out",
 					// hover
 					"hover:after:opacity-[.24]",

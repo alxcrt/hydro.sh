@@ -1,13 +1,12 @@
-import { Icons } from "@/components/icons";
-import { useORPC } from "@/hooks/use-orpc";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
-
 import Bottle from "@/components/bottle";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { WaterIntakeForm } from "@/components/water-intake-form";
+import { useORPC } from "@/hooks/use-orpc";
 import { cn } from "@/utils/cn";
 
 export const Route = createFileRoute("/_app/dashboard")({
@@ -18,13 +17,7 @@ export const Route = createFileRoute("/_app/dashboard")({
 	component: RouteComponent,
 });
 
-function HydrationRing({
-	current,
-	goal,
-}: {
-	current: number;
-	goal: number;
-}) {
+function HydrationRing({ current, goal }: { current: number; goal: number }) {
 	const percentage = Math.min(100, Math.round((current / goal) * 100));
 	const circumference = 2 * Math.PI * 88;
 	const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -33,7 +26,7 @@ function HydrationRing({
 		<div className="relative flex items-center justify-center">
 			<svg
 				aria-hidden="true"
-				className="-rotate-90 h-48 w-48 transform"
+				className="h-48 w-48 -rotate-90 transform"
 				viewBox="0 0 200 200"
 			>
 				{/* Background ring */}
@@ -78,13 +71,13 @@ function HydrationRing({
 				>
 					{current}
 				</span>
-				<span className="text-(--text-sub-600) text-paragraph-sm">
+				<span className="text-paragraph-sm text-(--text-sub-600)">
 					of {goal} ml
 				</span>
 				<div className="mt-2 flex items-center gap-1.5 rounded-full bg-(--color-blue-50) px-2.5 py-1">
 					<span
 						className={cn(
-							"font-medium text-paragraph-xs",
+							"text-paragraph-xs font-medium",
 							percentage >= 100
 								? "text-(--color-green-600)"
 								: "text-(--color-blue-600)",
@@ -113,7 +106,7 @@ function QuickAddButton({
 			onClick={() => onClick(amount)}
 			disabled={isLoading}
 			className={cn(
-				"flex flex-col items-center justify-center gap-1 rounded-12 border border-(--stroke-soft-200) bg-(--bg-white-0) px-3 py-2.5",
+				"rounded-12 flex flex-col items-center justify-center gap-1 border border-(--stroke-soft-200) bg-(--bg-white-0) px-3 py-2.5",
 				"transition-all duration-200 ease-out",
 				"hover:border-(--color-blue-300) hover:bg-(--color-blue-50) hover:shadow-sm",
 				"active:scale-95",
@@ -121,7 +114,7 @@ function QuickAddButton({
 			)}
 		>
 			<Icons.waterDroplet className="h-4 w-4 text-(--color-blue-500)" />
-			<span className="font-medium text-(--text-strong-950) text-label-xs">
+			<span className="text-label-xs font-medium text-(--text-strong-950)">
 				{amount}ml
 			</span>
 		</button>
@@ -147,7 +140,7 @@ function IntakeLogItem({
 			<div className="flex items-center gap-3">
 				<div
 					className={cn(
-						"flex h-9 w-9 items-center justify-center rounded-10",
+						"rounded-10 flex h-9 w-9 items-center justify-center",
 						source === "bottle"
 							? "bg-(--color-blue-50)"
 							: "bg-(--color-green-50)",
@@ -160,17 +153,17 @@ function IntakeLogItem({
 					)}
 				</div>
 				<div>
-					<span className="font-medium text-(--text-strong-950) text-label-sm">
+					<span className="text-label-sm font-medium text-(--text-strong-950)">
 						{amount}ml
 					</span>
 					{brand && (
-						<span className="ml-2 text-(--text-soft-400) text-paragraph-xs">
+						<span className="text-paragraph-xs ml-2 text-(--text-soft-400)">
 							{brand}
 						</span>
 					)}
 				</div>
 			</div>
-			<span className="font-mono text-(--text-sub-600) text-paragraph-xs">
+			<span className="text-paragraph-xs font-mono text-(--text-sub-600)">
 				{formattedTime}
 			</span>
 		</div>
@@ -246,21 +239,21 @@ function RouteComponent() {
 	return (
 		<div className="flex flex-1 flex-col">
 			{/* Header */}
-			<header className="border-(--stroke-soft-200) border-b px-6 py-5 lg:px-8">
+			<header className="border-b border-(--stroke-soft-200) px-6 py-5 lg:px-8">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-3">
-						<div className="flex h-11 w-11 items-center justify-center rounded-12 bg-(--color-blue-50)">
+						<div className="rounded-12 flex h-11 w-11 items-center justify-center bg-(--color-blue-50)">
 							<Icons.waterDroplet className="h-5 w-5 text-(--color-blue-500)" />
 						</div>
 						<div>
-							<h1 className="font-semibold text-(--text-strong-950) text-label-lg">
+							<h1 className="text-label-lg font-semibold text-(--text-strong-950)">
 								{new Date().toLocaleDateString("en-US", {
 									weekday: "long",
 									month: "long",
 									day: "numeric",
 								})}
 							</h1>
-							<p className="text-(--text-sub-600) text-paragraph-sm">
+							<p className="text-paragraph-sm text-(--text-sub-600)">
 								Track your daily hydration
 							</p>
 						</div>
@@ -275,7 +268,7 @@ function RouteComponent() {
 					<div className="space-y-6">
 						{/* Hydration Progress Card */}
 						<div className="rounded-16 border border-(--stroke-soft-200) bg-(--bg-white-0) p-6">
-							<h2 className="mb-6 font-semibold text-(--text-strong-950) text-label-md">
+							<h2 className="text-label-md mb-6 font-semibold text-(--text-strong-950)">
 								Today's Progress
 							</h2>
 							<div className="flex justify-center">
@@ -284,7 +277,7 @@ function RouteComponent() {
 
 							{/* Quick Add Buttons */}
 							<div className="mt-6">
-								<p className="mb-3 text-center text-(--text-sub-600) text-paragraph-xs">
+								<p className="text-paragraph-xs mb-3 text-center text-(--text-sub-600)">
 									Quick add
 								</p>
 								<div className="grid grid-cols-4 gap-2">
@@ -303,7 +296,7 @@ function RouteComponent() {
 						{/* Connected Bottles */}
 						<div className="rounded-16 border border-(--stroke-soft-200) bg-(--bg-white-0) p-6">
 							<div className="mb-4 flex items-center justify-between">
-								<h2 className="font-semibold text-(--text-strong-950) text-label-md">
+								<h2 className="text-label-md font-semibold text-(--text-strong-950)">
 									Smart Bottles
 								</h2>
 								<div className="flex items-center gap-2">
@@ -327,7 +320,7 @@ function RouteComponent() {
 									</Button>
 								</div>
 							</div>
-							<p className="mb-4 text-(--text-sub-600) text-paragraph-xs">
+							<p className="text-paragraph-xs mb-4 text-(--text-sub-600)">
 								Connect your smart water bottles to automatically track intake
 							</p>
 							<div className="space-y-3">
@@ -348,10 +341,10 @@ function RouteComponent() {
 
 						{/* Today's Log */}
 						<div className="rounded-16 border border-(--stroke-soft-200) bg-(--bg-white-0) p-6">
-							<h2 className="mb-1 font-semibold text-(--text-strong-950) text-label-md">
+							<h2 className="text-label-md mb-1 font-semibold text-(--text-strong-950)">
 								Today's Log
 							</h2>
-							<p className="mb-4 text-(--text-sub-600) text-paragraph-xs">
+							<p className="text-paragraph-xs mb-4 text-(--text-sub-600)">
 								Recent water intake entries
 							</p>
 
@@ -371,10 +364,10 @@ function RouteComponent() {
 										<div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-(--bg-weak-50)">
 											<Icons.waterDroplet className="h-6 w-6 text-(--text-soft-400)" />
 										</div>
-										<p className="font-medium text-(--text-sub-600) text-paragraph-sm">
+										<p className="text-paragraph-sm font-medium text-(--text-sub-600)">
 											No entries yet
 										</p>
-										<p className="mt-1 text-(--text-soft-400) text-paragraph-xs">
+										<p className="text-paragraph-xs mt-1 text-(--text-soft-400)">
 											Start tracking to see your history
 										</p>
 									</div>

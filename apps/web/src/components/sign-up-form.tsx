@@ -1,8 +1,8 @@
-import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import z from "zod";
+import { authClient } from "@/lib/auth-client";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -66,7 +66,7 @@ export default function SignUpForm({
 		<div className="w-full">
 			<div className="mb-6">
 				<h1 className="text-label-xl text-neutral-950">Create account</h1>
-				<p className="mt-1 text-neutral-500 text-paragraph-sm">
+				<p className="text-paragraph-sm mt-1 text-neutral-500">
 					Start tracking your hydration
 				</p>
 			</div>
@@ -170,10 +170,10 @@ export default function SignUpForm({
 
 			<div className="relative my-5">
 				<div className="absolute inset-0 flex items-center">
-					<div className="w-full border-neutral-200 border-t" />
+					<div className="w-full border-t border-neutral-200" />
 				</div>
 				<div className="relative flex justify-center">
-					<span className="bg-neutral-50 px-3 text-neutral-400 text-paragraph-xs">
+					<span className="text-paragraph-xs bg-neutral-50 px-3 text-neutral-400">
 						or
 					</span>
 				</div>
@@ -187,7 +187,7 @@ export default function SignUpForm({
 						callbackURL: `${window.location.origin}/dashboard`,
 					});
 				}}
-				className="group flex w-full items-center justify-center gap-2.5 rounded-10 border border-neutral-200 bg-white px-4 py-2.5 text-label-sm text-neutral-700 transition-all hover:border-neutral-300 hover:bg-neutral-50"
+				className="group rounded-10 text-label-sm flex w-full items-center justify-center gap-2.5 border border-neutral-200 bg-white px-4 py-2.5 text-neutral-700 transition-all hover:border-neutral-300 hover:bg-neutral-50"
 			>
 				<svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24">
 					<path
@@ -210,12 +210,12 @@ export default function SignUpForm({
 				Continue with Google
 			</button>
 
-			<p className="mt-6 text-center text-neutral-500 text-paragraph-sm">
+			<p className="text-paragraph-sm mt-6 text-center text-neutral-500">
 				Already have an account?{" "}
 				<button
 					type="button"
 					onClick={onSwitchToSignIn}
-					className="font-medium text-primary hover:underline"
+					className="text-primary font-medium hover:underline"
 				>
 					Sign in
 				</button>

@@ -28,7 +28,7 @@ export function PageHeader({
 				{icon}
 				<div className="space-y-1">
 					<div className="text-label-md lg:text-label-lg">{title}</div>
-					<div className="text-(--text-sub-600) text-paragraph-sm">
+					<div className="text-paragraph-sm text-(--text-sub-600)">
 						{description}
 					</div>
 				</div>

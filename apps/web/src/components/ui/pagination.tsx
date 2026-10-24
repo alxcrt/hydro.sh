@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/utils/cn.ts";
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const PAGINATION_ROOT_NAME = "PaginationRoot";
 const PAGINATION_ITEM_NAME = "PaginationItem";
@@ -14,7 +14,7 @@ const PAGINATION_NAV_ICON_NAME = "PaginationNavIcon";
 const paginationVariants = tv({
 	slots: {
 		root: "flex flex-wrap items-center justify-center",
-		item: "flex items-center justify-center text-center text-(--text-sub-600) text-label-sm transition duration-200 ease-out",
+		item: "text-label-sm flex items-center justify-center text-center text-(--text-sub-600) transition duration-200 ease-out",
 		navButton:
 			"flex items-center justify-center text-(--text-sub-600) transition duration-200 ease-out",
 		navIcon: "size-5",
@@ -25,13 +25,13 @@ const paginationVariants = tv({
 				root: "gap-2",
 				item: [
 					// base
-					"h-8 min-w-8 rounded-8 px-1.5 ring-(--stroke-soft-200) ring-1 ring-inset",
+					"rounded-8 h-8 min-w-8 px-1.5 ring-1 ring-(--stroke-soft-200) ring-inset",
 					// hover
 					"hover:bg-(--bg-weak-50) hover:ring-transparent",
 				],
 				navButton: [
 					// base
-					"size-8 rounded-8",
+					"rounded-8 size-8",
 					// hover
 					"hover:bg-(--bg-weak-50)",
 				],
@@ -40,7 +40,7 @@ const paginationVariants = tv({
 				root: "gap-2",
 				item: [
 					// base
-					"h-8 min-w-8 rounded-full px-1.5 ring-(--stroke-soft-200) ring-1 ring-inset",
+					"h-8 min-w-8 rounded-full px-1.5 ring-1 ring-(--stroke-soft-200) ring-inset",
 					// hover
 					"hover:bg-(--bg-weak-50) hover:ring-transparent",
 				],
@@ -52,7 +52,7 @@ const paginationVariants = tv({
 				],
 			},
 			group: {
-				root: "divide-x divide-(--stroke-soft-200) overflow-hidden rounded-8 border border-stroke-soft-200",
+				root: "rounded-8 border-stroke-soft-200 divide-x divide-(--stroke-soft-200) overflow-hidden border",
 				item: [
 					// base
 					"h-8 min-w-10 px-1.5",

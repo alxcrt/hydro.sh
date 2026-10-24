@@ -1,25 +1,22 @@
-import { Toaster } from "@/components/ui/toast";
+import type { QueryClient } from "@tanstack/react-query";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-import type { QueryClient } from "@tanstack/react-query";
 import {
+	createRootRouteWithContext,
 	HeadContent,
 	Outlet,
 	Scripts,
-	createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { LazyMotion, domAnimation } from "motion/react";
+import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
+import type { Session, User } from "better-auth";
+import { domAnimation, LazyMotion } from "motion/react";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
-
+import { Toaster } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import type { orpc } from "@/utils/orpc";
-import { createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
-import type { Session } from "better-auth";
-import type { User } from "better-auth";
 import appCss from "../app.css?url";
 import tailwindCss from "../tailwind.css?url";
 
@@ -59,7 +56,7 @@ export interface RouterAppContext {
  */
 export const authStateFn = createServerFn({ method: "GET" }).handler(
 	async () => {
-		const request = getWebRequest();
+		const request = getRequest();
 		if (!request)
 			throw new Error("No request found in current execution context");
 		const { data } = await authClient.getSession({

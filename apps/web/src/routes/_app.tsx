@@ -1,6 +1,6 @@
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AddDeviceModal } from "@/components/modals/add-device-modal";
 import Sidebar from "@/components/sidebar";
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app")({
 	async beforeLoad({ context: { queryClient, orpc, ...context }, location }) {

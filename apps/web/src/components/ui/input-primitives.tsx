@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const INPUT_ROOT_NAME = "InputRoot";
 const INPUT_WRAPPER_NAME = "InputWrapper";
@@ -20,7 +20,7 @@ export const inputVariants = tv({
 			"transition duration-200 ease-out",
 			"divide-x divide-(--stroke-soft-200)",
 			// before
-			"before:absolute before:inset-0 before:ring-(--stroke-soft-200) before:ring-1 before:ring-inset",
+			"before:absolute before:inset-0 before:ring-1 before:ring-(--stroke-soft-200) before:ring-inset",
 			"before:pointer-events-none before:rounded-[inherit]",
 			"before:transition before:duration-200 before:ease-out",
 			// hover
@@ -41,10 +41,10 @@ export const inputVariants = tv({
 		],
 		input: [
 			// base
-			"w-full bg-none bg-transparent text-(--text-strong-950) text-paragraph-sm outline-none",
+			"text-paragraph-sm w-full bg-transparent bg-none text-(--text-strong-950) outline-none",
 			"transition duration-200 ease-out",
 			// placeholder
-			"placeholder:select-none placeholder:text-(--text-soft-400) placeholder:transition placeholder:duration-200 placeholder:ease-out",
+			"placeholder:text-(--text-soft-400) placeholder:transition placeholder:duration-200 placeholder:ease-out placeholder:select-none",
 			// hover placeholder
 			"group-hover/input-wrapper:placeholder:text-(--text-sub-600)",
 			// focus
@@ -56,7 +56,7 @@ export const inputVariants = tv({
 		],
 		icon: [
 			// base
-			"flex size-5 shrink-0 select-none items-center justify-center",
+			"flex size-5 shrink-0 items-center justify-center select-none",
 			"transition duration-200 ease-out",
 			// placeholder state
 			"group-has-[:placeholder-shown]:text-(--text-soft-400)",
@@ -71,7 +71,7 @@ export const inputVariants = tv({
 		],
 		affix: [
 			// base
-			"shrink-0 bg-(--bg-white-0) text-(--text-sub-600) text-paragraph-sm",
+			"text-paragraph-sm shrink-0 bg-(--bg-white-0) text-(--text-sub-600)",
 			"flex items-center justify-center truncate",
 			"transition duration-200 ease-out",
 			// placeholder state
@@ -81,7 +81,7 @@ export const inputVariants = tv({
 		],
 		inlineAffix: [
 			// base
-			"text-(--text-sub-600) text-paragraph-sm",
+			"text-paragraph-sm text-(--text-sub-600)",
 			// placeholder state
 			"group-has-[:placeholder-shown]:text-(--text-soft-400)",
 			// focus state
@@ -301,10 +301,10 @@ function InputInlineAffix({
 InputInlineAffix.displayName = INPUT_INLINE_AFFIX_NAME;
 
 export {
+	Input,
 	InputAffix as Affix,
 	InputIcon as Icon,
 	InputInlineAffix as InlineAffix,
-	Input,
 	InputRoot as Root,
 	InputWrapper as Wrapper,
 };

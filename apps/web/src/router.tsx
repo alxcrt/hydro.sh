@@ -16,7 +16,7 @@ import { ORPCContext } from "./hooks/use-orpc";
 import { routeTree } from "./routeTree.gen";
 import { orpc } from "./utils/orpc";
 
-export const createRouter = () => {
+export const getRouter = () => {
 	const queryClient = new QueryClient({
 		queryCache: new QueryCache({
 			onError: (error) => {
@@ -66,7 +66,6 @@ export const createRouter = () => {
 		}),
 	});
 
-	// export const createRouter = () => {
 	const router = createTanstackRouter({
 		// Root of all application routes
 		routeTree,
@@ -96,6 +95,7 @@ export const createRouter = () => {
 		defaultViewTransition: true,
 
 		// Wrap all routes with necessary providers
+		// biome-ignore lint/correctness/noComponentHookFactories: A per-request TanStack router owns its QueryClient provider.
 		Wrap: ({ children }) => (
 			<QueryClientProvider client={queryClient}>
 				{/* Make ORPC client available throughout the app */}
@@ -108,6 +108,6 @@ export const createRouter = () => {
 
 declare module "@tanstack/react-router" {
 	interface Register {
-		router: ReturnType<typeof createRouter>;
+		router: ReturnType<typeof getRouter>;
 	}
 }

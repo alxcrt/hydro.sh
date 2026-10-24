@@ -12,20 +12,20 @@ import * as React from "react";
 
 import { cn } from "@/utils/cn.ts";
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 export const selectVariants = tv({
 	slots: {
 		triggerRoot: [
 			// base
-			"group/trigger min-w-0 shrink-0 bg-(--bg-white-0) shadow-xs outline-none ring-(--stroke-soft-200) ring-1 ring-inset",
-			"text-(--text-strong-950) text-paragraph-sm",
+			"group/trigger min-w-0 shrink-0 bg-(--bg-white-0) shadow-xs ring-1 ring-(--stroke-soft-200) outline-none ring-inset",
+			"text-paragraph-sm text-(--text-strong-950)",
 			"flex items-center text-left",
 			"transition duration-200 ease-out",
 			// hover
 			"hover:bg-(--bg-weak-50) hover:ring-transparent",
 			// focus
-			"focus:shadow-button-important-focus focus:outline-none focus:ring-(--stroke-strong-950)",
+			"focus:shadow-button-important-focus focus:ring-(--stroke-strong-950) focus:outline-none",
 			"focus:text-(--text-strong-950) data-[placeholder]:focus:text-(--text-strong-950)",
 			// disabled
 			"disabled:pointer-events-none disabled:bg-(--bg-weak-50) disabled:text-(--text-disabled-300) disabled:shadow-none disabled:ring-transparent data-[placeholder]:disabled:text-(--text-disabled-300)",
@@ -65,7 +65,7 @@ export const selectVariants = tv({
 			"size-5 shrink-0 bg-[length:1.25rem] text-(--text-sub-600)",
 			// 'group-has-[&]-ml-0.5',
 			// disabled
-			"[[data-disabled]_&:not(.remixicon)]:opacity-[.48] [[data-disabled]_&]:text-(--text-disabled-300)",
+			"[[data-disabled]_&]:text-(--text-disabled-300) [[data-disabled]_&:not(.remixicon)]:opacity-[.48]",
 		],
 	},
 	variants: {
@@ -137,21 +137,21 @@ export const selectVariants = tv({
 			$size: "md",
 			$variant: "default",
 			class: {
-				triggerRoot: "h-10 min-h-10 gap-2 rounded-10 pr-2.5 pl-3",
+				triggerRoot: "rounded-10 h-10 min-h-10 gap-2 pr-2.5 pl-3",
 			},
 		},
 		{
 			$size: "sm",
 			$variant: "default",
 			class: {
-				triggerRoot: "h-9 min-h-9 gap-2 rounded-8 pr-2 pl-2.5",
+				triggerRoot: "rounded-8 h-9 min-h-9 gap-2 pr-2 pl-2.5",
 			},
 		},
 		{
 			$size: "xs",
 			$variant: "default",
 			class: {
-				triggerRoot: "h-8 min-h-8 gap-1.5 rounded-8 pr-1.5 pl-2",
+				triggerRoot: "rounded-8 h-8 min-h-8 gap-1.5 pr-1.5 pl-2",
 			},
 		},
 		//#endregion
@@ -161,7 +161,7 @@ export const selectVariants = tv({
 			$size: "md",
 			$variant: "compact",
 			class: {
-				triggerRoot: "h-10 gap-1 rounded-10 pr-2.5 pl-3",
+				triggerRoot: "rounded-10 h-10 gap-1 pr-2.5 pl-3",
 				triggerIcon: "-ml-0.5",
 				selectItemIcon: "group-has-[&]/trigger:-ml-0.5",
 			},
@@ -170,7 +170,7 @@ export const selectVariants = tv({
 			$size: "sm",
 			$variant: "compact",
 			class: {
-				triggerRoot: "h-9 gap-1 rounded-8 pr-2 pl-3",
+				triggerRoot: "rounded-8 h-9 gap-1 pr-2 pl-3",
 				triggerIcon: "-ml-0.5",
 				selectItemIcon: "group-has-[&]/trigger:-ml-0.5",
 			},
@@ -179,9 +179,9 @@ export const selectVariants = tv({
 			$size: "xs",
 			$variant: "compact",
 			class: {
-				triggerRoot: "h-8 gap-0.5 rounded-8 pr-1.5 pl-2.5",
+				triggerRoot: "rounded-8 h-8 gap-0.5 pr-1.5 pl-2.5",
 				triggerIcon: "-ml-0.5 size-4",
-				selectItemIcon: "group-has-[&]/trigger:-ml-0.5 size-4 bg-[length:1rem]",
+				selectItemIcon: "size-4 bg-[length:1rem] group-has-[&]/trigger:-ml-0.5",
 			},
 		},
 		//#endregion
@@ -322,9 +322,9 @@ function SelectContent({
 			<SelectPrimitives.Content
 				className={cn(
 					// base
-					"relative z-50 overflow-hidden rounded-16 bg-(--bg-white-0) shadow-md ring-(--stroke-soft-200) ring-1 ring-inset",
+					"rounded-16 relative z-50 overflow-hidden bg-(--bg-white-0) shadow-md ring-1 ring-(--stroke-soft-200) ring-inset",
 					// widths
-					"min-w-(--radix-select-trigger-width) max-w-[max(var(--radix-select-trigger-width),320px)]",
+					"max-w-[max(var(--radix-select-trigger-width),320px)] min-w-(--radix-select-trigger-width)",
 					// heights
 					"max-h-(--radix-select-content-available-height)",
 					// animation
@@ -353,7 +353,7 @@ function SelectContent({
 						</ScrollAreaPrimitives.Viewport>
 					</SelectPrimitives.Viewport>
 					<ScrollAreaPrimitives.Scrollbar orientation="vertical">
-						<ScrollAreaPrimitives.Thumb className="!w-1 rounded-4 bg-(--bg-soft-200)" />
+						<ScrollAreaPrimitives.Thumb className="rounded-4 !w-1 bg-(--bg-soft-200)" />
 					</ScrollAreaPrimitives.Scrollbar>
 				</ScrollAreaPrimitives.Root>
 			</SelectPrimitives.Content>
@@ -372,7 +372,7 @@ function SelectItem({
 		<SelectPrimitives.Item
 			className={cn(
 				// base
-				"group relative cursor-pointer select-none rounded-8 p-2 pr-9 text-(--text-strong-950) text-paragraph-sm",
+				"group rounded-8 text-paragraph-sm relative cursor-pointer p-2 pr-9 text-(--text-strong-950) select-none",
 				"flex items-center gap-2 transition duration-200 ease-out",
 				// disabled
 				"data-[disabled]:pointer-events-none data-[disabled]:text-(--text-disabled-300)",
@@ -401,7 +401,7 @@ function SelectItem({
 				</span>
 			</SelectPrimitives.ItemText>
 			<SelectPrimitives.ItemIndicator asChild>
-				<Tick01Icon className="-translate-y-1/2 absolute top-1/2 right-2 size-5 shrink-0 text-(--text-sub-600)" />
+				<Tick01Icon className="absolute top-1/2 right-2 size-5 shrink-0 -translate-y-1/2 text-(--text-sub-600)" />
 			</SelectPrimitives.ItemIndicator>
 		</SelectPrimitives.Item>
 	);
@@ -431,6 +431,6 @@ export {
 	SelectRoot as Root,
 	SelectSeparator as Separator,
 	SelectTrigger as Trigger,
-	TriggerIcon,
 	SelectValue as Value,
+	TriggerIcon,
 };

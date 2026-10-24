@@ -4,7 +4,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type ClassValue, type VariantProps, tv } from "@/utils/tv.ts";
+import { type ClassValue, tv, type VariantProps } from "@/utils/tv.ts";
 
 const ALERT_ROOT_NAME = "AlertRoot";
 const ALERT_ICON_NAME = "AlertIcon";
@@ -35,7 +35,7 @@ export const alertVariants = tv({
 				closeIcon: "text-(--text-strong-950) opacity-40",
 			},
 			stroke: {
-				root: "bg-(--bg-white-0) text-(--text-strong-950) shadow-md ring-(--stroke-soft-200) ring-1 ring-inset",
+				root: "bg-(--bg-white-0) text-(--text-strong-950) shadow-md ring-1 ring-(--stroke-soft-200) ring-inset",
 				closeIcon: "text-(--text-strong-950) opacity-40",
 			},
 		},
@@ -48,19 +48,19 @@ export const alertVariants = tv({
 		},
 		$size: {
 			xs: {
-				root: "rounded-8 p-2 text-paragraph-xs",
+				root: "rounded-8 text-paragraph-xs p-2",
 				wrapper: "gap-2",
 				icon: "size-4",
 				closeIcon: "size-4",
 			},
 			sm: {
-				root: "rounded-8 px-2.5 py-2 text-paragraph-sm",
+				root: "rounded-8 text-paragraph-sm px-2.5 py-2",
 				wrapper: "gap-2",
 				icon: "size-5",
 				closeIcon: "size-5",
 			},
 			lg: {
-				root: "rounded-16 p-3.5 pb-4 text-paragraph-sm",
+				root: "rounded-16 text-paragraph-sm p-3.5 pb-4",
 				wrapper: "items-start gap-3",
 				icon: "size-5",
 				closeIcon: "size-5",

@@ -1,8 +1,8 @@
+import type React from "react";
+import { useState } from "react";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/cn";
-import type React from "react";
-import { useState } from "react";
 
 interface WaterIntakeFormProps {
 	onAddWater: (amount: number) => void;
@@ -39,10 +39,10 @@ export function WaterIntakeForm({ onAddWater }: WaterIntakeFormProps) {
 			className="space-y-5"
 		>
 			<div>
-				<h3 className="font-semibold text-(--text-strong-950) text-label-md">
+				<h3 className="text-label-md font-semibold text-(--text-strong-950)">
 					Manual Entry
 				</h3>
-				<p className="mt-1 text-(--text-sub-600) text-paragraph-xs">
+				<p className="text-paragraph-xs mt-1 text-(--text-sub-600)">
 					Log water intake not tracked by your bottles
 				</p>
 			</div>
@@ -72,7 +72,7 @@ export function WaterIntakeForm({ onAddWater }: WaterIntakeFormProps) {
 						className="w-full bg-transparent text-center font-semibold text-(--text-strong-950) focus:outline-none"
 						style={{ fontSize: "2.5rem", lineHeight: 1 }}
 					/>
-					<span className="text-(--text-soft-400) text-paragraph-sm">
+					<span className="text-paragraph-sm text-(--text-soft-400)">
 						milliliters
 					</span>
 				</div>
@@ -99,7 +99,7 @@ export function WaterIntakeForm({ onAddWater }: WaterIntakeFormProps) {
 						type="button"
 						onClick={() => setAmount(preset)}
 						className={cn(
-							"rounded-full px-3 py-1.5 text-paragraph-xs transition-all duration-150",
+							"text-paragraph-xs rounded-full px-3 py-1.5 transition-all duration-150",
 							amount === preset
 								? "bg-(--color-blue-500) font-medium text-white"
 								: "bg-(--bg-weak-50) text-(--text-sub-600) hover:bg-(--bg-soft-200)",

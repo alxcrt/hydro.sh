@@ -1,10 +1,13 @@
 {
 	"name": "hydro.sh",
 	"private": true,
-	"workspaces": ["apps/*", "packages/*"],
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
 	"scripts": {
 		"dev": "turbo dev",
-		"start": "bun --print process.env && turbo start",
+		"start": "node scripts/start.mjs",
 		"build": "turbo build",
 		"typecheck": "turbo typecheck",
 		"dev:native": "turbo -F native dev",
@@ -24,18 +27,23 @@
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-			"biome check --write ."
+			"biome check --write"
 		]
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.6.2",
 		"husky": "^9.1.7",
-		"turbo": "^2.5.4"
+		"turbo": "^2.11.10"
 	},
-	"packageManager": "bun@1.2.15",
-	"trustedDependencies": ["@biomejs/biome"],
+	"packageManager": "bun@1.4.3",
+	"trustedDependencies": [
+		"@biomejs/biome"
+	],
 	"engines": {
 		"node": ">=22.14.0",
 		"bun": ">=1.2.13"
+	},
+	"overrides": {
+		"esbuild": "^0.28.2"
 	}
 }

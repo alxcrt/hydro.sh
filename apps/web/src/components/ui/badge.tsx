@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const BADGE_ROOT_NAME = "BadgeRoot";
 const BADGE_ICON_NAME = "BadgeIcon";
@@ -24,12 +24,12 @@ export const badgeVariants = tv({
 	variants: {
 		$size: {
 			sm: {
-				root: "h-4 gap-1.5 px-2 text-subheading-2xs uppercase has-[>.dot]:gap-2",
+				root: "text-subheading-2xs h-4 gap-1.5 px-2 uppercase has-[>.dot]:gap-2",
 				icon: "-mx-1 size-3",
 				dot: "-mx-2 size-4",
 			},
 			md: {
-				root: "h-5 gap-1.5 px-2 text-label-xs",
+				root: "text-label-xs h-5 gap-1.5 px-2",
 				icon: "-mx-1 size-4",
 				dot: "-mx-1.5 size-4",
 			},
@@ -423,7 +423,7 @@ export const badgeVariants = tv({
 			],
 			class: {
 				root: [
-					"ring-1 ring-stroke-soft-200 ring-inset",
+					"ring-stroke-soft-200 ring-1 ring-inset",
 					"bg-transparent text-(--text-disabled-300)",
 				],
 			},

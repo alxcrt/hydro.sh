@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const COMPACT_BUTTON_ROOT_NAME = "CompactButtonRoot";
 const COMPACT_BUTTON_ICON_NAME = "CompactButtonIcon";

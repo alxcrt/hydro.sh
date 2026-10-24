@@ -15,7 +15,7 @@ export function SettingsModal() {
 				<DialogPrimitives.Overlay
 					className={cn(
 						// base
-						"fixed inset-0 z-50 overflow-hidden bg-overlay",
+						"bg-overlay fixed inset-0 z-50 overflow-hidden",
 						"grid size-full flex-col items-center overflow-y-auto p-4 sm:p-6",
 						// animation
 						"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=open]:animate-in",
@@ -24,7 +24,7 @@ export function SettingsModal() {
 					<DialogPrimitives.Content
 						className={cn(
 							// base
-							"relative mx-auto flex h-max min-h-[680px] w-full min-w-0 max-w-[980px] rounded-24 bg-(--bg-white-0) shadow-md",
+							"rounded-24 relative mx-auto flex h-max min-h-[680px] w-full max-w-[980px] min-w-0 bg-(--bg-white-0) shadow-md",
 							// animation
 							"data-[state=open]:animate-in data-[state=open]:duration-200 data-[state=open]:ease-out",
 							"data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=closed]:ease-in",

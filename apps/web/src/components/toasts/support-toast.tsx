@@ -10,14 +10,14 @@ export function SupportToast({
 	onSupport: () => void;
 }) {
 	return (
-		<div className="w-[360px] rounded-8 bg-(--bg-white-0) px-3.5 py-3 shadow-md ring-(--stroke-soft-200) ring-1 ring-inset">
+		<div className="rounded-8 w-[360px] bg-(--bg-white-0) px-3.5 py-3 shadow-md ring-1 ring-(--stroke-soft-200) ring-inset">
 			<div className="flex items-start gap-3">
 				<div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[10px] leading-none">
 					💧
 				</div>
 
 				<div className="min-w-0 flex-1 space-y-1.5">
-					<p className="text-(--text-strong-950) text-paragraph-sm">
+					<p className="text-paragraph-sm text-(--text-strong-950)">
 						Hydro.sh is a solo project.{" "}
 						<button
 							type="button"
@@ -31,7 +31,7 @@ export function SupportToast({
 						</button>{" "}
 						if you find it useful.
 					</p>
-					<p className="text-(--text-soft-400) text-paragraph-xs">
+					<p className="text-paragraph-xs text-(--text-soft-400)">
 						<a
 							href="https://github.com/alxcrt/hydro.sh"
 							target="_blank"

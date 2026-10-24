@@ -3,7 +3,7 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const SOCIAL_BUTTON_ROOT_NAME = "SocialButtonRoot";
 const SOCIAL_BUTTON_ICON_NAME = "SocialButtonIcon";
@@ -12,14 +12,14 @@ export const socialButtonVariants = tv({
 	slots: {
 		root: [
 			// base
-			"group relative inline-flex h-10 items-center justify-center gap-3.5 whitespace-nowrap rounded-10 px-4 text-label-sm outline-none",
+			"group rounded-10 text-label-sm relative inline-flex h-10 items-center justify-center gap-3.5 px-4 whitespace-nowrap outline-none",
 			"transition duration-200 ease-out",
 			// focus
 			"focus:outline-none",
 			// disabled
 			"disabled:pointer-events-none disabled:bg-(--bg-weak-50) disabled:text-(--text-disabled-300) disabled:ring-transparent",
 		],
-		icon: "-mx-1.5 relative z-10 size-5 shrink-0 group-disabled:opacity-50",
+		icon: "relative z-10 -mx-1.5 size-5 shrink-0 group-disabled:opacity-50",
 	},
 	variants: {
 		$brand: {
@@ -37,7 +37,7 @@ export const socialButtonVariants = tv({
 					// base
 					"text-white",
 					// before
-					"before:pointer-events-none before:absolute before:inset-0 before:rounded-10 before:opacity-0 before:transition before:duration-200 before:ease-out",
+					"before:rounded-10 before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition before:duration-200 before:ease-out",
 					// hover
 					"hover:before:opacity-100",
 					// focus
@@ -47,7 +47,7 @@ export const socialButtonVariants = tv({
 			stroke: {
 				root: [
 					// base
-					"bg-(--bg-white-0) text-(--text-strong-950) shadow-xs ring-(--stroke-soft-200) ring-1 ring-inset",
+					"bg-(--bg-white-0) text-(--text-strong-950) shadow-xs ring-1 ring-(--stroke-soft-200) ring-inset",
 					// hover
 					"hover:bg-(--bg-weak-50) hover:shadow-none hover:ring-transparent",
 					// focus

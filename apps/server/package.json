@@ -15,25 +15,25 @@
 	},
 	"dependencies": {
 		"@hydro.sh/schemas": "workspace:*",
-		"@orpc/client": "^1.4.4",
-		"@orpc/server": "^1.4.4",
+		"@orpc/client": "^1.16.1",
+		"@orpc/server": "^1.16.1",
 		"@resvg/resvg-js": "^2.6.2",
-		"@t3-oss/env-core": "^0.13.6",
-		"better-auth": "^1.2.8",
-		"dotenv": "^16.5.0",
-		"drizzle-orm": "^0.38.4",
-		"hono": "^4.7.11",
-		"pg": "^8.16.0",
-		"resend": "^4.5.2",
-		"satori": "^0.19.1",
-		"stripe": "^20.3.1",
-		"zod": "^3.25.56"
+		"@t3-oss/env-core": "^0.13.11",
+		"better-auth": "^1.7.12",
+		"dotenv": "^18.0.9",
+		"drizzle-orm": "^0.45.4",
+		"hono": "^4.13.13",
+		"pg": "^8.23.1",
+		"resend": "^6.34.1",
+		"satori": "^0.63.2",
+		"stripe": "^23.0.1",
+		"zod": "^4.6.7"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.2.15",
-		"@types/pg": "^8.15.4",
-		"drizzle-kit": "^0.31.1",
-		"tsc-alias": "^1.8.16",
-		"typescript": "^5.8.3"
+		"@types/bun": "^1.4.4",
+		"@types/pg": "^8.23.1",
+		"drizzle-kit": "^0.31.11",
+		"tsc-alias": "^1.9.9",
+		"typescript": "^6"
 	}
 }

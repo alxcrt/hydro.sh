@@ -26,7 +26,7 @@ function DropdownMenuContent({
 		<DropdownMenuPrimitive.Portal>
 			<DropdownMenuPrimitive.Content
 				className={cn(
-					"z-50 w-[300px] overflow-hidden rounded-16 bg-(--bg-white-0) p-2 shadow-md ring-(--stroke-soft-200) ring-1 ring-inset",
+					"rounded-16 z-50 w-[300px] overflow-hidden bg-(--bg-white-0) p-2 shadow-md ring-1 ring-(--stroke-soft-200) ring-inset",
 					"flex flex-col gap-1",
 					// origin
 					"data-[side=bottom]:origin-top data-[side=left]:origin-right data-[side=right]:origin-left data-[side=top]:origin-bottom",
@@ -55,7 +55,7 @@ function DropdownMenuItem({
 		<DropdownMenuPrimitive.Item
 			className={cn(
 				// base
-				"group/item relative cursor-pointer select-none rounded-8 p-2 text-(--text-strong-950) text-paragraph-sm outline-none",
+				"group/item rounded-8 text-paragraph-sm relative cursor-pointer p-2 text-(--text-strong-950) outline-none select-none",
 				"flex items-center gap-2",
 				"transition duration-200 ease-out",
 				// hover
@@ -112,7 +112,7 @@ function DropdownMenuLabel({
 	return (
 		<DropdownMenuPrimitive.Label
 			className={cn(
-				"px-2 py-1 text-(--text-soft-400) text-subheading-xs uppercase",
+				"text-subheading-xs px-2 py-1 text-(--text-soft-400) uppercase",
 				className,
 			)}
 			{...rest}
@@ -134,7 +134,7 @@ function DropdownMenuSubTrigger({
 		<DropdownMenuPrimitive.SubTrigger
 			className={cn(
 				// base
-				"group/item relative cursor-pointer select-none rounded-8 p-2 text-(--text-strong-950) text-paragraph-sm outline-0",
+				"group/item rounded-8 text-paragraph-sm relative cursor-pointer p-2 text-(--text-strong-950) outline-0 select-none",
 				"flex items-center gap-2",
 				"transition duration-200 ease-out",
 				// hover
@@ -160,7 +160,7 @@ function DropdownMenuSubContent({
 	return (
 		<DropdownMenuPrimitive.SubContent
 			className={cn(
-				"z-50 w-max overflow-hidden rounded-16 bg-(--bg-white-0) p-2 shadow-md ring-(--stroke-soft-200) ring-1 ring-inset",
+				"rounded-16 z-50 w-max overflow-hidden bg-(--bg-white-0) p-2 shadow-md ring-1 ring-(--stroke-soft-200) ring-inset",
 				"flex flex-col gap-1",
 				// animation
 				"data-[state=open]:fade-in-0 data-[state=open]:animate-in",
@@ -175,20 +175,20 @@ function DropdownMenuSubContent({
 }
 
 export {
+	DropdownItemIcon as ItemIcon,
+	DropdownMenu as Root,
 	DropdownMenuArrow as Arrow,
 	DropdownMenuCheckboxItem as CheckboxItem,
 	DropdownMenuContent as Content,
 	DropdownMenuGroup as Group,
 	DropdownMenuItem as Item,
-	DropdownItemIcon as ItemIcon,
 	DropdownMenuLabel as Label,
-	DropdownMenuSub as MenuSub,
-	DropdownMenuSubContent as MenuSubContent,
-	DropdownMenuSubTrigger as MenuSubTrigger,
 	DropdownMenuPortal as Portal,
 	DropdownMenuRadioGroup as RadioGroup,
 	DropdownMenuRadioItem as RadioItem,
-	DropdownMenu as Root,
 	DropdownMenuSeparator as Separator,
+	DropdownMenuSub as MenuSub,
+	DropdownMenuSubContent as MenuSubContent,
+	DropdownMenuSubTrigger as MenuSubTrigger,
 	DropdownMenuTrigger as Trigger,
 };

@@ -90,9 +90,9 @@ export function SidebarHeader({ collapsed }: { collapsed?: boolean }) {
 				"lg:px-2": collapsed,
 			})}
 		>
-			<div className="flex w-full items-center gap-3 whitespace-nowrap p-3 text-left outline-none focus:outline-none">
+			<div className="flex w-full items-center gap-3 p-3 text-left whitespace-nowrap outline-none focus:outline-none">
 				<Link to="/" className="flex items-center gap-2">
-					<Logo className="h-10 w-auto text-primary" />
+					<Logo className="text-primary h-10 w-auto" />
 					<span className="font-semibold" data-hide-collapsed>
 						Hydro.sh
 					</span>
@@ -109,7 +109,7 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
 		<div className="space-y-2">
 			<div
 				className={cn(
-					"p-1 text-(--text-soft-400) text-subheading-xs uppercase",
+					"text-subheading-xs p-1 text-(--text-soft-400) uppercase",
 					{
 						"-mx-2.5 w-14 px-0 text-center": collapsed,
 					},
@@ -125,7 +125,7 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
 						aria-current={pathname === to ? "page" : undefined}
 						aria-disabled={disabled}
 						className={cn(
-							"group relative flex items-center gap-2 whitespace-nowrap rounded-8 py-2 text-(--text-sub-600) hover:bg-(--bg-weak-50)",
+							"group rounded-8 relative flex items-center gap-2 py-2 whitespace-nowrap text-(--text-sub-600) hover:bg-(--bg-weak-50)",
 							"transition duration-200 ease-out",
 							"aria-[current=page]:bg-(--bg-weak-50)",
 							"aria-disabled:pointer-events-none aria-disabled:opacity-50",
@@ -137,7 +137,7 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
 					>
 						<div
 							className={cn(
-								"-translate-y-1/2 absolute top-1/2 h-5 w-1 origin-left rounded-r-full bg-primary transition duration-200 ease-out",
+								"bg-primary absolute top-1/2 h-5 w-1 origin-left -translate-y-1/2 rounded-r-full transition duration-200 ease-out",
 								{
 									"-left-[22px]": collapsed,
 									"-left-5": !collapsed,
@@ -157,7 +157,7 @@ function NavigationMenu({ collapsed }: { collapsed: boolean }) {
 							className="flex w-[180px] shrink-0 items-center gap-2"
 							data-hide-collapsed
 						>
-							<div className="flex-1 text-label-sm">{label}</div>
+							<div className="text-label-sm flex-1">{label}</div>
 							{pathname === to && (
 								<ArrowRight01Icon className="size-5 text-(--text-sub-600)" />
 							)}
@@ -204,7 +204,7 @@ function GitHubLink({ collapsed }: { collapsed: boolean }) {
 			target="_blank"
 			rel="noopener noreferrer"
 			className={cn(
-				"group flex items-center gap-2 whitespace-nowrap rounded-8 py-2 text-(--text-soft-400) hover:bg-(--bg-weak-50) hover:text-(--text-sub-600)",
+				"group rounded-8 flex items-center gap-2 py-2 whitespace-nowrap text-(--text-soft-400) hover:bg-(--bg-weak-50) hover:text-(--text-sub-600)",
 				"transition duration-200 ease-out",
 				{
 					"w-9 justify-center px-2": collapsed,
@@ -237,7 +237,7 @@ function DonateLink({ collapsed }: { collapsed: boolean }) {
 				type="button"
 				onClick={() => setDonateOpen(true)}
 				className={cn(
-					"group flex items-center gap-2 whitespace-nowrap rounded-8 py-2 text-(--text-soft-400) hover:bg-pink-50 hover:text-pink-600",
+					"group rounded-8 flex items-center gap-2 py-2 whitespace-nowrap text-(--text-soft-400) hover:bg-pink-50 hover:text-pink-600",
 					"transition duration-200 ease-out",
 					{
 						"w-9 justify-center px-2": collapsed,
@@ -265,7 +265,7 @@ export default function Sidebar({
 		<>
 			<div
 				className={cn(
-					"fixed top-0 left-0 z-40 hidden h-full overflow-hidden border-(--stroke-soft-200) border-r bg-(--bg-white-0) transition-all-default duration-300 lg:block",
+					"transition-all-default fixed top-0 left-0 z-40 hidden h-full overflow-hidden border-r border-(--stroke-soft-200) bg-(--bg-white-0) duration-300 lg:block",
 					{
 						"w-20": collapsed,
 						"w-[272px]": !collapsed,

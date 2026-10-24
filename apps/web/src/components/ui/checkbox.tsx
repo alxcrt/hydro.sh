@@ -153,7 +153,7 @@ function Checkbox({ className, checked, ...rest }: CheckboxProps) {
 			>
 				<IconCheck
 					className={cn(
-						"-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 shrink-0",
+						"absolute top-1/2 left-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2",
 						// checked
 						"group-data-[state=checked]/checkbox:opacity-100",
 						"group-data-[state=checked]/checkbox:[&>path]:[stroke-dashoffset:0]",
@@ -167,7 +167,7 @@ function Checkbox({ className, checked, ...rest }: CheckboxProps) {
 				/>
 				<IconIndeterminate
 					className={cn(
-						"-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 shrink-0",
+						"absolute top-1/2 left-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2",
 						// indeterminate
 						"group-data-[state=indeterminate]/checkbox:opacity-100",
 						"group-data-[state=indeterminate]/checkbox:[&>path]:[stroke-dashoffset:0]",

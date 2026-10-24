@@ -1,12 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import { createFileRoute } from "@tanstack/react-router";
-import * as React from "react";
-
 import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
+import { useQuery } from "@tanstack/react-query";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { useORPC } from "@/hooks/use-orpc";
 import { cn } from "@/utils/cn";
-import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/_home/")({
 	component: RouteComponent,
@@ -85,7 +82,7 @@ function RouteComponent() {
 				<div className="absolute inset-0 opacity-10">
 					<div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-white blur-3xl" />
 					<div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-white blur-3xl" />
-					<div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-white opacity-50 blur-3xl" />
+					<div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-50 blur-3xl" />
 				</div>
 
 				{/* Grid pattern overlay */}
@@ -103,14 +100,14 @@ function RouteComponent() {
 				<div className="relative z-10">
 					<div className="flex items-center gap-3">
 						<img src="/logo.png" alt="Hydro" className="h-10 w-10" />
-						<span className="font-bold text-2xl text-white">hydro.sh</span>
+						<span className="text-2xl font-bold text-white">hydro.sh</span>
 					</div>
 				</div>
 
 				{/* Main content */}
 				<div className="relative z-10 space-y-8">
 					<div className="space-y-4">
-						<div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-label-xs text-white backdrop-blur-sm">
+						<div className="text-label-xs inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-white backdrop-blur-sm">
 							<span className="relative flex h-1.5 w-1.5">
 								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
 								<span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
@@ -118,13 +115,13 @@ function RouteComponent() {
 							No app required - works in your browser
 						</div>
 
-						<h1 className="font-bold text-4xl text-white leading-tight xl:text-5xl">
+						<h1 className="text-4xl leading-tight font-bold text-white xl:text-5xl">
 							Track your hydration,
 							<br />
 							<span className="text-cyan-200">effortlessly.</span>
 						</h1>
 
-						<p className="max-w-md text-blue-100 text-lg leading-relaxed">
+						<p className="max-w-md text-lg leading-relaxed text-blue-100">
 							Connect your smart water bottle and automatically track every sip.
 							Set daily goals, view your progress, and build healthier hydration
 							habits.
@@ -138,14 +135,14 @@ function RouteComponent() {
 								key={feature.title}
 								className="flex items-start gap-3 text-white"
 							>
-								<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-10 bg-white/15 backdrop-blur-sm">
+								<div className="rounded-10 flex h-8 w-8 shrink-0 items-center justify-center bg-white/15 backdrop-blur-sm">
 									{feature.icon}
 								</div>
 								<div className="pt-0.5">
-									<div className="font-medium text-label-sm">
+									<div className="text-label-sm font-medium">
 										{feature.title}
 									</div>
-									<div className="text-blue-100/80 text-paragraph-xs">
+									<div className="text-paragraph-xs text-blue-100/80">
 										{feature.description}
 									</div>
 								</div>
@@ -155,7 +152,7 @@ function RouteComponent() {
 				</div>
 
 				{/* Footer */}
-				<div className="relative z-10 flex items-center gap-3 text-blue-200 text-paragraph-sm">
+				<div className="text-paragraph-sm relative z-10 flex items-center gap-3 text-blue-200">
 					<div
 						className={cn(
 							"size-2 rounded-full transition-colors",
@@ -180,12 +177,12 @@ function RouteComponent() {
 					{/* Mobile logo */}
 					<div className="mb-8 flex items-center justify-center gap-3 lg:hidden">
 						<img src="/logo.png" alt="Hydro" className="h-10 w-10" />
-						<span className="font-bold text-2xl text-gray-900">hydro.sh</span>
+						<span className="text-2xl font-bold text-gray-900">hydro.sh</span>
 					</div>
 
 					{/* Mobile badge */}
 					<div className="mb-6 flex justify-center lg:hidden">
-						<div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 text-label-xs">
+						<div className="text-label-xs inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700">
 							<span className="relative flex h-1.5 w-1.5">
 								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
 								<span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-500" />
@@ -198,10 +195,10 @@ function RouteComponent() {
 						<h2 className="text-label-xl text-neutral-950 lg:hidden">
 							Track your hydration, effortlessly
 						</h2>
-						<h2 className="hidden text-label-xl text-neutral-950 lg:block">
+						<h2 className="text-label-xl hidden text-neutral-950 lg:block">
 							Ready to get started?
 						</h2>
-						<p className="mt-2 text-neutral-500 text-paragraph-sm">
+						<p className="text-paragraph-sm mt-2 text-neutral-500">
 							Join thousands of users building healthier hydration habits with
 							their smart water bottle.
 						</p>
@@ -233,10 +230,10 @@ function RouteComponent() {
 
 					<div className="relative my-6 lg:hidden">
 						<div className="absolute inset-0 flex items-center">
-							<div className="w-full border-neutral-200 border-t" />
+							<div className="w-full border-t border-neutral-200" />
 						</div>
 						<div className="relative flex justify-center">
-							<span className="bg-gray-50 px-3 text-neutral-400 text-paragraph-xs">
+							<span className="text-paragraph-xs bg-gray-50 px-3 text-neutral-400">
 								or
 							</span>
 						</div>
@@ -249,7 +246,7 @@ function RouteComponent() {
 								.getElementById("features")
 								?.scrollIntoView({ behavior: "smooth" });
 						}}
-						className="group flex w-full items-center justify-center gap-2 rounded-10 border border-neutral-200 bg-white px-4 py-2.5 text-label-sm text-neutral-700 transition-all hover:border-neutral-300 hover:bg-neutral-50 lg:hidden"
+						className="group rounded-10 text-label-sm flex w-full items-center justify-center gap-2 border border-neutral-200 bg-white px-4 py-2.5 text-neutral-700 transition-all hover:border-neutral-300 hover:bg-neutral-50 lg:hidden"
 					>
 						<svg
 							aria-hidden="true"
@@ -273,16 +270,16 @@ function RouteComponent() {
 						{features.map((feature) => (
 							<div
 								key={feature.title}
-								className="flex items-start gap-3 rounded-12 border border-neutral-200 bg-white p-3"
+								className="rounded-12 flex items-start gap-3 border border-neutral-200 bg-white p-3"
 							>
-								<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-8 bg-blue-50 text-blue-600">
+								<div className="rounded-8 flex h-8 w-8 shrink-0 items-center justify-center bg-blue-50 text-blue-600">
 									{feature.icon}
 								</div>
 								<div>
 									<div className="text-label-sm text-neutral-900">
 										{feature.title}
 									</div>
-									<div className="text-neutral-500 text-paragraph-xs">
+									<div className="text-paragraph-xs text-neutral-500">
 										{feature.description}
 									</div>
 								</div>
@@ -291,7 +288,7 @@ function RouteComponent() {
 					</div>
 
 					{/* Mobile status */}
-					<div className="mt-6 flex items-center justify-center gap-2 text-neutral-500 text-paragraph-xs lg:hidden">
+					<div className="text-paragraph-xs mt-6 flex items-center justify-center gap-2 text-neutral-500 lg:hidden">
 						<div
 							className={cn(
 								"size-1.5 rounded-full transition-colors",
@@ -309,7 +306,7 @@ function RouteComponent() {
 								: "All Systems Online"}
 					</div>
 
-					<p className="mt-6 text-center text-neutral-400 text-paragraph-xs">
+					<p className="text-paragraph-xs mt-6 text-center text-neutral-400">
 						No credit card required. Free forever for personal use.
 					</p>
 				</div>

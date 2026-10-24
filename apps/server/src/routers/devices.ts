@@ -1,15 +1,14 @@
-import { ORPCError } from "@orpc/server";
-import { eq } from "drizzle-orm";
-
-import { db } from "@/db";
-import * as schema from "@/db/schema";
-import { protectedProcedure } from "@/lib/orpc";
 import {
 	CreateDeviceSchema,
 	DeleteDeviceSchema,
 	UpdateDeviceSchema,
 } from "@hydro.sh/schemas/devices";
+import { ORPCError } from "@orpc/server";
+import { eq } from "drizzle-orm";
 import z from "zod";
+import { db } from "@/db";
+import * as schema from "@/db/schema";
+import { protectedProcedure } from "@/lib/orpc";
 
 export const devicesRouter = {
 	list: protectedProcedure.handler(async ({ context }) => {

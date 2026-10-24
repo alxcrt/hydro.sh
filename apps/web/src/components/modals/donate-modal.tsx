@@ -1,11 +1,9 @@
 import FavouriteIcon from "virtual:icons/hugeicons/favourite";
 import Loading03Icon from "virtual:icons/hugeicons/loading-03";
-
+import { useMutation } from "@tanstack/react-query";
 import * as React from "react";
-
 import { useORPC } from "@/hooks/use-orpc.ts";
 import { cn } from "@/utils/cn.ts";
-import { useMutation } from "@tanstack/react-query";
 import { Button } from "../ui/button.tsx";
 import * as Modal from "../ui/modal.tsx";
 
@@ -85,7 +83,7 @@ export function DonateModal({
 				<Modal.Body className="space-y-5">
 					{/* Preset Amounts */}
 					<div>
-						<p className="mb-2 text-(--text-sub-600) text-paragraph-xs">
+						<p className="text-paragraph-xs mb-2 text-(--text-sub-600)">
 							Choose an amount
 						</p>
 						<div className="grid grid-cols-4 gap-2">
@@ -95,7 +93,7 @@ export function DonateModal({
 									type="button"
 									onClick={() => handlePresetClick(value)}
 									className={cn(
-										"flex items-center justify-center rounded-10 border py-2.5 font-medium text-label-sm",
+										"rounded-10 text-label-sm flex items-center justify-center border py-2.5 font-medium",
 										"transition-all duration-200 ease-out",
 										"hover:shadow-sm",
 										selectedAmount === value && !customAmount
@@ -113,12 +111,12 @@ export function DonateModal({
 					<div>
 						<label
 							htmlFor="custom-amount"
-							className="mb-2 block text-(--text-sub-600) text-paragraph-xs"
+							className="text-paragraph-xs mb-2 block text-(--text-sub-600)"
 						>
 							Or enter a custom amount
 						</label>
 						<div className="relative">
-							<span className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 text-(--text-soft-400) text-paragraph-sm">
+							<span className="text-paragraph-sm pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-(--text-soft-400)">
 								$
 							</span>
 							<input
@@ -129,12 +127,12 @@ export function DonateModal({
 								value={customAmount}
 								onChange={handleCustomAmountChange}
 								className={cn(
-									"w-full rounded-12 bg-(--bg-white-0) py-2.5 pr-3 pl-7 text-(--text-strong-950) text-paragraph-sm shadow-xs",
-									"ring-(--stroke-soft-200) ring-1 ring-inset",
+									"rounded-12 text-paragraph-sm w-full bg-(--bg-white-0) py-2.5 pr-3 pl-7 text-(--text-strong-950) shadow-xs",
+									"ring-1 ring-(--stroke-soft-200) ring-inset",
 									"transition duration-200 ease-out",
 									"placeholder:text-(--text-soft-400)",
 									"hover:[&:not(:focus)]:bg-(--bg-weak-50) hover:[&:not(:focus)]:ring-transparent",
-									"focus:shadow-button-important-focus focus:outline-none focus:ring-(--stroke-strong-950)",
+									"focus:shadow-button-important-focus focus:ring-(--stroke-strong-950) focus:outline-none",
 								)}
 							/>
 						</div>
@@ -151,7 +149,7 @@ export function DonateModal({
 					<div>
 						<label
 							htmlFor="donate-message"
-							className="mb-2 block text-(--text-sub-600) text-paragraph-xs"
+							className="text-paragraph-xs mb-2 block text-(--text-sub-600)"
 						>
 							Leave a message{" "}
 							<span className="text-(--text-soft-400)">(optional)</span>
@@ -164,12 +162,12 @@ export function DonateModal({
 							rows={2}
 							maxLength={200}
 							className={cn(
-								"block w-full resize-none rounded-12 bg-(--bg-white-0) px-3 py-2.5 text-(--text-strong-950) text-paragraph-sm shadow-xs",
-								"ring-(--stroke-soft-200) ring-1 ring-inset",
+								"rounded-12 text-paragraph-sm block w-full resize-none bg-(--bg-white-0) px-3 py-2.5 text-(--text-strong-950) shadow-xs",
+								"ring-1 ring-(--stroke-soft-200) ring-inset",
 								"transition duration-200 ease-out",
 								"placeholder:text-(--text-soft-400)",
 								"hover:[&:not(:focus)]:bg-(--bg-weak-50) hover:[&:not(:focus)]:ring-transparent",
-								"focus:shadow-button-important-focus focus:outline-none focus:ring-(--stroke-strong-950)",
+								"focus:shadow-button-important-focus focus:ring-(--stroke-strong-950) focus:outline-none",
 							)}
 						/>
 					</div>
@@ -177,7 +175,7 @@ export function DonateModal({
 
 				<Modal.Footer className="flex-col gap-3 sm:flex-row">
 					{createCheckout.isError && (
-						<p className="w-full text-center text-paragraph-xs text-red-500">
+						<p className="text-paragraph-xs w-full text-center text-red-500">
 							Something went wrong. Please try again.
 						</p>
 					)}
@@ -218,7 +216,7 @@ export function DonateModal({
 					</Button>
 				</Modal.Footer>
 
-				<div className="flex items-center justify-center gap-3 pb-4 text-(--text-soft-400) text-paragraph-xs">
+				<div className="text-paragraph-xs flex items-center justify-center gap-3 pb-4 text-(--text-soft-400)">
 					<span>Payments processed by Stripe</span>
 					<span>·</span>
 					<a

@@ -1,7 +1,7 @@
 import { Slot } from "radix-ui";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const BUTTON_ROOT_NAME = "ButtonRoot";
 const BUTTON_ICON_NAME = "ButtonIcon";
@@ -46,19 +46,19 @@ export const buttonVariants = tv({
 				icon: "-mx-1",
 			},
 			xxs: {
-				root: "h-7 gap-2.5 rounded-8 px-2 text-label-sm",
+				root: "rounded-8 text-label-sm h-7 gap-2.5 px-2",
 				icon: "-mx-1",
 			},
 			xs: {
-				root: "h-8 gap-2.5 rounded-8 px-2.5 text-label-sm",
+				root: "rounded-8 text-label-sm h-8 gap-2.5 px-2.5",
 				icon: "-mx-1",
 			},
 			sm: {
-				root: "h-9 gap-3 rounded-8 px-3 text-label-sm",
+				root: "rounded-8 text-label-sm h-9 gap-3 px-3",
 				icon: "-mx-1",
 			},
 			md: {
-				root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
+				root: "rounded-10 text-label-sm h-10 gap-3 px-3.5",
 				icon: "-mx-1",
 			},
 		},
@@ -85,7 +85,7 @@ export const buttonVariants = tv({
 			class: {
 				root: [
 					// base
-					"bg-(--bg-white-0) text-primary ring-primary",
+					"text-primary ring-primary bg-(--bg-white-0)",
 					// hover
 					"hover:bg-primary-lightest hover:ring-transparent",
 					// focus
@@ -101,9 +101,9 @@ export const buttonVariants = tv({
 					// base
 					"bg-primary-lightest text-primary ring-transparent",
 					// hover
-					"hover:bg-(--bg-white-0) hover:ring-primary",
+					"hover:ring-primary hover:bg-(--bg-white-0)",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:shadow-button-primary-focus focus-visible:ring-primary",
+					"focus-visible:shadow-button-primary-focus focus-visible:ring-primary focus-visible:bg-(--bg-white-0)",
 				],
 			},
 		},
@@ -113,11 +113,11 @@ export const buttonVariants = tv({
 			class: {
 				root: [
 					// base
-					"bg-transparent text-primary ring-transparent",
+					"text-primary bg-transparent ring-transparent",
 					// hover
 					"hover:bg-primary-lightest",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:shadow-button-primary-focus focus-visible:ring-primary",
+					"focus-visible:shadow-button-primary-focus focus-visible:ring-primary focus-visible:bg-(--bg-white-0)",
 				],
 			},
 		},
@@ -144,11 +144,11 @@ export const buttonVariants = tv({
 			class: {
 				root: [
 					// base
-					"bg-(--bg-white-0) text-(--text-sub-600) shadow-regular-xs ring-(--stroke-soft-200)",
+					"shadow-regular-xs bg-(--bg-white-0) text-(--text-sub-600) ring-(--stroke-soft-200)",
 					// hover
 					"hover:bg-(--bg-weak-50) hover:text-(--text-strong-950) hover:shadow-none hover:ring-transparent",
 					// focus
-					"focus-visible:text-(--text-strong-950) focus-visible:shadow-button-important-focus focus-visible:ring-(--stroke-strong-950)",
+					"focus-visible:shadow-button-important-focus focus-visible:text-(--text-strong-950) focus-visible:ring-(--stroke-strong-950)",
 				],
 			},
 		},
@@ -160,9 +160,9 @@ export const buttonVariants = tv({
 					// base
 					"bg-(--bg-weak-50) text-(--text-sub-600) ring-transparent",
 					// hover
-					"hover:bg-(--bg-white-0) hover:text-(--text-strong-950) hover:shadow-regular-xs hover:ring-(--stroke-soft-200)",
+					"hover:shadow-regular-xs hover:bg-(--bg-white-0) hover:text-(--text-strong-950) hover:ring-(--stroke-soft-200)",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:text-(--text-strong-950) focus-visible:shadow-button-important-focus focus-visible:ring-(--stroke-strong-950)",
+					"focus-visible:shadow-button-important-focus focus-visible:bg-(--bg-white-0) focus-visible:text-(--text-strong-950) focus-visible:ring-(--stroke-strong-950)",
 				],
 			},
 		},
@@ -176,7 +176,7 @@ export const buttonVariants = tv({
 					// hover
 					"hover:bg-(--bg-weak-50) hover:text-(--text-strong-950)",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:text-(--text-strong-950) focus-visible:shadow-button-important-focus focus-visible:ring-(--stroke-strong-950)",
+					"focus-visible:shadow-button-important-focus focus-visible:bg-(--bg-white-0) focus-visible:text-(--text-strong-950) focus-visible:ring-(--stroke-strong-950)",
 				],
 			},
 		},
@@ -203,7 +203,7 @@ export const buttonVariants = tv({
 			class: {
 				root: [
 					// base
-					"bg-(--bg-white-0) text-state-error-base ring-state-error-base",
+					"text-state-error-base ring-state-error-base bg-(--bg-white-0)",
 					// hover
 					"hover:bg-red-alpha-10 hover:ring-transparent",
 					// focus
@@ -219,9 +219,9 @@ export const buttonVariants = tv({
 					// base
 					"bg-red-alpha-10 text-state-error-base ring-transparent",
 					// hover
-					"hover:bg-(--bg-white-0) hover:ring-state-error-base",
+					"hover:ring-state-error-base hover:bg-(--bg-white-0)",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:shadow-button-error-focus focus-visible:ring-state-error-base",
+					"focus-visible:shadow-button-error-focus focus-visible:ring-state-error-base focus-visible:bg-(--bg-white-0)",
 				],
 			},
 		},
@@ -231,11 +231,11 @@ export const buttonVariants = tv({
 			class: {
 				root: [
 					// base
-					"bg-transparent text-state-error-base ring-transparent",
+					"text-state-error-base bg-transparent ring-transparent",
 					// hover
 					"hover:bg-red-alpha-10",
 					// focus
-					"focus-visible:bg-(--bg-white-0) focus-visible:shadow-button-error-focus focus-visible:ring-state-error-base",
+					"focus-visible:shadow-button-error-focus focus-visible:ring-state-error-base focus-visible:bg-(--bg-white-0)",
 				],
 			},
 		},

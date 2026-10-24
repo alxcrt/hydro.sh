@@ -2,14 +2,18 @@ import { z } from "zod";
 
 export const EmailSchema = z
 	.string({
-		required_error: "Email is required",
+		error: (issue) =>
+			issue.input === undefined ? "Email is required" : undefined,
 	})
 	.email({
 		message: "Invalid email address",
 	});
 
 export const NewPasswordSchema = z
-	.string({ required_error: "Password is required" })
+	.string({
+		error: (issue) =>
+			issue.input === undefined ? "Password is required" : undefined,
+	})
 	.min(8, {
 		message: "Password must be at least 8 characters long",
 	})

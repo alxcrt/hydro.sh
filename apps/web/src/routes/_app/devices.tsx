@@ -2,15 +2,14 @@
 
 import AddCircleIcon from "virtual:icons/hugeicons/add-circle";
 import SodaIcon from "virtual:icons/hugeicons/soda-can-stroke-rounded";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { DashedDivider } from "@/components/dashed-divider";
 import { PageHeader } from "@/components/page-header";
 import { DevicesTable } from "@/components/tables/devices-table";
 import { Button } from "@/components/ui/button";
 import { useActionsParams } from "@/hooks/use-actions-params";
 import { useORPC } from "@/hooks/use-orpc";
-import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/_app/devices")({
 	component: RouteComponent,
@@ -26,7 +25,7 @@ function RouteComponent() {
 		<>
 			<PageHeader
 				icon={
-					<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-(--bg-white-0) shadow-xs ring-(--stroke-soft-200) ring-1 ring-inset">
+					<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-(--bg-white-0) shadow-xs ring-1 ring-(--stroke-soft-200) ring-inset">
 						<SodaIcon className="size-6 text-(--text-sub-600)" />
 					</div>
 				}

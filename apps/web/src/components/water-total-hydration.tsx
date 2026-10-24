@@ -1,9 +1,3 @@
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import type React from "react";
-import { useState } from "react";
-
 interface WaterTotalHydrationProps {
 	currentAmount?: number;
 	goalAmount?: number;
@@ -19,18 +13,14 @@ interface WaterTotalHydrationProps {
 export function WaterTotalHydration({
 	currentAmount = 0,
 	goalAmount = 2500,
-	connectedBottles = 1,
-	lastSyncStatus = "Last global sync attempt status can be seen in settings.",
-	bottleDetails = [{ name: "Generic Bottle #1", brand: "Generic Bottle" }],
-	batteryLevel = 96,
 }: WaterTotalHydrationProps) {
 	const percentCompleted =
 		Math.min(100, Math.round((currentAmount / goalAmount) * 100)) || 0;
 
 	return (
-		<div className="w-full space-y-2 rounded-8 bg-state-faded-lighter px-2.5 py-2 text-(--text-strong-950) ">
-			<h2 className="font-semibold text-paragraph-lg">💧 Total Hydration</h2>
-			<p className="mb-2 text-(--text-sub-600) text-paragraph-sm">
+		<div className="rounded-8 bg-state-faded-lighter w-full space-y-2 px-2.5 py-2 text-(--text-strong-950)">
+			<h2 className="text-paragraph-lg font-semibold">💧 Total Hydration</h2>
+			<p className="text-paragraph-sm mb-2 text-(--text-sub-600)">
 				Track your daily water intake from all sources.
 				{/* {bottleDetails.map((bottle, i) => (
           <span key={i}>
@@ -43,7 +33,7 @@ export function WaterTotalHydration({
 			<div className="relative my-8 flex justify-center">
 				<div className="inline-flex h-40 w-40 items-center justify-center rounded-full border-4 border-blue-200">
 					<div className="text-center">
-						<p className="font-bold text-3xl">{currentAmount}ml</p>
+						<p className="text-3xl font-bold">{currentAmount}ml</p>
 						<p className="text-muted-foreground text-sm">of {goalAmount}ml</p>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import { Toaster, type ToasterProps, toast as sonnerToast } from "sonner";
+import { toast as sonnerToast, Toaster, type ToasterProps } from "sonner";
 
 const defaultOptions: ToasterProps = {
 	className: "group/toast",

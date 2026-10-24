@@ -28,7 +28,7 @@ const AccordionItem = React.forwardRef<
 			className={cn(
 				// base
 				"group/accordion",
-				"rounded-10 bg-(--bg-white-0) p-3.5 ring-(--stroke-soft-200) ring-1 ring-inset",
+				"rounded-10 bg-(--bg-white-0) p-3.5 ring-1 ring-(--stroke-soft-200) ring-inset",
 				"transition duration-200 ease-out",
 				// hover
 				"hover:bg-(--bg-weak-50) hover:ring-transparent",
@@ -53,7 +53,7 @@ const AccordionTrigger = React.forwardRef<
 			ref={forwardedRef}
 			className={cn(
 				// base
-				"w-[calc(100%+theme(space.7))] text-left text-(--text-strong-950) text-label-sm",
+				"text-label-sm w-[calc(100%+theme(space.7))] text-left text-(--text-strong-950)",
 				"grid auto-cols-auto grid-flow-col grid-cols-[auto_minmax(0,1fr)] items-center gap-2.5",
 				"-m-3.5 p-3.5 outline-none",
 				// focus
@@ -131,12 +131,12 @@ const AccordionContent = React.forwardRef<
 	return (
 		<AccordionPrimitive.Content
 			ref={forwardedRef}
-			className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+			className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden"
 			{...rest}
 		>
 			<div
 				className={cn(
-					"pt-1.5 text-(--text-sub-600) text-paragraph-sm",
+					"text-paragraph-sm pt-1.5 text-(--text-sub-600)",
 					className,
 				)}
 			>

@@ -37,7 +37,7 @@ export function SubmitButton({
 					<span className={cn(isSubmitting && "invisible")}>{children}</span>
 
 					{isSubmitting ? (
-						<div className="-translate-1/2 absolute top-1/2 left-1/2">
+						<div className="absolute top-1/2 left-1/2 -translate-1/2">
 							<Loading03Icon className="size-5 animate-spin" />
 						</div>
 					) : null}

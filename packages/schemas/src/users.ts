@@ -3,16 +3,22 @@ import { EmailSchema, NewPasswordSchema } from "./common";
 
 export const SignInSchema = z.object({
 	email: EmailSchema,
-	password: z.string({ required_error: "Password is required" }).min(8, {
-		message: "Password must be at least 8 characters long",
-	}),
+	password: z
+		.string({
+			error: (issue) =>
+				issue.input === undefined ? "Password is required" : undefined,
+		})
+		.min(8, {
+			message: "Password must be at least 8 characters long",
+		}),
 	rememberMe: z.coerce.boolean(),
 });
 
 export const SignUpSchema = z.object({
 	name: z
 		.string({
-			required_error: "Full name is required",
+			error: (issue) =>
+				issue.input === undefined ? "Full name is required" : undefined,
 		})
 		.min(1, {
 			message: "Full name is required",
@@ -27,7 +33,10 @@ export const ForgotPasswordSchema = z.object({
 
 export const ResetPasswordSchema = z.object({
 	newPassword: NewPasswordSchema,
-	token: z.string({ required_error: "Token is required" }),
+	token: z.string({
+		error: (issue) =>
+			issue.input === undefined ? "Token is required" : undefined,
+	}),
 });
 
 export const UpdateUserSchema = z.object({

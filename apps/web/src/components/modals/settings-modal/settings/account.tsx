@@ -12,8 +12,8 @@ import { useAppForm } from "@/components/forms/form.tsx";
 import * as Avatar from "@/components/ui/avatar.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import * as Divider from "@/components/ui/divider.tsx";
-import * as ToastAlert from "@/components/ui/toast-alert.tsx";
 import { toast } from "@/components/ui/toast.tsx";
+import * as ToastAlert from "@/components/ui/toast-alert.tsx";
 import { useDelayedPending } from "@/hooks/use-delayed-pending.ts";
 import { useMe } from "@/hooks/use-me.ts";
 import { useORPC } from "@/hooks/use-orpc.ts";
@@ -68,10 +68,10 @@ export function AccountSettings() {
 			<div>
 				<div className="flex w-full flex-col gap-3.5 px-5 py-4 sm:flex-row sm:items-center">
 					<div className="flex-1">
-						<DialogPrimitives.Title className="text-(--text-strong-950) text-label-md">
+						<DialogPrimitives.Title className="text-label-md text-(--text-strong-950)">
 							Account Settings
 						</DialogPrimitives.Title>
-						<DialogPrimitives.Description className="mt-1 text-(--text-sub-600) text-paragraph-sm">
+						<DialogPrimitives.Description className="text-paragraph-sm mt-1 text-(--text-sub-600)">
 							Manage and collaborate on your account settings
 						</DialogPrimitives.Description>
 					</div>
@@ -110,10 +110,10 @@ export function AccountSettings() {
 					{/* Profile Photo */}
 					<div className="grid items-center gap-4 sm:grid-cols-[minmax(0,1fr)_312px] sm:gap-6">
 						<div>
-							<div className="text-(--text-strong-950) text-label-sm">
+							<div className="text-label-sm text-(--text-strong-950)">
 								Profile Photo
 							</div>
-							<div className="mt-1 text-(--text-sub-600) text-paragraph-xs">
+							<div className="text-paragraph-xs mt-1 text-(--text-sub-600)">
 								Min 400x400px, PNG or JPEG formats.
 							</div>
 						</div>
@@ -160,10 +160,10 @@ export function AccountSettings() {
 					{/* Name */}
 					<div className="grid items-center gap-4 sm:grid-cols-[minmax(0,1fr)_312px] sm:gap-6">
 						<div>
-							<div className="text-(--text-strong-950) text-label-sm">
+							<div className="text-label-sm text-(--text-strong-950)">
 								Full Name
 							</div>
-							<div className="mt-1 text-(--text-sub-600) text-paragraph-xs">
+							<div className="text-paragraph-xs mt-1 text-(--text-sub-600)">
 								Your name will be visible to your workspace members and for you.
 							</div>
 						</div>
@@ -186,10 +186,10 @@ export function AccountSettings() {
 					{/* Email */}
 					<div className="grid items-center gap-4 sm:grid-cols-[minmax(0,1fr)_312px] sm:gap-6">
 						<div>
-							<div className="text-(--text-strong-950) text-label-sm">
+							<div className="text-label-sm text-(--text-strong-950)">
 								Email Address
 							</div>
-							<div className="mt-1 text-(--text-sub-600) text-paragraph-xs">
+							<div className="text-paragraph-xs mt-1 text-(--text-sub-600)">
 								If you change your email address, you will need to verify it
 								again.
 							</div>

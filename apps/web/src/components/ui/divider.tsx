@@ -1,4 +1,4 @@
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const DIVIDER_ROOT_NAME = "DividerRoot";
 
@@ -6,17 +6,17 @@ export const dividerVariants = tv({
 	base: "relative flex w-full items-center",
 	variants: {
 		$type: {
-			line: "before:-translate-y-1/2 h-0 before:absolute before:top-1/2 before:left-0 before:h-px before:w-full before:bg-(--stroke-soft-200)",
+			line: "h-0 before:absolute before:top-1/2 before:left-0 before:h-px before:w-full before:-translate-y-1/2 before:bg-(--stroke-soft-200)",
 			"line-spacing": [
 				// base
 				"h-1",
 				// before
-				"before:-translate-y-1/2 before:absolute before:top-1/2 before:left-0 before:h-px before:w-full before:bg-(--stroke-soft-200)",
+				"before:absolute before:top-1/2 before:left-0 before:h-px before:w-full before:-translate-y-1/2 before:bg-(--stroke-soft-200)",
 			],
 			"line-text": [
 				// base
 				"gap-2.5",
-				"text-(--text-soft-400) text-subheading-2xs",
+				"text-subheading-2xs text-(--text-soft-400)",
 				// before
 				"before:h-px before:w-full before:flex-1 before:bg-(--stroke-soft-200)",
 				// after
@@ -33,12 +33,12 @@ export const dividerVariants = tv({
 			text: [
 				// base
 				"px-2 py-1",
-				"text-(--text-soft-400) text-subheading-xs",
+				"text-subheading-xs text-(--text-soft-400)",
 			],
 			"solid-text": [
 				// base
 				"bg-(--bg-weak-50) px-5 py-1.5 uppercase",
-				"text-(--text-soft-400) text-subheading-xs",
+				"text-subheading-xs text-(--text-soft-400)",
 			],
 		},
 	},
@@ -54,10 +54,11 @@ function Divider({
 }: React.HTMLAttributes<HTMLDivElement> &
 	VariantProps<typeof dividerVariants>) {
 	return (
+		// biome-ignore lint/a11y/useSemanticElements: Text and content variants may contain children, unlike hr.
 		<div
 			className={dividerVariants({ $type, class: className })}
 			role="separator"
-			tabIndex={-1}
+			aria-orientation="horizontal"
 			{...rest}
 		/>
 	);

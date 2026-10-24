@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.6.2/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -7,43 +7,45 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": [
-			".next",
-			"dist",
-			".turbo",
-			".output",
-			".vinxi",
-			"dev-dist",
-			".zed",
-			".vscode",
-			"routeTree.gen.ts",
-			"src-tauri",
-			".nuxt",
-			"tailwind.css"
+		"includes": [
+			"**",
+			"!**/.next",
+			"!**/dist",
+			"!**/.turbo",
+			"!**/.output",
+			"!**/.vinxi",
+			"!**/dev-dist",
+			"!**/.zed",
+			"!**/.vscode",
+			"!**/routeTree.gen.ts",
+			"!**/src-tauri",
+			"!**/.nuxt",
+			"!**/tailwind.css"
 		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
 	},
-	"organizeImports": {
-		"enabled": true
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"correctness": {
 				"useExhaustiveDependencies": "info",
 				"noChildrenProp": "off"
 			},
 			"nursery": {
-				"useSortedClasses": {
+				"useTailwindSortedClasses": {
 					"level": "warn",
-					"fix": "safe",
-					"options": {
-						"functions": ["clsx", "cva", "cn", "tv"]
-					}
+					"fix": "safe"
 				}
 			}
 		}
@@ -52,5 +54,25 @@
 		"formatter": {
 			"quoteStyle": "double"
 		}
-	}
+	},
+	"tailwind": {
+		"mergeFunctions": ["clsx", "cn"],
+		"variantFunctions": ["cva", "tv"]
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["apps/web/public/icons/**"],
+			"linter": {
+				"enabled": false
+			},
+			"formatter": {
+				"enabled": false
+			}
+		}
+	]
 }

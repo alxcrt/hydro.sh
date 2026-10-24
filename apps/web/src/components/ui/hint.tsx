@@ -4,14 +4,14 @@ import * as React from "react";
 
 import type { PolymorphicComponentProps } from "@/utils/polymorphic.ts";
 import { recursiveCloneChildren } from "@/utils/recursive-clone-children.tsx";
-import { type VariantProps, tv } from "@/utils/tv.ts";
+import { tv, type VariantProps } from "@/utils/tv.ts";
 
 const HINT_ROOT_NAME = "HintRoot";
 const HINT_ICON_NAME = "HintIcon";
 
 export const hintVariants = tv({
 	slots: {
-		root: "group flex items-start gap-1 text-(--text-sub-600) text-paragraph-xs",
+		root: "group text-paragraph-xs flex items-start gap-1 text-(--text-sub-600)",
 		icon: "mt-px size-4 shrink-0 text-(--text-soft-400)",
 	},
 	variants: {

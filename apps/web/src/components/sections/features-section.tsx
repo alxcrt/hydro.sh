@@ -177,18 +177,18 @@ export function FeaturesSection({
 				<div className="mb-12 text-center lg:mb-16">
 					<div className="mb-4 inline-flex items-center gap-2">
 						<span className="h-px w-8 bg-gradient-to-r from-transparent to-blue-300" />
-						<span className="text-blue-600 text-label-sm uppercase tracking-wider">
+						<span className="text-label-sm tracking-wider text-blue-600 uppercase">
 							Features
 						</span>
 						<span className="h-px w-8 bg-gradient-to-l from-transparent to-blue-300" />
 					</div>
-					<h2 className="font-semibold text-(--text-strong-950) text-3xl lg:text-4xl">
+					<h2 className="text-3xl font-semibold text-(--text-strong-950) lg:text-4xl">
 						Everything you need to{" "}
 						<span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
 							stay hydrated
 						</span>
 					</h2>
-					<p className="mx-auto mt-4 max-w-2xl text-(--text-sub-600) text-lg">
+					<p className="mx-auto mt-4 max-w-2xl text-lg text-(--text-sub-600)">
 						Simple, powerful features designed to help you build better
 						hydration habits.
 					</p>
@@ -221,19 +221,19 @@ export function FeaturesSection({
 								</div>
 
 								{/* Title */}
-								<h3 className="mb-2 font-semibold text-(--text-strong-950) text-lg">
+								<h3 className="mb-2 text-lg font-semibold text-(--text-strong-950)">
 									{feature.title}
 								</h3>
 
 								{/* Description */}
-								<p className="text-(--text-sub-600) text-paragraph-sm leading-relaxed">
+								<p className="text-paragraph-sm leading-relaxed text-(--text-sub-600)">
 									{feature.description}
 								</p>
 
 								{/* Decorative corner accent */}
 								<div
 									className={cn(
-										"-z-10 absolute top-4 right-4 h-8 w-8 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+										"absolute top-4 right-4 -z-10 h-8 w-8 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100",
 										colors.bg,
 									)}
 								/>

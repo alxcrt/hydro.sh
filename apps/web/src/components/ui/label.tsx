@@ -12,7 +12,7 @@ function LabelRoot({ className, ...props }: LabelRootProps) {
 	return (
 		<LabelPrimitives.Root
 			className={cn(
-				"group flex cursor-pointer items-center gap-px text-label-sm aria-disabled:pointer-events-none aria-disabled:text-(--text-disabled-300)",
+				"group text-label-sm flex cursor-pointer items-center gap-px aria-disabled:pointer-events-none aria-disabled:text-(--text-disabled-300)",
 				className,
 			)}
 			tabIndex={props.disabled ? -1 : undefined}
@@ -46,7 +46,7 @@ function LabelSub({
 	return (
 		<span
 			className={cn(
-				"text-(--text-sub-600) text-paragraph-sm group-aria-disabled:text-(--text-disabled-300)",
+				"text-paragraph-sm text-(--text-sub-600) group-aria-disabled:text-(--text-disabled-300)",
 				className,
 			)}
 			{...props}
