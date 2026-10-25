@@ -11,7 +11,6 @@ it does not record a completed rotation or session revocation.
 Hydro uses Better Auth 1.7.12 with PostgreSQL sessions and Google OAuth
 (`apps/server/src/lib/auth.ts`, `apps/server/src/db/schema/auth.ts`, `bun.lock`).
 The installed 1.7.12 implementation shows:
-
 - The session cookie contains a database session token signed with the auth
   secret. After a direct secret change, old cookies fail verification and users
   must sign in again. The corresponding `session` rows are **not** deleted by
