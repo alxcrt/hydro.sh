@@ -70,11 +70,27 @@ For production, see the [Better Auth secret rotation note](docs/production-auth-
 
 ## Database Setup
 
-This project uses PostgreSQL with Drizzle ORM.
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
+This project uses PostgreSQL with Drizzle ORM. For the local Docker database,
+generate a unique password with `openssl rand -hex 24` and save it in an ignored,
+owner-only root `.env` file as `HYDRO_DEV_DB_PASSWORD=<generated value>`. Put the
+same value in the ignored `apps/server/.env` connection URL:
 
-3. Apply the schema to your database:
+```text
+DATABASE_URL=postgresql://postgres:<generated value>@127.0.0.1:5432/hydro
+```
+
+Run `docker compose up -d db`. The development database listens on the host's
+loopback interface only. Keep both environment files private and out of Git.
+If you use another PostgreSQL server, set its own unique credentials in
+`apps/server/.env` instead.
+
+An existing Compose data volume keeps its **old PostgreSQL password** when the
+container environment changes. For an existing database, connect locally with
+`docker compose exec db psql -U postgres -d hydro` and use the interactive
+`\password postgres` command to change the role password to the new value.
+Do not remove the data volume as a password-rotation shortcut.
+
+Apply the schema to your database:
 ```bash
 bun db:push
 ```

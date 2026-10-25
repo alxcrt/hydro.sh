@@ -5,6 +5,7 @@ import ArrowRight01Icon from "virtual:icons/hugeicons/arrow-right-01";
 import Logout04Icon from "virtual:icons/hugeicons/logout-04";
 import Moon02Icon from "virtual:icons/hugeicons/moon-02";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useTheme } from "next-themes";
 
@@ -21,6 +22,7 @@ export function UserButton({ className }: { className?: string }) {
 	const me = useMe();
 	const { theme, setTheme } = useTheme();
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 
 	return (
 		<DropdownMenu.Root>
@@ -94,6 +96,7 @@ export function UserButton({ className }: { className?: string }) {
 							authClient.signOut({
 								fetchOptions: {
 									onSuccess: () => {
+										queryClient.clear();
 										navigate({
 											to: "/",
 										});
@@ -119,6 +122,7 @@ export function UserButtonMobile({ className }: { className?: string }) {
 	const { theme, setTheme } = useTheme();
 	const me = useMe();
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 
 	return (
 		<DropdownMenu.Root modal={false}>
@@ -173,6 +177,7 @@ export function UserButtonMobile({ className }: { className?: string }) {
 							authClient.signOut({
 								fetchOptions: {
 									onSuccess: () => {
+										queryClient.clear();
 										navigate({
 											to: "/",
 										});

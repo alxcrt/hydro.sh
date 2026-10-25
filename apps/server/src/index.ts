@@ -37,12 +37,51 @@ app.use(
 
 app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
 
-app.post("/api/stripe/webhook", async (c) => {
-	const body = await c.req.text();
-	const signature = c.req.header("stripe-signature");
+const MAX_WEBHOOK_BODY_BYTES = 1024 * 1024;
 
+async function readWebhookBody(request: Request): Promise<string | null> {
+	const reader = request.body?.getReader();
+	if (!reader) return "";
+
+	const chunks: Uint8Array[] = [];
+	let total = 0;
+	try {
+		for (;;) {
+			const { done, value } = await reader.read();
+			if (done) break;
+			total += value.byteLength;
+			if (total > MAX_WEBHOOK_BODY_BYTES) {
+				await reader.cancel().catch(() => undefined);
+				return null;
+			}
+			chunks.push(value);
+		}
+	} finally {
+		reader.releaseLock();
+	}
+
+	const bytes = new Uint8Array(total);
+	let offset = 0;
+	for (const chunk of chunks) {
+		bytes.set(chunk, offset);
+		offset += chunk.byteLength;
+	}
+	return new TextDecoder().decode(bytes);
+}
+
+app.post("/api/stripe/webhook", async (c) => {
+	const signature = c.req.header("stripe-signature");
 	if (!signature) {
 		return c.json({ error: "Missing stripe-signature header" }, 400);
+	}
+
+	const declaredLength = Number(c.req.header("content-length"));
+	if (declaredLength > MAX_WEBHOOK_BODY_BYTES) {
+		return c.json({ error: "Webhook body too large" }, 413);
+	}
+	const body = await readWebhookBody(c.req.raw);
+	if (body === null) {
+		return c.json({ error: "Webhook body too large" }, 413);
 	}
 
 	try {

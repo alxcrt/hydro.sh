@@ -1,4 +1,5 @@
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ export default function SignInForm({
 		from: "/login",
 	});
 	const { isPending } = authClient.useSession();
+	const queryClient = useQueryClient();
 	const [hasMounted, setHasMounted] = useState(false);
 
 	useEffect(() => {
@@ -36,6 +38,7 @@ export default function SignInForm({
 				},
 				{
 					onSuccess: () => {
+						queryClient.clear();
 						navigate({
 							to: "/dashboard",
 						});
