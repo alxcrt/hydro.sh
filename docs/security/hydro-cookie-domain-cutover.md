@@ -31,11 +31,11 @@ with the old production environment or the old frontend build.
 Use a short maintenance window because the API and frontend deployments are not
 atomic. Set these values for the same release:
 
-| Setting | Value | Where |
-| --- | --- | --- |
-| `DOMAIN` | `hydro.alexcretu.com` | API runtime |
-| `BETTER_AUTH_URL` | `https://api.hydro.alexcretu.com` | API runtime |
-| `CORS_ORIGIN` | `https://hydro.alexcretu.com` | API runtime |
+| Setting           | Value                             | Where                              |
+| ----------------- | --------------------------------- | ---------------------------------- |
+| `DOMAIN`          | `hydro.alexcretu.com`             | API runtime                        |
+| `BETTER_AUTH_URL` | `https://api.hydro.alexcretu.com` | API runtime                        |
+| `CORS_ORIGIN`     | `https://hydro.alexcretu.com`     | API runtime                        |
 | `VITE_SERVER_URL` | `https://api.hydro.alexcretu.com` | **Frontend Docker build argument** |
 
 `VITE_SERVER_URL` is baked into the frontend by `Dockerfile`; changing only its
