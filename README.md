@@ -38,6 +38,36 @@ First, install the dependencies:
 ```bash
 bun install
 ```
+
+Create a local server environment file with a unique, random Better Auth secret.
+This command creates `apps/server/.env` with owner-only permissions and refuses to
+overwrite an existing file:
+
+```bash
+node <<'NODE'
+const fs = require('node:fs');
+const { randomBytes } = require('node:crypto');
+
+const example = fs.readFileSync('apps/server/.env.example', 'utf8');
+const placeholder = 'BETTER_AUTH_SECRET=REPLACE_WITH_A_UNIQUE_RANDOM_SECRET';
+if (example.split(placeholder).length !== 2) {
+  throw new Error('Expected exactly one Better Auth secret placeholder');
+}
+const secret = randomBytes(48).toString('base64url');
+fs.writeFileSync('apps/server/.env', example.replace(placeholder, `BETTER_AUTH_SECRET=${secret}`), {
+  flag: 'wx',
+  mode: 0o600,
+});
+NODE
+```
+
+Fill in the other required values in `apps/server/.env` for your local setup.
+Keep this file out of version control. The example placeholder must never be
+used as a running secret. If you already have a local `.env`, generate a fresh
+secret for that environment without overwriting its other settings.
+
+For production, see the [Better Auth secret rotation note](docs/production-auth-secret-rotation.md).
+
 ## Database Setup
 
 This project uses PostgreSQL with Drizzle ORM.
