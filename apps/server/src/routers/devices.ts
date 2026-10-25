@@ -4,8 +4,7 @@ import {
 	UpdateDeviceSchema,
 } from "@hydro.sh/schemas/devices";
 import { ORPCError } from "@orpc/server";
-import { eq } from "drizzle-orm";
-import z from "zod";
+import { and, eq } from "drizzle-orm";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { protectedProcedure } from "@/lib/orpc";
@@ -102,7 +101,12 @@ export const devicesRouter = {
 		.handler(async ({ context, input }) => {
 			const device = await db
 				.delete(schema.device)
-				.where(eq(schema.device.id, input.id));
+				.where(
+					and(
+						eq(schema.device.id, input.id),
+						eq(schema.device.userId, context.session.user.id),
+					),
+				);
 			return device;
 		}),
 };
