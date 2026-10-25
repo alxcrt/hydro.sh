@@ -4,7 +4,6 @@ import { z } from "zod";
 export const env = createEnv({
 	server: {
 		CORS_ORIGIN: z.string().url().optional(),
-		BETTER_AUTH_URL: z.string().url().optional(),
 		DATABASE_URL: z.string(),
 		BETTER_AUTH_SECRET: z.string(),
 		// DOMAIN is only required in production environment
