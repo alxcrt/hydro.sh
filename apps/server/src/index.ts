@@ -4,6 +4,10 @@ import "dotenv/config";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { auth } from "./lib/auth";
+import {
+	expireLegacyAuthCookies,
+	shouldExpireLegacyAuthCookies,
+} from "./lib/auth-cookies";
 import { createContext } from "./lib/context";
 import { generateOGImage } from "./lib/og";
 import { stripe } from "./lib/stripe";
@@ -13,6 +17,13 @@ import { env } from "./utils/env";
 const app = new Hono();
 
 app.use(logger());
+if (
+	shouldExpireLegacyAuthCookies(
+		process.env.NODE_ENV === "production",
+		env.DOMAIN,
+	)
+)
+	app.use("*", expireLegacyAuthCookies);
 app.use(
 	"/*",
 	cors({
