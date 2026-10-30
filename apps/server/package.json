@@ -19,7 +19,7 @@
 		"@orpc/server": "^1.16.1",
 		"@resvg/resvg-js": "^2.6.2",
 		"@t3-oss/env-core": "^0.13.11",
-		"better-auth": "^1.7.13",
+		"better-auth": "^1.7.14",
 		"dotenv": "^18.0.9",
 		"drizzle-orm": "^0.45.4",
 		"hono": "^4.13.14",
